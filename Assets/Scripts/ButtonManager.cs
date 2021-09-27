@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleScreen : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class TitleScreen : MonoBehaviour
         
     }
 
-    public void StartGame()
+    public void GoToUpgradeScreen()
     {
         //Debug.Log("THIS BUTTON WORKS");
 
@@ -26,5 +26,13 @@ public class TitleScreen : MonoBehaviour
     public void Options()
     {
         Debug.Log("THIS BUTTON WORKS");
+    }
+    public void StartGamePlay()
+    {
+        SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Title", LoadSceneMode.Single);
     }
 }
