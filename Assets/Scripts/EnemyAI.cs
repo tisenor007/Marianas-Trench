@@ -12,14 +12,17 @@ public class EnemyAI : MonoBehaviour
     public int health;
     public int damage;
 
+    public float randomY;
+
 
     void Start()
     {
-        speed = 2;
-        transform.position = new Vector2(-(Screen.width / 100) - 2, -1);
+        randomY = Random.Range(-30.0f, -1.0f);
+        transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
         right = true;
         if (this.gameObject.tag == "LightEnemy")
         {
+            speed = Random.Range(3.0f, 5.0f); ;
             health = 20;
             damage = 10;
         }
