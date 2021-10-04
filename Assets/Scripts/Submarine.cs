@@ -9,6 +9,7 @@ public class Submarine : MonoBehaviour
     public int speed = 50;
     public int health;
     public Text healthTxt;
+    public bool inShop;
 
     // Start is called before the first frame update
     void Start()
@@ -19,16 +20,24 @@ public class Submarine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (inShop == false)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        if (Input.GetKey(KeyCode.W))
-            rb.AddForce(Vector3.up * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.A))
-            rb.AddForce(Vector3.left * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.S))
-            rb.AddForce(Vector3.down * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.D))
-            rb.AddForce(Vector3.right * speed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.W))
+                rb.AddForce(Vector3.up * speed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.A))
+                rb.AddForce(Vector3.left * speed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.S))
+                rb.AddForce(Vector3.down * speed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.D))
+                rb.AddForce(Vector3.right * speed * Time.deltaTime);
+        }
+        if (inShop == true)
+        {
+            //reset stats
+            health = 50;
+        }
 
         healthTxt.text = "Health: " + health.ToString();
 
