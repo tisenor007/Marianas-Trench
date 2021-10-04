@@ -16,7 +16,7 @@ public class Collectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        txtCoins.text = "Coins: " + coins.ToString();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -24,7 +24,7 @@ public class Collectable : MonoBehaviour
         {
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
             coins++;
-            txtCoins.text = "Coins: " + coins.ToString();
+            
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }

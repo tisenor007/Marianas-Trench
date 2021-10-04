@@ -35,4 +35,8 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title", LoadSceneMode.Single);
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

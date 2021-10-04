@@ -9,10 +9,8 @@ public class EnemyAI : MonoBehaviour
 
     public bool right;
     public float speed;
-    public int health = 20;
-    public int damage = 10;
-
-    public Text healthTxt;
+    public int health;
+    public int damage;
 
 
     void Start()
@@ -20,6 +18,11 @@ public class EnemyAI : MonoBehaviour
         speed = 2;
         transform.position = new Vector2(-(Screen.width / 100) - 2, -1);
         right = true;
+        if (this.gameObject.tag == "LightEnemy")
+        {
+            health = 20;
+            damage = 10;
+        }
     }
 
     // Update is called once per frame
@@ -48,13 +51,13 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collider2D other)
     {
         health = health - damage;
-        healthTxt.text = "Health: " + health.ToString();
-        if (health >= 0)
+        
+        if (health <= 0)
         {
-
+            health = 0;
         }
     }
 }
