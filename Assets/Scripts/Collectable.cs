@@ -18,12 +18,12 @@ public class Collectable : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("trigger");
-            //gameObject.GetComponent<SphereCollider>().enabled = false;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            coins++;
             txtCoins.text = "Coins: " + coins.ToString();
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }

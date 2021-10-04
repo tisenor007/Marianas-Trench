@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class EnemyAI : MonoBehaviour
 
     public bool right;
     public float speed;
+    public int health = 20;
+    public int damage = 10;
+
+    public Text healthTxt;
+
+
     void Start()
     {
         speed = 2;
@@ -41,8 +48,13 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        
+        health = health - damage;
+        healthTxt.text = "Health: " + health.ToString();
+        if (health >= 0)
+        {
+
+        }
     }
 }
