@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void OnCollisionEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
         health = health - damage;
         

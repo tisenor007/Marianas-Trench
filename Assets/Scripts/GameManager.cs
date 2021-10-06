@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Submarine subStats;
     public GameObject submarine;
     public GameObject subStatsCanvas;
-
+    private Vector3 originPos;
     private Scene currentScene;
     private string sceneName;
 
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(submarine);
             DontDestroyOnLoad(subStatsCanvas);
+            control = this;
         }
         else if (control != this)
         {
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        originPos = submarine.transform.position;
     }
 
     // Update is called once per frame
@@ -44,20 +45,32 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
-        if (sceneName == "GamePlay") 
-        { 
+        if (sceneName == "GamePlay")
+        {
+            subStats.inShop = false;
             submarine.SetActive(true);
             subStatsCanvas.SetActive(true);
+            submarine.transform.localScale = new Vector3(1, 1, 1);
+            submarine.transform.position = originPos;
+        }
+        else if (sceneName == "UpgradeScreen")
+        {
+            submarine.SetActive(true);
+            subStatsCanvas.SetActive(false);
+            subStats.inShop = true;
+            submarine.transform.position = originPos;
+
+            submarine.transform.localScale = new Vector3(4, 4, 4);
+        }
+        else if (sceneName == "Title" || sceneName == "GameOver")
+        {
+            submarine.SetActive(false);
+            subStatsCanvas.SetActive(false);
             subStats.inShop = false;
         }
-        if (sceneName == "UpgradeScreen") 
-        { 
-            submarine.SetActive(true);
-            subStatsCanvas.SetActive(true);
-        }
-        else { subStats.inShop = true; }
 
-        Debug.Log(sceneName);
+        //Debug.Log(sceneName);
+        //Debug.Log(subStats.inShop);
     }
     public void Save()
     {
