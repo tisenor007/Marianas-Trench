@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Submarine : MonoBehaviour
+public class Submarine : Character
 {
     public int speed = 50;
-    public int health = 100;
     public Text healthTxt;
     public Text coinTxt;
     public bool inShop;
@@ -16,7 +15,7 @@ public class Submarine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -27,34 +26,37 @@ public class Submarine : MonoBehaviour
 
         if (inShop == false)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-            if (Input.GetKey(KeyCode.W))
-                rb.AddForce(Vector3.up * speed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.A))
-                rb.AddForce(Vector3.left * speed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.S))
-                rb.AddForce(Vector3.down * speed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.D))
-                rb.AddForce(Vector3.right * speed * Time.deltaTime);
-
+            if (health <= 0)
+            {
+                isDead = true;
+            }
+            else
+            {
+                isDead = false;
+                if (Input.GetKey(KeyCode.W))
+                    rb.AddForce(Vector3.up * speed * Time.deltaTime);
+                if (Input.GetKey(KeyCode.A))
+                    rb.AddForce(Vector3.left * speed * Time.deltaTime);
+                if (Input.GetKey(KeyCode.S))
+                    rb.AddForce(Vector3.down * speed * Time.deltaTime);
+                if (Input.GetKey(KeyCode.D))
+                    rb.AddForce(Vector3.right * speed * Time.deltaTime);
+            }
         }
         if (inShop == true)
         {
-            //reset stats
             health = 100;
+            rb.velocity = Vector3.zero;
         }
-
-        if (health <= 0) { health = 0; SceneManager.LoadScene("GameOver", LoadSceneMode.Single); }
-        //Debug.Log(health);
     }
 
     public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "LightEnemy")
         {
-            health = health - 50;
+            TakeDamage(50);
         }
+        if (isDead == true) { SceneManager.LoadScene("GameOver", LoadSceneMode.Single); }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {

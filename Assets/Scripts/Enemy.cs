@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyAI : MonoBehaviour
+public class Enemy : Character
 {
     //public GameObject fish;
 
     public bool right;
     public float speed;
-    public int health;
     public int damage;
 
 
@@ -17,6 +16,7 @@ public class EnemyAI : MonoBehaviour
     {
         speed = 2;
         transform.position = new Vector2(-(Screen.width / 100) - 2, -1);
+        rb = GetComponent<Rigidbody2D>();
         right = true;
         if (this.gameObject.tag == "LightEnemy")
         {
@@ -53,11 +53,9 @@ public class EnemyAI : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        health = health - damage;
-        
-        if (health <= 0)
+        if (other.gameObject.tag == "Player")
         {
-            health = 0;
+            health = health - damage;
         }
     }
 }

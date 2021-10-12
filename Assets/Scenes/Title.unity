@@ -577,38 +577,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &631086119
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 631086120}
-  m_Layer: 0
-  m_Name: Submarine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &631086120
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631086119}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 673228956}
-  - {fileID: 1286312105}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &631422045
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +772,7 @@ GameObject:
   - component: {fileID: 673228953}
   - component: {fileID: 673228952}
   m_Layer: 0
-  m_Name: Sub
+  m_Name: Submarine
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -838,8 +806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0aeb00ea55c97342be84b1605357933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   speed: 50
-  health: 50
   healthTxt: {fileID: 631422047}
   coinTxt: {fileID: 2126169027}
   inShop: 0
@@ -926,8 +894,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
-  m_Father: {fileID: 631086120}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126818387
 GameObject:
@@ -1025,7 +993,7 @@ GameObject:
   - component: {fileID: 1286312103}
   - component: {fileID: 1286312106}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: SubCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,8 +1061,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 631086120}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1286312106
 MonoBehaviour:
@@ -1329,7 +1297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subStats: {fileID: 673228953}
-  submarine: {fileID: 631086119}
+  subCam: {fileID: 1286312102}
+  sub: {fileID: 673228951}
   subStatsCanvas: {fileID: 532924435}
 --- !u!1 &1883795867
 GameObject:
