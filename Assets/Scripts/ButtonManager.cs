@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    public Submarine subStats;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,13 @@ public class ButtonManager : MonoBehaviour
     void Update()
     {
         
+    }
+    public void upgradeFuel()
+    {
+        //if (subStats.fuelUpgrade = 0)
+        //{
+
+        //}
     }
 
     public void GoToUpgradeScreen()

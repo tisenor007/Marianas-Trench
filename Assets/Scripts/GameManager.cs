@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         if (sceneName == "GamePlay")
         {
-            subStats.inShop = false;
+            subStats.setInShopStatus(false);
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(false);
-            subStats.inShop = true;
+            subStats.setInShopStatus(true);
             subCam.transform.position = subCamOriginPos;
             sub.transform.position = originSubPos;
             sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            subStats.inShop = true;
+            subStats.setInShopStatus(true);
         }
     }
     public void Save()
