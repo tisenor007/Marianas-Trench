@@ -5,31 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    public Submarine subStats;
+    protected GameObject upgradeManager;
+    protected UpgradeManager upgradeManagerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        upgradeManager = GameObject.FindWithTag("UpgradeManager");
+        if (upgradeManager != null)
+        {
+            upgradeManagerScript = upgradeManager.GetComponent<UpgradeManager>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+   
     }
     public void upgradeFuel()
     {
-        //if (subStats.fuelUpgrade = 0)
-        //{
-
-        //}
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradeFuel();
+            Debug.Log("1");
+        }
     }
 
     public void GoToUpgradeScreen()
     {
         //Debug.Log("THIS BUTTON WORKS");
 
-        SceneManager.LoadScene("UpgradeScreen", LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.upgradeScene, LoadSceneMode.Single);
     }
     public void Options()
     {
@@ -37,11 +43,11 @@ public class ButtonManager : MonoBehaviour
     }
     public void StartGamePlay()
     {
-        SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.gameScene, LoadSceneMode.Single);
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene("Title", LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.titleScene, LoadSceneMode.Single);
     }
     public void ExitGame()
     {

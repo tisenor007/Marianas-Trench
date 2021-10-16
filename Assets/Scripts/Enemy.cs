@@ -14,11 +14,10 @@ public class Enemy : Character
 
     void Start()
     {
+        isDead = false;
         transform.position = new Vector2(-(Screen.width / 100) - 2, -1);
         rb = GetComponent<Rigidbody2D>();
         right = true;
-        shield = 0;
-        maxShield = 0;
         if (this.gameObject.tag == "LightEnemy")
         {
             health = 20;

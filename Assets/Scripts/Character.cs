@@ -5,9 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public int health;
-    public int shield;
     protected int maxHealth;
-    protected int maxShield;
 
     protected bool isDead;
     protected Rigidbody2D rb;
@@ -22,15 +20,13 @@ public class Character : MonoBehaviour
     {
         
     }
+    public bool GetIsDead()
+    {
+        return isDead;
+    }
     public void TakeDamage(int damage)
     {
-        int remainingDamage = damage - shield;
-        shield = shield - damage;
-        if (shield <= 0)
-        {
-            shield = 0;
-            health = health - remainingDamage;
-        }
+        health = health - damage;
         if (health <= 0)
         {
             health = 0;

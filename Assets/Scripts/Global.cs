@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour
+public class Global : MonoBehaviour
 {
-    public Submarine subStats;
-    public float buyPrice;
+    public static string gameOverScene = "GameOver";
+    public static string titleScene = "Title";
+    public static string gameScene = "GamePlay";
+    public static string upgradeScene = "UpgradeScreen";
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +18,5 @@ public class UpgradeManager : MonoBehaviour
     void Update()
     {
         
-    }
-    public void UpgradeFuel()
-    {
-        subStats.upgradeFuel();
-        Debug.Log("2");
     }
 }

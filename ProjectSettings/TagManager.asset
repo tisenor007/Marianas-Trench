@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LightEnemy
   - Coin
+  - UpgradeManager
   layers:
   - Default
   - TransparentFX

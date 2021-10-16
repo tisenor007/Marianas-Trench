@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager control;
 
-    public Submarine subStats;
     public GameObject subCam;
     public GameObject sub;
     public GameObject subStatsCanvas;
+    public GameObject UpgradeManager;
+    private Submarine subStats;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
     private Scene currentScene;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         if (control == null)
         {
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(UpgradeManager);
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
             DontDestroyOnLoad(subStatsCanvas);
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         else if (control != this)
         {
             Destroy(gameObject);
+            Destroy(UpgradeManager);
             Destroy(sub);
             Destroy(subCam);
             Destroy(subStatsCanvas);
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        subStats = sub.GetComponent<Submarine>();
         originSubPos = sub.transform.position;
         subCamOriginPos = subCam.transform.position;
     }
@@ -50,17 +54,15 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
-        if (sceneName == "GamePlay")
+        if (sceneName == Global.gameScene)
         {
             subStats.setInShopStatus(false);
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            //subCam.transform.position = subCamOriginPos;
-            //sub.transform.position = originSubPos;
         }
-        if (sceneName == "UpgradeScreen")
+        if (sceneName == Global.upgradeScene)
         {
             sub.SetActive(true);
             subCam.SetActive(true);
@@ -107,4 +109,6 @@ public class GameManager : MonoBehaviour
 class PlayerData
 {
     public int health;
+    public int currentFuelUpgrade;
+    public int currentEngineUpgrade;
 }
