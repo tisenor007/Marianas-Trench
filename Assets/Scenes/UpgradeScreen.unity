@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Upgrade Propeller
 --- !u!222 &99968697
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -463,7 +463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 312.6, y: 35.2}
+  m_AnchoredPosition: {x: 310.8, y: 35.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &211483027
@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 645306264}
   - component: {fileID: 645306267}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: HullUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -893,7 +893,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 645306265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2077759413}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: upgradeHull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &645306265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1013,7 +1025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Upgrade Hull Armour
 --- !u!222 &824436110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1111,7 +1123,7 @@ GameObject:
   - component: {fileID: 911656733}
   - component: {fileID: 911656736}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FuelUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1134,7 +1146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -310.8, y: 35.2}
+  m_AnchoredPosition: {x: 6.2, y: 117.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &911656733
@@ -1256,7 +1268,7 @@ GameObject:
   - component: {fileID: 1250589789}
   - component: {fileID: 1250589792}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: EngineUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1325,7 +1337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1250589790}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2077759413}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: upgradeEngine
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1250589790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,7 +1413,7 @@ GameObject:
   - component: {fileID: 1307935800}
   - component: {fileID: 1307935803}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: PropellerUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1412,7 +1436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.2, y: 117.1}
+  m_AnchoredPosition: {x: -310.8, y: 35.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307935800
@@ -1458,7 +1482,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1307935801}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2077759413}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: upgradePropeller
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1307935801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1578,7 +1614,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Upgrade Engine
 --- !u!222 &2012641966
 CanvasRenderer:
   m_ObjectHideFlags: 0

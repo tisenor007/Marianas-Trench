@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,37 +14,46 @@ public class GameManager : MonoBehaviour
     public GameObject subCam;
     public GameObject sub;
     public GameObject subStatsCanvas;
-    public GameObject UpgradeManager;
+    public GameObject earnedMoneyCanvas;
+    public GameObject moneyCanvas;
+    public Text EarnedMoneyTxt;
+    public GameObject upgradeManager;
+    private UpgradeManager upgradeManagerScript;
     private Submarine subStats;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
     private Scene currentScene;
     private string sceneName;
+    private int earnedMoney;
 
     void Awake()
     {
         if (control == null)
         {
             DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(UpgradeManager);
+            DontDestroyOnLoad(upgradeManager);
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
             DontDestroyOnLoad(subStatsCanvas);
+            DontDestroyOnLoad(moneyCanvas);
+            DontDestroyOnLoad(earnedMoneyCanvas);
             control = this;
         }
         else if (control != this)
         {
             Destroy(gameObject);
-            Destroy(UpgradeManager);
+            Destroy(upgradeManager);
             Destroy(sub);
             Destroy(subCam);
             Destroy(subStatsCanvas);
+            Destroy(earnedMoneyCanvas);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
         subStats = sub.GetComponent<Submarine>();
+        upgradeManagerScript = upgradeManager.GetComponent<UpgradeManager>();
         originSubPos = sub.transform.position;
         subCamOriginPos = subCam.transform.position;
     }
@@ -56,27 +66,44 @@ public class GameManager : MonoBehaviour
 
         if (sceneName == Global.gameScene)
         {
+            earnedMoneyCanvas.SetActive(false);
             subStats.setInShopStatus(false);
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
+            moneyCanvas.SetActive(true);
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         if (sceneName == Global.upgradeScene)
         {
+            earnedMoneyCanvas.SetActive(false);
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(false);
+            moneyCanvas.SetActive(true);
             subStats.setInShopStatus(true);
             subCam.transform.position = subCamOriginPos;
             sub.transform.position = originSubPos;
             sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
-        if (sceneName == "Title" || sceneName == "GameOver")
+        if (sceneName == Global.titleScene)
         {
+            earnedMoneyCanvas.SetActive(false);
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
+            moneyCanvas.SetActive(false);
+            subStats.setInShopStatus(true);
+        }
+        if (sceneName == Global.gameOverScene)
+        {
+            earnedMoneyCanvas.SetActive(true);
+            earnedMoney = subStats.GetCurrentDepth();
+            EarnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
+            sub.SetActive(false);
+            subCam.SetActive(false);
+            subStatsCanvas.SetActive(false);
+            moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
     }

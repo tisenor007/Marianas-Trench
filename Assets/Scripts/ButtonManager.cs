@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
@@ -27,7 +28,27 @@ public class ButtonManager : MonoBehaviour
         if (upgradeManagerScript != null && upgradeManager != null)
         {
             upgradeManagerScript.UpgradeFuel();
-            Debug.Log("1");
+        }
+    }
+    public void upgradeEngine()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradeEngine();
+        }
+    }
+    public void upgradeHull()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradeHullArmour();
+        }
+    }
+    public void upgradePropeller()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradePropeller();
         }
     }
 

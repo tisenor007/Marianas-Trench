@@ -6,19 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Submarine : Character
 {
-    public int speed;
-    public int currentFuelUpgrade = 0;
-    public int currentEngineUpgrade = 0;
     public Text healthTxt;
     public Text MoneyTxt;
     public Text fuelTxt;
-    public int[] fuelUpgrades = new int[8];
-    public int[] engineUpgrades = new int[8];
+    public Text depthTxt;
+    public UpgradeManager upgradeManager;
+    protected int speed;
     protected int fuel;
     protected int engineEfficiency;
     protected bool inShop;
-    protected float currentDepth;
-    protected float currentMoney = 0;
+    protected int currentDepth;
+    protected int currentMoney = 0;
 
     
 
@@ -33,21 +31,28 @@ public class Submarine : Character
     void Update()
     {
        
-        healthTxt.text = "Sub Hull: " + health.ToString();
-        MoneyTxt.text = "Your Money: " + currentMoney.ToString();
+        healthTxt.text = "Sub Hull Armour: " + health.ToString();
+        MoneyTxt.text = "Your Money: $" + currentMoney.ToString();
         fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
-        currentDepth = +this.gameObject.transform.position.y;
+        depthTxt.text = "Current Depth: " + currentDepth.ToString() + "ft";
 
-        if (inShop == false)
+        if (inShop == true)
         {
-            if (getFuel() <= 0 || GetIsDead() == true) { SceneManager.LoadScene(Global.gameOverScene, LoadSceneMode.Single); }
+            addMoney(currentDepth);
+            ResetStats();
+            rb.velocity = Vector3.zero;
+        }
+
+        else if (inShop == false)
+        {
+            if (fuel <= 0 || GetIsDead() == true) { SceneManager.LoadScene(Global.gameOverScene, LoadSceneMode.Single); }
             if (health <= 0)
             {
                 isDead = true;
             }
             else
             {
-                ResetStats();
+                currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
                 //if (Input.GetKey(KeyCode.W))
                 //rb.AddForce(Vector3.up * speed * Time.deltaTime);
                 if (fuel > 0)
@@ -71,50 +76,47 @@ public class Submarine : Character
 
             }
         }
-        if (inShop == true)
-        {
-            ResetStats();
-            rb.velocity = Vector3.zero;
-        }
     }
     public void ResetStats()
     {
         isDead = false;
-        fuel = fuelUpgrades[currentFuelUpgrade];
-        engineEfficiency = engineUpgrades[currentEngineUpgrade];
-        health = 100;
+        currentDepth = 0;
+        fuel = upgradeManager.fuelUpgrades[upgradeManager.currentFuelUpgrade];
+        engineEfficiency = upgradeManager.engineUpgrades[upgradeManager.currentEngineUpgrade];
+        health = upgradeManager.hullUpgrades[upgradeManager.currentHullUpgrade];
         maxHealth = health;
+        speed = upgradeManager.propellerUpgrades[upgradeManager.currentPropellerUpgrade];
     }
     public void useFuel()
     {
         engineEfficiency--;
-        Debug.Log(engineEfficiency);
         if (engineEfficiency <= 0)
         {
             fuel = fuel - 1;
-            engineEfficiency = engineUpgrades[currentEngineUpgrade];
+            engineEfficiency = upgradeManager.engineUpgrades[upgradeManager.currentEngineUpgrade];
         }
         if (fuel <= 0)
         {
             fuel = 0;
         }
     }
-    public void upgradeFuel()
+    public int GetCurrentDepth()
     {
-        currentFuelUpgrade = currentFuelUpgrade + 1;
-        Debug.Log("3");
+        return currentDepth;
     }
-    public int getFuel(){return fuel;}
-    public int getCurrFuelUpdrage(){return currentFuelUpgrade;}
     //shop status
     public bool getInShopStatus(){return inShop;}
     public void setInShopStatus(bool status){inShop = status;}
     //money
-    public void addMoney(float amount)
+    public int GetMoney()
+    {
+        return currentMoney;
+    }
+    public void addMoney(int amount)
     {
         currentMoney = currentMoney + amount;
     }
-    public void removeMoney(float amount)
+    public void removeMoney(int amount)
     {
         currentMoney = currentMoney - amount;
         if (currentMoney <= 0)
@@ -127,7 +129,7 @@ public class Submarine : Character
     {
         if (other.gameObject.tag == "LightEnemy")
         {
-            TakeDamage(50);
+            TakeDamage(10);
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
