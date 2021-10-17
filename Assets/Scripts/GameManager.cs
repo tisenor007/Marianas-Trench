@@ -14,9 +14,6 @@ public class GameManager : MonoBehaviour
     public GameObject subCam;
     public GameObject sub;
     public GameObject subStatsCanvas;
-    public GameObject earnedMoneyCanvas;
-    public GameObject moneyCanvas;
-    public Text EarnedMoneyTxt;
     public GameObject upgradeManager;
     private UpgradeManager upgradeManagerScript;
     private Submarine subStats;
@@ -34,9 +31,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(upgradeManager);
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
-            DontDestroyOnLoad(subStatsCanvas);
-            DontDestroyOnLoad(moneyCanvas);
-            DontDestroyOnLoad(earnedMoneyCanvas);
             control = this;
         }
         else if (control != this)
@@ -45,8 +39,6 @@ public class GameManager : MonoBehaviour
             Destroy(upgradeManager);
             Destroy(sub);
             Destroy(subCam);
-            Destroy(subStatsCanvas);
-            Destroy(earnedMoneyCanvas);
         }
     }
     // Start is called before the first frame update
@@ -66,21 +58,23 @@ public class GameManager : MonoBehaviour
 
         if (sceneName == Global.gameScene)
         {
-            earnedMoneyCanvas.SetActive(false);
+            upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             subStats.setInShopStatus(false);
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
-            moneyCanvas.SetActive(true);
+            upgradeManagerScript.InsufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.moneyCanvas.SetActive(true);
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         if (sceneName == Global.upgradeScene)
         {
-            earnedMoneyCanvas.SetActive(false);
+            upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(false);
-            moneyCanvas.SetActive(true);
+            upgradeManagerScript.moneyCanvas.SetActive(true);
+            upgradeManagerScript.InsufficientFundsMessage.SetActive(true);
             subStats.setInShopStatus(true);
             subCam.transform.position = subCamOriginPos;
             sub.transform.position = originSubPos;
@@ -88,22 +82,24 @@ public class GameManager : MonoBehaviour
         }
         if (sceneName == Global.titleScene)
         {
-            earnedMoneyCanvas.SetActive(false);
+            upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            moneyCanvas.SetActive(false);
+            upgradeManagerScript.InsufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
         if (sceneName == Global.gameOverScene)
         {
-            earnedMoneyCanvas.SetActive(true);
+            upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
             earnedMoney = subStats.GetCurrentDepth();
-            EarnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
+            upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            moneyCanvas.SetActive(false);
+            upgradeManagerScript.InsufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
     }

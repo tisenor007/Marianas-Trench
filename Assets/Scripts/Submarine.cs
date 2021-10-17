@@ -72,6 +72,10 @@ public class Submarine : Character
                         rb.AddForce(Vector3.right * speed * Time.deltaTime);
                         useFuel();
                     }
+                    else if (!Input.anyKey)
+                    { 
+                        rb.velocity = new Vector3(0, -0.15f, 0);
+                    }
                 }
 
             }
