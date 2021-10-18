@@ -45,14 +45,13 @@ public class Submarine : Character
 
         if (inShop == true)
         {
-            addMoney(currentDepth);
             ResetStats();
             rb.velocity = Vector3.zero;
         }
 
         else if (inShop == false)
         {
-            if (fuel <= 0 || GetIsDead() == true) { SceneManager.LoadScene(Global.gameOverScene, LoadSceneMode.Single); }
+            if (fuel <= 0 || GetIsDead() == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverScene, LoadSceneMode.Single); }
             if (health <= 0)
             {
                 isDead = true;

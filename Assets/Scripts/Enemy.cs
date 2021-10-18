@@ -15,7 +15,6 @@ public class Enemy : Character
     void Start()
     {
         isDead = false;
-        transform.position = new Vector2(-(Screen.width / 100) - 2, -1);
         rb = GetComponent<Rigidbody2D>();
         right = true;
         if (this.gameObject.tag == "LightEnemy")
