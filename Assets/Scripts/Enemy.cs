@@ -5,69 +5,28 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    //public GameObject fish;
+    public int minY;
+    public int maxY;
 
-    public bool right;
-    public float speed;
-    public int damage;
-
+    public int randomY;
 
     void Start()
     {
-        isDead = false;
-        rb = GetComponent<Rigidbody2D>();
-        right = true;
-        if (this.gameObject.tag == "LightEnemy")
-        {
-            health = 20;
-            damage = 10;
-            speed = 2;
-        }
-        maxHealth = health;
+        //randomY = Random.Range(minY, maxY);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (right)
-        {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-            if (transform.position.x > (Screen.width / 100) + 2)
-            {
-                right = false;
-            }
-        }
+        
 
 
-        if (right == false)
-        {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
-
-            if (transform.position.x < -(Screen.width / 100) - 2)
-            {
-                right = true;
-            }
-        }
 
     }
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            health = health - damage;
-        }
-        else
-        {
-            if (right == true)
-            {
-                right = false;
-            }
-            else if (right == false)
-            {
-                right = true;
-            }
-        }
+
     }
 }
