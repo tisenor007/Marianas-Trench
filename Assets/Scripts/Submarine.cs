@@ -59,10 +59,15 @@ public class Submarine : Character
             else
             {
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
-                //if (Input.GetKey(KeyCode.W))
-                //rb.AddForce(Vector3.up * speed * Time.deltaTime);
+                if (Input.GetKey(KeyCode.W))
+                rb.AddForce(Vector3.up * speed * Time.deltaTime);
                 if (fuel > 0)
                 {
+                    if (Input.GetKey(KeyCode.W))
+                    {
+                        rb.AddForce(Vector3.up * speed * Time.deltaTime);
+                        useFuel();
+                    }
                     if (Input.GetKey(KeyCode.A))
                     {
                         rb.AddForce(Vector3.left * speed * Time.deltaTime);
