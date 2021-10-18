@@ -59,5 +59,16 @@ public class Enemy : Character
         {
             health = health - damage;
         }
+        else
+        {
+            if (right == true)
+            {
+                right = false;
+            }
+            else if (right == false)
+            {
+                right = true;
+            }
+        }
     }
 }

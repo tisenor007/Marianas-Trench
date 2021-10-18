@@ -6,22 +6,59 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    [Header("Upgrade Buttons")]
+    public Text fuelButtonTxt;
+    public Text engineButtonTxt;
+    public Text hullButtonTxt;
+    public Text propellerButtonTxt;
+
     protected GameObject upgradeManager;
     protected UpgradeManager upgradeManagerScript;
+
+    protected GameObject gameManager;
+    protected GameManager gameManagerScript;
     // Start is called before the first frame update
     void Start()
     {
         upgradeManager = GameObject.FindWithTag("UpgradeManager");
+        gameManager = GameObject.FindWithTag("GameManager");
         if (upgradeManager != null)
         {
             upgradeManagerScript = upgradeManager.GetComponent<UpgradeManager>();
+        }
+        if (gameManager != null)
+        {
+            gameManagerScript = gameManager.GetComponent<GameManager>();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-   
+        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt);
+    }
+    public void SaveGame()
+    {
+        if (gameManagerScript != null) 
+        { 
+            gameManagerScript.Save();
+        }
+    }
+    public void LoadGame()
+    {
+        if (gameManagerScript != null)
+        {
+            gameManagerScript.Load();
+            GoToUpgradeScreen();
+        }
+    }
+    public void NewGame()
+    {
+        if (gameManagerScript != null)
+        {
+            gameManagerScript.NewGame();
+            GoToUpgradeScreen();
+        }
     }
     public void upgradeFuel()
     {

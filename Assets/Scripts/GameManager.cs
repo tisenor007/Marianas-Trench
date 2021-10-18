@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
             sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
-            upgradeManagerScript.InsufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             subCam.SetActive(true);
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
-            upgradeManagerScript.InsufficientFundsMessage.SetActive(true);
+            upgradeManagerScript.insufficientFundsMessage.SetActive(true);
             subStats.setInShopStatus(true);
             subCam.transform.position = subCamOriginPos;
             sub.transform.position = originSubPos;
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            upgradeManagerScript.InsufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
@@ -98,17 +98,26 @@ public class GameManager : MonoBehaviour
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            upgradeManagerScript.InsufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
+    }
+    public void NewGame()
+    {
+        subStats.clearGameStats();
     }
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
         PlayerData data = new PlayerData();
-        data.health = subStats.health;
+
+        data.currentMoney = subStats.GetMoney();
+        data.currentFuelUpgrade = subStats.currentFuelUpgrade;
+        data.currentEngineUpgrade = subStats.currentEngineUpgrade;
+        data.currentHullUpgrade = subStats.currentHullUpgrade;
+        data.currentPropellerUpgrade = subStats.currentPropellerUpgrade;
 
         bf.Serialize(file, data);
         file.Close();
@@ -123,7 +132,11 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            subStats.health = data.health;
+            subStats.SetMoney(data.currentMoney);
+            subStats.currentFuelUpgrade = data.currentFuelUpgrade;
+            subStats.currentEngineUpgrade = data.currentEngineUpgrade;
+            subStats.currentHullUpgrade = data.currentHullUpgrade;
+            subStats.currentPropellerUpgrade = data.currentPropellerUpgrade;
 
         }
     }
@@ -131,7 +144,9 @@ public class GameManager : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-    public int health;
+    public int currentMoney;
     public int currentFuelUpgrade;
     public int currentEngineUpgrade;
+    public int currentHullUpgrade;
+    public int currentPropellerUpgrade;
 }

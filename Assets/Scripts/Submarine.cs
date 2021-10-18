@@ -11,6 +11,13 @@ public class Submarine : Character
     public Text fuelTxt;
     public Text depthTxt;
     public UpgradeManager upgradeManager;
+
+    [Header("Can set these for testing")]
+    public int currentFuelUpgrade = 0;
+    public int currentEngineUpgrade = 0;
+    public int currentHullUpgrade = 0;
+    public int currentPropellerUpgrade = 0;
+
     protected int speed;
     protected int fuel;
     protected int engineEfficiency;
@@ -85,19 +92,28 @@ public class Submarine : Character
     {
         isDead = false;
         currentDepth = 0;
-        fuel = upgradeManager.fuelUpgrades[upgradeManager.currentFuelUpgrade];
-        engineEfficiency = upgradeManager.engineUpgrades[upgradeManager.currentEngineUpgrade];
-        health = upgradeManager.hullUpgrades[upgradeManager.currentHullUpgrade];
+        fuel = upgradeManager.fuelUpgrades[currentFuelUpgrade];
+        engineEfficiency = upgradeManager.engineUpgrades[currentEngineUpgrade];
+        health = upgradeManager.hullUpgrades[currentHullUpgrade];
         maxHealth = health;
-        speed = upgradeManager.propellerUpgrades[upgradeManager.currentPropellerUpgrade];
+        speed = upgradeManager.propellerUpgrades[currentPropellerUpgrade];
+    }
+    public void clearGameStats()
+    {
+        ResetStats();
+        SetMoney(0);
+        currentHullUpgrade = 0;
+        currentFuelUpgrade = 0;
+        currentEngineUpgrade = 0;
+        currentPropellerUpgrade = 0;
     }
     public void useFuel()
     {
-        engineEfficiency--;
-        if (engineEfficiency <= 0)
+       
+        if (Time.time > engineEfficiency)
         {
             fuel = fuel - 1;
-            engineEfficiency = upgradeManager.engineUpgrades[upgradeManager.currentEngineUpgrade];
+            engineEfficiency = Mathf.RoundToInt(Time.time) + upgradeManager.engineUpgrades[currentEngineUpgrade];
         }
         if (fuel <= 0)
         {
@@ -115,6 +131,10 @@ public class Submarine : Character
     public int GetMoney()
     {
         return currentMoney;
+    }
+    public void SetMoney(int amount)
+    {
+        currentMoney = amount;
     }
     public void addMoney(int amount)
     {

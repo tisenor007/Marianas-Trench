@@ -8,15 +8,9 @@ public class UpgradeManager : MonoBehaviour
     public Submarine subStats;
     public GameObject earnedMoneyCanvas;
     public GameObject moneyCanvas;
-    public GameObject InsufficientFundsMessage;
-    public CanvasGroup InsufficientFundsCanvas;
+    public GameObject insufficientFundsMessage;
+    public CanvasGroup insufficientFundsCanvas;
     public Text earnedMoneyTxt;
-
-    [Header("Can set these for testing")]
-    public int currentFuelUpgrade = 0;
-    public int currentEngineUpgrade = 0;
-    public int currentHullUpgrade = 0;
-    public int currentPropellerUpgrade = 0;
 
     [Header("Set these for game play")]
     public int[] fuelUpgrades = new int[upgradeAmount];
@@ -32,55 +26,43 @@ public class UpgradeManager : MonoBehaviour
 
     protected static int upgradeAmount = 8;
 
-    protected bool fadingOut;
     // Start is called before the first frame update
     void Start()
     {
-        fadingOut = true;
+        StartCoroutine(FadeCanvas(true));
     }
 
     // Update is called once per frame
     void Update()
     {
-        fuelCost = pricePerUpgrade[currentFuelUpgrade];
-        engineCost = pricePerUpgrade[currentEngineUpgrade];
-        hullCost = pricePerUpgrade[currentHullUpgrade];
-        propellerCost = pricePerUpgrade[currentPropellerUpgrade];
+        fuelCost = pricePerUpgrade[subStats.currentFuelUpgrade];
+        engineCost = pricePerUpgrade[subStats.currentEngineUpgrade];
+        hullCost = pricePerUpgrade[subStats.currentHullUpgrade];
+        propellerCost = pricePerUpgrade[subStats.currentPropellerUpgrade];
 
-        if (fadingOut == true)
+        if (insufficientFundsCanvas.alpha <= 0)
         {
-            if (InsufficientFundsCanvas.alpha >= 0)
-            {
-                InsufficientFundsCanvas.alpha -= Time.deltaTime;
-                if (InsufficientFundsCanvas.alpha == 0)
-                {
-                }
-            }
+            StopCoroutine(FadeCanvas(false));
         }
-        else if (fadingOut == false)
-        {
-            InsufficientFundsCanvas.alpha = 1;
-            fadingOut = true;
-        }
-        Debug.Log(fadingOut);
     }
     public void UpgradeFuel()
     {
         if (subStats.GetMoney() >= fuelCost)
         {
-            if (currentFuelUpgrade >= upgradeAmount - 1)
+            if (subStats.currentFuelUpgrade >= upgradeAmount - 1)
             {
-                currentFuelUpgrade = upgradeAmount - 1;
+                subStats.currentFuelUpgrade = upgradeAmount - 1;
             }
             else
             {
                 subStats.removeMoney(fuelCost);
-                currentFuelUpgrade = currentFuelUpgrade + 1;
+                subStats.currentFuelUpgrade = subStats.currentFuelUpgrade + 1;
             }
         }
         else if (subStats.GetMoney() < fuelCost)
         {
-            fadingOut = false;
+            insufficientFundsCanvas.alpha = 1;
+            StartCoroutine(FadeCanvas(true));
         }
     }
 
@@ -88,57 +70,119 @@ public class UpgradeManager : MonoBehaviour
     {
         if (subStats.GetMoney() >= engineCost)
         {
-            if (currentEngineUpgrade >= upgradeAmount - 1)
+            if (subStats.currentEngineUpgrade >= upgradeAmount - 1)
             {
-                currentEngineUpgrade = upgradeAmount - 1;
+                subStats.currentEngineUpgrade = upgradeAmount - 1;
             }
             else
             {
-                currentEngineUpgrade = currentEngineUpgrade + 1;
+                subStats.currentEngineUpgrade = subStats.currentEngineUpgrade + 1;
                 subStats.removeMoney(engineCost);
             }
         }
         else if (subStats.GetMoney() < engineCost)
         {
-            fadingOut = false;
+            insufficientFundsCanvas.alpha = 1;
+            StartCoroutine(FadeCanvas(true));
         }
     }
     public void UpgradeHullArmour()
     {
         if (subStats.GetMoney() >= hullCost)
         {
-            if (currentHullUpgrade >= upgradeAmount - 1)
+            if (subStats.currentHullUpgrade >= upgradeAmount - 1)
             {
-                currentHullUpgrade = upgradeAmount - 1;
+                subStats.currentHullUpgrade = upgradeAmount - 1;
             }
             else
             {
-                currentHullUpgrade = currentHullUpgrade + 1;
+                subStats.currentHullUpgrade = subStats.currentHullUpgrade + 1;
                 subStats.removeMoney(hullCost);
             }
         }
         else if (subStats.GetMoney() < hullCost)
         {
-            fadingOut = false;
+            insufficientFundsCanvas.alpha = 1;
+            StartCoroutine(FadeCanvas(true));
         }
     }
     public void UpgradePropeller()
     {
         if (subStats.GetMoney() >= propellerCost)
         {
-            if (currentPropellerUpgrade >= upgradeAmount - 1)
+            if (subStats.currentPropellerUpgrade >= upgradeAmount - 1)
             {
-                currentPropellerUpgrade = upgradeAmount - 1;
+                subStats.currentPropellerUpgrade = upgradeAmount - 1;
             }
-            else if (subStats.GetMoney() < propellerCost)
+            else
             {
-                currentPropellerUpgrade = currentPropellerUpgrade + 1;
+                subStats.currentPropellerUpgrade = subStats.currentPropellerUpgrade + 1;
                 subStats.removeMoney(propellerCost);
             }
         }
-        else
+        else if (subStats.GetMoney() < propellerCost)
         {
-            fadingOut = false;
+            insufficientFundsCanvas.alpha = 1;
+            StartCoroutine(FadeCanvas(true));
+        }
+    }
+    public void updateButtons(Text fuelButtonTxt, Text engineButtonTxt, Text hullButtonTxt, Text propellerButtonTxt)
+    {
+        if (fuelButtonTxt != null)
+        {
+            if (subStats.currentFuelUpgrade >= upgradeAmount - 1)
+            {
+                fuelButtonTxt.text = "Fuel MAXED";
+            }
+            else if (subStats.currentFuelUpgrade < upgradeAmount - 1)
+            {
+                fuelButtonTxt.text = "$" + fuelCost + " - Upgrade to Fuel Tank Level " + (subStats.currentFuelUpgrade + 1);
+            }
+        }
+        if (engineButtonTxt != null)
+        {
+            if (subStats.currentEngineUpgrade >= upgradeAmount - 1)
+            {
+                engineButtonTxt.text = "Engine MAXED";
+            }
+            else if (subStats.currentEngineUpgrade < upgradeAmount - 1)
+            {
+                engineButtonTxt.text = "$" + engineCost + " - Upgrade to Engine Level " + (subStats.currentEngineUpgrade + 1);
+            }
+        }
+        if (hullButtonTxt != null)
+        {
+            if (subStats.currentHullUpgrade >= upgradeAmount - 1)
+            {
+                hullButtonTxt.text = "Hull Armour MAXED";
+            }
+            else if (subStats.currentHullUpgrade < upgradeAmount - 1)
+            {
+                hullButtonTxt.text = "$" + hullCost + " - Upgrade to Hull Armour Level " + (subStats.currentHullUpgrade + 1);
+            }
+        }
+        if (propellerButtonTxt != null)
+        {
+            if (subStats.currentPropellerUpgrade >= upgradeAmount - 1)
+            {
+                propellerButtonTxt.text = "Propeller MAXED";
+            }
+            else if (subStats.currentPropellerUpgrade < upgradeAmount - 1)
+            {
+                propellerButtonTxt.text = "$" + propellerCost + " - Upgrade to Propeller Level " + (subStats.currentPropellerUpgrade + 1);
+            }
+        }
+    }
+
+    public IEnumerator FadeCanvas(bool fadeOut)
+    {
+        if (fadeOut == true)
+        {
+            for (float i = 1; i >= 0; i -= Time.deltaTime)
+            {
+                insufficientFundsCanvas.alpha = i;
+                yield return null;
+            }
         }
     }
 
