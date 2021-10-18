@@ -237,10 +237,11 @@ MonoBehaviour:
   insufficientFundsMessage: {fileID: 888620867}
   insufficientFundsCanvas: {fileID: 888620872}
   earnedMoneyTxt: {fileID: 863234222}
-  fuelUpgrades: 050000000a0000000f00000014000000190000001e0000002300000028000000
+  fuelUpgrades: 640000000a0000000f00000014000000190000001e0000002300000028000000
   engineUpgrades: 020000000400000006000000080000000a0000000c0000000e00000010000000
-  hullUpgrades: 050000000f000000190000002800000037000000460000005500000064000000
+  hullUpgrades: 640000000f000000190000002800000037000000460000005500000064000000
   propellerUpgrades: 320000000400000006000000080000000a0000000c0000000e00000010000000
+  pressureResistanceUpgrades: 0f00000014000000280000003c00000050000000640000007300000087000000
   pricePerUpgrade: 64000000fa000000900100005802000052030000e8030000b0040000aa050000
 --- !u!4 &102670695
 Transform:
@@ -1146,6 +1147,7 @@ RectTransform:
   - {fileID: 1490207516}
   - {fileID: 830694344}
   - {fileID: 2115643289}
+  - {fileID: 1826304744}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1212,6 +1214,7 @@ MonoBehaviour:
   currentEngineUpgrade: 0
   currentHullUpgrade: 0
   currentPropellerUpgrade: 0
+  currentPressureResistanceUpgrade: 0
 --- !u!50 &673228954
 Rigidbody2D:
   serializedVersion: 4
@@ -1914,6 +1917,7 @@ MonoBehaviour:
   engineButtonTxt: {fileID: 0}
   hullButtonTxt: {fileID: 0}
   propellerButtonTxt: {fileID: 0}
+  pressureResistanceTxt: {fileID: 0}
 --- !u!4 &1292359453
 Transform:
   m_ObjectHideFlags: 0
@@ -2442,6 +2446,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1826304743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1826304744}
+  - component: {fileID: 1826304746}
+  - component: {fileID: 1826304745}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1826304744
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826304743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 647875475}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1826304745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826304743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 100
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Mariana's Trench
+--- !u!222 &1826304746
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826304743}
+  m_CullTransparentMesh: 1
 --- !u!1 &1883795867
 GameObject:
   m_ObjectHideFlags: 0

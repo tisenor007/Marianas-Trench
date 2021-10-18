@@ -11,6 +11,7 @@ public class ButtonManager : MonoBehaviour
     public Text engineButtonTxt;
     public Text hullButtonTxt;
     public Text propellerButtonTxt;
+    public Text pressureResistanceTxt;
 
     protected GameObject upgradeManager;
     protected UpgradeManager upgradeManagerScript;
@@ -35,7 +36,7 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt);
+        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
     }
     public void SaveGame()
     {
@@ -58,6 +59,13 @@ public class ButtonManager : MonoBehaviour
         {
             gameManagerScript.NewGame();
             GoToUpgradeScreen();
+        }
+    }
+    public void upgradePressureResistance()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradePressureResistance();
         }
     }
     public void upgradeFuel()
