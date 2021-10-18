@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    public Submarine submarineSript;
     public GameObject sub;
-    public GameObject camera;
     void Start()
     {
         

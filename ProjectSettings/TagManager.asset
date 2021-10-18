@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - LightEnemy
+  - Coin
+  - UpgradeManager
+  - GameManager
   layers:
   - Default
   - TransparentFX

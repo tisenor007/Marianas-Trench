@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Collectable : MonoBehaviour
 {
-    public Text txtCoins;
-    public int coins;
+    //public Text txtCoins;
+    //public int coins;
 
     void Start()
     {
@@ -16,15 +16,13 @@ public class Collectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txtCoins.text = "Coins: " + coins.ToString();
+        //txtCoins.text = "Coins: " + coins.ToString();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            coins++;
-            
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }

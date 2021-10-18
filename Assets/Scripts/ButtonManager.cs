@@ -1,27 +1,99 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    [Header("Upgrade Buttons")]
+    public Text fuelButtonTxt;
+    public Text engineButtonTxt;
+    public Text hullButtonTxt;
+    public Text propellerButtonTxt;
+
+    protected GameObject upgradeManager;
+    protected UpgradeManager upgradeManagerScript;
+
+    protected GameObject gameManager;
+    protected GameManager gameManagerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        upgradeManager = GameObject.FindWithTag("UpgradeManager");
+        gameManager = GameObject.FindWithTag("GameManager");
+        if (upgradeManager != null)
+        {
+            upgradeManagerScript = upgradeManager.GetComponent<UpgradeManager>();
+        }
+        if (gameManager != null)
+        {
+            gameManagerScript = gameManager.GetComponent<GameManager>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt);
+    }
+    public void SaveGame()
+    {
+        if (gameManagerScript != null) 
+        { 
+            gameManagerScript.Save();
+        }
+    }
+    public void LoadGame()
+    {
+        if (gameManagerScript != null)
+        {
+            gameManagerScript.Load();
+            GoToUpgradeScreen();
+        }
+    }
+    public void NewGame()
+    {
+        if (gameManagerScript != null)
+        {
+            gameManagerScript.NewGame();
+            GoToUpgradeScreen();
+        }
+    }
+    public void upgradeFuel()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradeFuel();
+        }
+    }
+    public void upgradeEngine()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradeEngine();
+        }
+    }
+    public void upgradeHull()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradeHullArmour();
+        }
+    }
+    public void upgradePropeller()
+    {
+        if (upgradeManagerScript != null && upgradeManager != null)
+        {
+            upgradeManagerScript.UpgradePropeller();
+        }
     }
 
     public void GoToUpgradeScreen()
     {
         //Debug.Log("THIS BUTTON WORKS");
 
-        SceneManager.LoadScene("UpgradeScreen", LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.upgradeScene, LoadSceneMode.Single);
     }
     public void Options()
     {
@@ -29,11 +101,11 @@ public class ButtonManager : MonoBehaviour
     }
     public void StartGamePlay()
     {
-        SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.gameScene, LoadSceneMode.Single);
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene("Title", LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.titleScene, LoadSceneMode.Single);
     }
     public void ExitGame()
     {

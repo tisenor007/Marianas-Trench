@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyAI : MonoBehaviour
+public class Enemy : Character
 {
     //public GameObject fish;
 
     public bool right;
     public float speed;
-    public int health;
     public int damage;
 
 
     void Start()
     {
-        speed = 2;
-        transform.position = new Vector2(-(Screen.width / 100) - 2, -1);
+        isDead = false;
+        rb = GetComponent<Rigidbody2D>();
         right = true;
         if (this.gameObject.tag == "LightEnemy")
         {
             health = 20;
             damage = 10;
+            speed = 2;
         }
+        maxHealth = health;
     }
 
     // Update is called once per frame
@@ -51,13 +52,22 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void OnCollisionEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        health = health - damage;
-        
-        if (health <= 0)
+        if (other.gameObject.tag == "Player")
         {
-            health = 0;
+            health = health - damage;
+        }
+        else
+        {
+            if (right == true)
+            {
+                right = false;
+            }
+            else if (right == false)
+            {
+                right = true;
+            }
         }
     }
 }
