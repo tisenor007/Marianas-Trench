@@ -9,7 +9,6 @@ public class UpgradeManager : MonoBehaviour
     public GameObject earnedMoneyCanvas;
     public GameObject moneyCanvas;
     public GameObject insufficientFundsMessage;
-    public CanvasGroup insufficientFundsCanvas;
     public Text earnedMoneyTxt;
 
     [Header("Set these for game play")]
@@ -26,11 +25,15 @@ public class UpgradeManager : MonoBehaviour
     protected int propellerCost;
     protected int pressureResistanceCost;
 
+    protected CanvasGroup insufficientFundsCanvas;
+
     protected static int upgradeAmount = 8;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        insufficientFundsCanvas = insufficientFundsMessage.GetComponent<CanvasGroup>();
         StartCoroutine(FadeCanvas(true));
     }
 
