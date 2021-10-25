@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    public int minY;
-    public int maxY;
+    public float minY;
+    public float maxY;
 
-    public int randomY;
+    public float randomY;
 
     void Start()
     {
@@ -25,8 +25,5 @@ public class Enemy : Character
 
     }
 
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-
-    }
+    
 }
