@@ -8,6 +8,8 @@ TagManager:
   - Coin
   - UpgradeManager
   - GameManager
+  - MediumFish
+  - HeavyFish
   layers:
   - Default
   - TransparentFX

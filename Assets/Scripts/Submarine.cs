@@ -196,6 +196,14 @@ public class Submarine : Character
         {
             TakeDamage(10);
         }
+        if (other.gameObject.tag == "LightEnemy")
+        {
+            TakeDamage(15);
+        }
+        if (other.gameObject.tag == "LightEnemy")
+        {
+            TakeDamage(30);
+        }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
