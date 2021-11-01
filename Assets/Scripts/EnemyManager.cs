@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
 
     public float startX = -7.5f;
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < 20; i++)
         {

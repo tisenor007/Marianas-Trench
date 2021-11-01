@@ -116,6 +116,8 @@ public class Submarine : Character
         health = upgradeManager.hullUpgrades[currentHullUpgrade];
         maxHealth = health;
         speed = upgradeManager.propellerUpgrades[currentPropellerUpgrade];
+        pressureTimer = Mathf.RoundToInt(Time.time) + pressureHitTime;
+        transform.position = new Vector3(0, 0, 0);
     }
     public void clearGameStats()
     {
@@ -196,11 +198,11 @@ public class Submarine : Character
         {
             TakeDamage(10);
         }
-        if (other.gameObject.tag == "LightEnemy")
+        if (other.gameObject.tag == "MediumFish")
         {
             TakeDamage(15);
         }
-        if (other.gameObject.tag == "LightEnemy")
+        if (other.gameObject.tag == "HeavyFish")
         {
             TakeDamage(30);
         }
@@ -209,7 +211,7 @@ public class Submarine : Character
     {
         if (other.gameObject.tag == "Coin")
         {
-            addMoney(10);
+            addMoney(50);
         }
     }
 }
