@@ -11,7 +11,6 @@ public class ButtonManager : MonoBehaviour
     public Text engineButtonTxt;
     public Text hullButtonTxt;
     public Text propellerButtonTxt;
-    public Text pressureResistanceTxt;
 
     protected GameObject upgradeManager;
     protected UpgradeManager upgradeManagerScript;
@@ -36,7 +35,7 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
+        //upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt);
     }
     public void SaveGame()
     {
@@ -58,14 +57,7 @@ public class ButtonManager : MonoBehaviour
         if (gameManagerScript != null)
         {
             gameManagerScript.NewGame();
-            StartGamePlay();
-        }
-    }
-    public void upgradePressureResistance()
-    {
-        if (upgradeManagerScript != null && upgradeManager != null)
-        {
-            upgradeManagerScript.UpgradePressureResistance();
+            GoToUpgradeScreen();
         }
     }
     public void upgradeFuel()
@@ -101,7 +93,7 @@ public class ButtonManager : MonoBehaviour
     {
         //Debug.Log("THIS BUTTON WORKS");
 
-        SceneManager.LoadScene(Global.upgradeSceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.upgradeScene, LoadSceneMode.Single);
     }
     public void Options()
     {
@@ -109,11 +101,11 @@ public class ButtonManager : MonoBehaviour
     }
     public void StartGamePlay()
     {
-        SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.gameScene, LoadSceneMode.Single);
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene(Global.titleSceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.titleScene, LoadSceneMode.Single);
     }
     public void ExitGame()
     {
