@@ -9,7 +9,7 @@ public class OctopusEnemy : Enemy
 
     void Start()
     {
-        submarine = GameObject.Find("Submarine");
+        submarine = GameObject.FindGameObjectWithTag("Player");
         speed = Random.Range(1f, 10f);
         attackDamage = 10;
 
