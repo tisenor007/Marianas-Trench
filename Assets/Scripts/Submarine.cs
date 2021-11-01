@@ -58,7 +58,7 @@ public class Submarine : Character
         else if (inShop == false)
         {
             //All ways game could end
-            if (fuel <= 0 || GetIsDead() == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverScene, LoadSceneMode.Single); }
+            if (fuel <= 0 || GetIsDead() == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverSceneName, LoadSceneMode.Single); }
             if (health <= 0)
             {
                 isDead = true;

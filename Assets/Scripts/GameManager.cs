@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
-        if (sceneName == Global.gameScene)
+        if (sceneName == Global.gameSceneName)
         {
             upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             subStats.setInShopStatus(false);
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             upgradeManagerScript.moneyCanvas.SetActive(true);
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
-        if (sceneName == Global.upgradeScene)
+        if (sceneName == Global.upgradeSceneName)
         {
             upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(true);
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             sub.transform.position = originSubPos;
             sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
-        if (sceneName == Global.titleScene)
+        if (sceneName == Global.titleSceneName)
         {
             upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(false);
@@ -90,7 +90,20 @@ public class GameManager : MonoBehaviour
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
-        if (sceneName == Global.gameOverScene)
+        if (sceneName == Global.gameOverSceneName)
+        {
+            Save();
+            upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
+            earnedMoney = subStats.GetCurrentDepth();
+            upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
+            sub.SetActive(false);
+            subCam.SetActive(false);
+            subStatsCanvas.SetActive(false);
+            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.moneyCanvas.SetActive(false);
+            subStats.setInShopStatus(true);
+        }
+        if (sceneName == Global.winSceneName)
         {
             Save();
             upgradeManagerScript.earnedMoneyCanvas.SetActive(true);

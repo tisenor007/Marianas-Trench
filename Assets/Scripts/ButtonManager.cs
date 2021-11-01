@@ -101,7 +101,7 @@ public class ButtonManager : MonoBehaviour
     {
         //Debug.Log("THIS BUTTON WORKS");
 
-        SceneManager.LoadScene(Global.upgradeScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.upgradeSceneName, LoadSceneMode.Single);
     }
     public void Options()
     {
@@ -109,11 +109,11 @@ public class ButtonManager : MonoBehaviour
     }
     public void StartGamePlay()
     {
-        SceneManager.LoadScene(Global.gameScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene(Global.titleScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(Global.titleSceneName, LoadSceneMode.Single);
     }
     public void ExitGame()
     {
