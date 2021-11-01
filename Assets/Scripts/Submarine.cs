@@ -37,7 +37,14 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-       
+        if (transform.position.x < -(Screen.width / 100) + 2)
+        {
+            transform.position = new Vector2(-(Screen.width / 100) + 2, transform.position.y);
+        }
+        else if (transform.position.x > (Screen.width / 100) - 2)
+        {
+            transform.position = new Vector2(Screen.width / 100 - 2, transform.position.y);
+        }
         healthTxt.text = "Sub Hull Armour: " + health.ToString();
         MoneyTxt.text = "Your Money: $" + currentMoney.ToString();
         fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
@@ -164,7 +171,7 @@ public class Submarine : Character
     {
         if (other.gameObject.tag == "Coin")
         {
-            addMoney(100);
+            addMoney(10);
         }
     }
 }
