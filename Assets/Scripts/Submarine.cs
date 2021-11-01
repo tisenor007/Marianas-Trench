@@ -85,7 +85,7 @@ public class Submarine : Character
                     }
                     if (Input.GetKey(KeyCode.A))
                     {
-                        rb.AddForce(Vector3.left * speed * Time.deltaTime);
+                        rb.AddForce(Vector3.left * (speed * 3f) * Time.deltaTime);
                         useFuel();
                     }
                     if (Input.GetKey(KeyCode.S))
@@ -95,7 +95,7 @@ public class Submarine : Character
                     }
                     if (Input.GetKey(KeyCode.D))
                     {
-                        rb.AddForce(Vector3.right * speed * Time.deltaTime);
+                        rb.AddForce(Vector3.right * (speed * 3f) * Time.deltaTime);
                         useFuel();
                     }
                     else if (!Input.anyKey)

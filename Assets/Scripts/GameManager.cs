@@ -58,9 +58,9 @@ public class GameManager : MonoBehaviour
 
         if (sceneName == Global.gameSceneName)
         {
+            sub.SetActive(true);
             upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             subStats.setInShopStatus(false);
-            sub.SetActive(true);
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
             upgradeManagerScript.insufficientFundsMessage.SetActive(false);
