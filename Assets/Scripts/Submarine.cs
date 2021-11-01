@@ -17,21 +17,27 @@ public class Submarine : Character
     public int currentEngineUpgrade = 0;
     public int currentHullUpgrade = 0;
     public int currentPropellerUpgrade = 0;
+    public int currentPressureResistanceUpgrade = 0;
 
     protected int speed;
     protected int fuel;
     protected int engineEfficiency;
     protected bool inShop;
     protected int currentDepth;
-    protected int currentMoney = 0;
+    protected int currentMoney = 10000000;
+    private int pressureTimer = 0;
+    private int pressureHitTime = 5;
+    private int originPressureHitTime;
+    private int pressureDamage = 5;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         ResetStats();
          rb = GetComponent<Rigidbody2D>();
+        originPressureHitTime = pressureHitTime;
     }
 
     // Update is called once per frame
@@ -51,7 +57,8 @@ public class Submarine : Character
 
         else if (inShop == false)
         {
-            if (fuel <= 0 || GetIsDead() == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverScene, LoadSceneMode.Single); }
+            //All ways game could end
+            if (fuel <= 0 || GetIsDead() == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverSceneName, LoadSceneMode.Single); }
             if (health <= 0)
             {
                 isDead = true;
@@ -59,6 +66,7 @@ public class Submarine : Character
             else
             {
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
+                CheckForPressure();
                 if (Input.GetKey(KeyCode.W))
                 rb.AddForce(Vector3.up * speed * Time.deltaTime);
                 if (fuel > 0)
@@ -110,6 +118,28 @@ public class Submarine : Character
         currentFuelUpgrade = 0;
         currentEngineUpgrade = 0;
         currentPropellerUpgrade = 0;
+    }
+    public void CheckForPressure()
+    {
+        if (currentDepth > upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade] && isDead == false)
+        {
+            if (Time.time > pressureTimer)
+            {
+                TakeDamage(pressureDamage);
+                pressureHitTime = pressureHitTime - 1;
+                if (pressureHitTime <= 1)
+                {
+                    pressureHitTime = 1;
+                }
+                pressureTimer = Mathf.RoundToInt(Time.time) + pressureHitTime;
+                
+            }
+        }
+        else if (currentDepth < upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade])
+        {
+            pressureHitTime = originPressureHitTime;
+        }
+
     }
     public void useFuel()
     {
