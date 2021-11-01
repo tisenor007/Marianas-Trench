@@ -10,7 +10,7 @@ public class OctopusEnemy : Enemy
     void Start()
     {
         //submarine = GameObject.FindGameObjectWithTag("Player");
-        speed = Random.Range(1f, 10f);
+        speed = Random.Range(1f, 5f);
         attackDamage = 10;
 
         //Vector2 visibleScreen = new Vector3((Screen.width / 100), submarine.transform.position.y + ((Screen.height / 100) / 2) + 3);

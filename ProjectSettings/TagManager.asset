@@ -10,6 +10,7 @@ TagManager:
   - GameManager
   - MediumFish
   - HeavyFish
+  - Treasure
   layers:
   - Default
   - TransparentFX
