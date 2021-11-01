@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         }
         if (sceneName == Global.gameOverScene)
         {
+            Save();
             upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
             earnedMoney = subStats.GetCurrentDepth();
             upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;

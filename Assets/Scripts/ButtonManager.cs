@@ -58,7 +58,7 @@ public class ButtonManager : MonoBehaviour
         if (gameManagerScript != null)
         {
             gameManagerScript.NewGame();
-            GoToUpgradeScreen();
+            StartGamePlay();
         }
     }
     public void upgradePressureResistance()
