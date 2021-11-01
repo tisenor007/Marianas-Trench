@@ -10,7 +10,7 @@ public class CoinManager : MonoBehaviour
     public float maxY;
 
     public GameObject coinPrefab;
-    public GameObject[] coins = new GameObject[150];
+    public GameObject[] coins = new GameObject[75];
 
     void Start()
     {

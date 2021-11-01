@@ -19,12 +19,12 @@ public class Submarine : Character
     public int currentPropellerUpgrade = 0;
     public int currentPressureResistanceUpgrade = 0;
 
-    protected int speed;
+    protected bool treasureFound = false;
     protected int fuel;
     protected int engineEfficiency;
     protected bool inShop;
     protected int currentDepth;
-    protected int currentMoney = 10000000;
+    protected int currentMoney = 0;
     private int pressureTimer = 0;
     private int pressureHitTime = 5;
     private int originPressureHitTime;
@@ -65,7 +65,8 @@ public class Submarine : Character
         else if (inShop == false)
         {
             //All ways game could end
-            if (fuel <= 0 || GetIsDead() == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverSceneName, LoadSceneMode.Single); }
+            if (fuel <= 0 || isDead == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverSceneName, LoadSceneMode.Single); }
+            if (treasureFound == true && inShop == false) { treasureFound = false; SceneManager.LoadScene(Global.winSceneName, LoadSceneMode.Single); }
             if (health <= 0)
             {
                 isDead = true;
@@ -170,6 +171,7 @@ public class Submarine : Character
     //shop status
     public bool getInShopStatus(){return inShop;}
     public void setInShopStatus(bool status){inShop = status;}
+    public bool isTeasureFound() { return treasureFound; }
     //money
     public int GetMoney()
     {
@@ -211,7 +213,11 @@ public class Submarine : Character
     {
         if (other.gameObject.tag == "Coin")
         {
-            addMoney(50);
+            addMoney(25);
+        }
+        if (other.gameObject.tag == "Treasure")
+        {
+            treasureFound = true;
         }
     }
 }
