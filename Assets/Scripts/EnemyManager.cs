@@ -11,6 +11,9 @@ public class EnemyManager : MonoBehaviour
     public GameObject octopusEnemyPrefab;
     public GameObject[] octopusEnemies = new GameObject[6];
 
+    public GameObject mediumFishPrefab;
+    public GameObject[] mediumFishes = new GameObject[10];
+
     public float startX = -7.5f;
 
     void Start()
@@ -24,6 +27,12 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             octopusEnemies[i] = Instantiate(octopusEnemyPrefab, new Vector2(startX + (3 * i), -90), Quaternion.identity);
+
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            mediumFishes[i] = Instantiate(mediumFishPrefab, new Vector2(0, 0), Quaternion.identity);
 
         }
 

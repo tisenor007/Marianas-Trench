@@ -171,7 +171,7 @@ public class Submarine : Character
     {
         if (other.gameObject.tag == "Coin")
         {
-            addMoney(100);
+            addMoney(10);
         }
     }
 }
