@@ -65,13 +65,10 @@ public class Submarine : Character
         else if (inShop == false)
         {
             //All ways game could end
-            if (fuel <= 0 || isDead == true) { addMoney(currentDepth); SceneManager.LoadScene(Global.gameOverSceneName, LoadSceneMode.Single); }
+            
             if (treasureFound == true && inShop == false) { treasureFound = false; SceneManager.LoadScene(Global.winSceneName, LoadSceneMode.Single); }
-            if (health <= 0)
-            {
-                isDead = true;
-            }
-            else
+            
+            if (GetIsDead() == false)
             {
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
                 CheckForPressure();
@@ -164,10 +161,8 @@ public class Submarine : Character
             fuel = 0;
         }
     }
-    public int GetCurrentDepth()
-    {
-        return currentDepth;
-    }
+    public int getFuel() { return fuel; }
+    public int GetCurrentDepth(){return currentDepth;}
     //shop status
     public bool getInShopStatus(){return inShop;}
     public void setInShopStatus(bool status){inShop = status;}

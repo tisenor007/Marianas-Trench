@@ -22,9 +22,17 @@ public class Character : MonoBehaviour
     {
         
     }
+    public int getHealth()
+    {
+        return health;
+    }
     public bool GetIsDead()
     {
         return isDead;
+    }
+    public void SetIsDead(bool status)
+    {
+        isDead = status;
     }
     public void TakeDamage(int damage)
     {

@@ -11,6 +11,7 @@ TagManager:
   - MediumFish
   - HeavyFish
   - Treasure
+  - deathUI
   layers:
   - Default
   - TransparentFX

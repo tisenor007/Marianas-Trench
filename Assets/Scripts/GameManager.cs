@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     private string sceneName;
     private int earnedMoney;
 
+    private GameObject deathUI;
+    private GameObject deathMessage;
+    private Text deathMessageTxt;
+
     void Awake()
     {
         if (control == null)
@@ -53,8 +57,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        deathUI = GameObject.FindGameObjectWithTag("deathUI");
+        deathMessage = GameObject.Find("deathUI/deathMessage");
+        if (deathMessage != null) { deathMessageTxt = deathMessage.GetComponent<Text>(); }
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
+        if (subStats.GetIsDead() == false)
+        {
+            if (subStats.getHealth() <= 0) {subStats.addMoney(subStats.GetCurrentDepth()); deathMessageTxt.text = "Hull Armour broke!"; subStats.SetIsDead(true); }
+            else if (subStats.getFuel() <= 0) { subStats.addMoney(subStats.GetCurrentDepth()); deathMessageTxt.text = "No Fuel Left!"; subStats.SetIsDead(true); }
+            if (deathUI != null) { deathUI.SetActive(false); }
+        }
+        else if (subStats.GetIsDead() == true)
+        {
+            if (deathUI != null) { deathUI.SetActive(true); }
+        }
 
         if (sceneName == Global.gameSceneName)
         {
