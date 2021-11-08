@@ -16,16 +16,17 @@ public class GameManager : MonoBehaviour
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
     private UpgradeManager upgradeManagerScript;
-    private Submarine subStats;
+    public UIManager UImanager;
+    public Submarine subStats;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
     private Scene currentScene;
     private string sceneName;
     private int earnedMoney;
 
-    private GameObject deathUI;
-    private GameObject deathMessage;
-    private Text deathMessageTxt;
+    //private GameObject deathUI;
+    //private GameObject deathMessage;
+    //private Text deathMessageTxt;
 
     void Awake()
     {
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(upgradeManager);
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
+            DontDestroyOnLoad(UImanager);
             control = this;
         }
         else if (control != this)
@@ -57,20 +59,29 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        deathUI = GameObject.FindGameObjectWithTag("deathUI");
-        deathMessage = GameObject.Find("deathMessage");
-        if (deathMessage != null) { deathMessageTxt = deathMessage.GetComponent<Text>(); }
+        //deathUI = GameObject.FindGameObjectWithTag("deathUI");
+        //deathMessage = GameObject.Find("deathMessage");
+        //if (deathMessage != null) { deathMessageTxt = deathMessage.GetComponent<Text>(); }
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
         if (subStats.GetIsDead() == false)
         {
-            if (subStats.getHealth() <= 0) {subStats.addMoney(subStats.GetCurrentDepth()); deathMessageTxt.text = "Hull Armour broke!"; subStats.SetIsDead(true); }
-            else if (subStats.getFuel() <= 0) { subStats.addMoney(subStats.GetCurrentDepth()); deathMessageTxt.text = "No Fuel Left!"; subStats.SetIsDead(true); }
-            if (deathUI != null) { deathUI.SetActive(false); }
+            if (subStats.getHealth() <= 0)
+            { 
+                subStats.SetIsDead(true);
+                subStats.addMoney(subStats.GetCurrentDepth()); 
+            }
+            else if (subStats.getFuel() <= 0)
+            { 
+                subStats.SetIsDead(true);
+                subStats.addMoney(subStats.GetCurrentDepth());
+                
+            }
+           
         }
         else if (subStats.GetIsDead() == true)
         {
-            if (deathUI != null) { deathUI.SetActive(true); }
+            //if (deathUI != null) { deathUI.SetActive(true); }
         }
 
         if (sceneName == Global.gameSceneName)

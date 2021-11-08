@@ -12,6 +12,7 @@ TagManager:
   - HeavyFish
   - Treasure
   - deathUI
+  - OutOfFuel
   layers:
   - Default
   - TransparentFX

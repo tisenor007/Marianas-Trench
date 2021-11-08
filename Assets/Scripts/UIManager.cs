@@ -9,7 +9,14 @@ using System.IO;
 
 public class UIManager : MonoBehaviour
 {
+    public GameManager gameManager;
+
+    public GameObject outOfFuelObject;
+    public GameObject hullBrokenObject;
+    public RectTransform results;
+    public Vector2 resultsMoveToPosition;
     public bool running = true;
+    public bool deathCheck = true;
 
     void Awake()
     {
@@ -56,6 +63,40 @@ public class UIManager : MonoBehaviour
                 running = false;
             }
 
+        }
+
+        if (sceneName == Global.gameSceneName)
+        {
+            if (results == null)
+            {
+                results = GameObject.Find("panel").GetComponent<RectTransform>();
+                resultsMoveToPosition = new Vector2(results.localPosition.x, results.localPosition.y);
+                results.transform.position = new Vector2(Screen.width / 2, Screen.height + 300);
+            }
+
+            if (outOfFuelObject == null)
+            {
+                outOfFuelObject = GameObject.Find("Out of Fuel");
+                outOfFuelObject.SetActive(false);
+                Debug.Log("FOUND");
+            }
+
+            if (deathCheck)
+            {
+                if (gameManager.subStats.GetIsDead() == true)
+                {
+                    deathCheck = false;
+                    outOfFuelObject.SetActive(true);
+                    LeanTween.scale(outOfFuelObject, Vector2.zero, 0f);
+                    LeanTween.scale(outOfFuelObject, Vector2.one, 2f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
+                    {
+                        LeanTween.scale(outOfFuelObject, Vector2.zero, 0f).setDelay(2f);
+                        LeanTween.move(results, resultsMoveToPosition, 1.0f);
+                    });
+                }
+            }
+            
+            
         }
     }
 }

@@ -2092,6 +2092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5e684f905185f48adf7f009da31dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1497978101}
   running: 1
 --- !u!4 &1493279126
 Transform:
@@ -2154,6 +2155,8 @@ MonoBehaviour:
   sub: {fileID: 673228951}
   subStatsCanvas: {fileID: 457592001}
   upgradeManager: {fileID: 102670693}
+  UImanager: {fileID: 1493279125}
+  subStats: {fileID: 0}
 --- !u!1 &1535248637
 GameObject:
   m_ObjectHideFlags: 0
