@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         deathUI = GameObject.FindGameObjectWithTag("deathUI");
-        deathMessage = GameObject.Find("deathUI/deathMessage");
+        deathMessage = GameObject.Find("deathMessage");
         if (deathMessage != null) { deathMessageTxt = deathMessage.GetComponent<Text>(); }
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
