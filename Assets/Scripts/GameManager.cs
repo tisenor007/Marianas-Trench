@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject sub;
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
+    public GameObject buttonManager;
     private UpgradeManager upgradeManagerScript;
     public UIManager UImanager;
     public Submarine subStats;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
             DontDestroyOnLoad(UImanager);
+            DontDestroyOnLoad(buttonManager);
             control = this;
         }
         else if (control != this)

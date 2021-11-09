@@ -70,6 +70,7 @@ public class Submarine : Character
             
             if (GetIsDead() == false)
             {
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
                 CheckForPressure();
                 if (Input.GetKey(KeyCode.W))
@@ -102,6 +103,10 @@ public class Submarine : Character
                     }
                 }
 
+            }
+            if (GetIsDead() == true)
+            {
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
             }
         }
     }

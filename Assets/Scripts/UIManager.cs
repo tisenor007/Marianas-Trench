@@ -83,6 +83,8 @@ public class UIManager : MonoBehaviour
 
             if (deathCheck)
             {
+                
+
                 if (gameManager.subStats.GetIsDead() == true)
                 {
                     deathCheck = false;
@@ -91,7 +93,8 @@ public class UIManager : MonoBehaviour
                     LeanTween.scale(outOfFuelObject, Vector2.one, 2f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
                     {
                         LeanTween.scale(outOfFuelObject, Vector2.zero, 0f).setDelay(2f);
-                        LeanTween.move(results, resultsMoveToPosition, 1.0f);
+                        LeanTween.move(results, resultsMoveToPosition, 1.0f); //.setOnComplete(() => );
+                        
                     });
                 }
             }

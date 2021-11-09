@@ -18,6 +18,9 @@ public class ButtonManager : MonoBehaviour
 
     protected GameObject gameManager;
     protected GameManager gameManagerScript;
+
+    //public GameObject resultsScreen;
+    public GameObject upgradeButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,13 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (upgradeButton == null)
+        {
+            //resultsScreen = GameObject.Find("panel");
+            upgradeButton = GameObject.Find("UpgradesMenuButton");
+            upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
+            Debug.Log("FOUND BUTTON");
+        }
         upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
     }
     public void SaveGame()

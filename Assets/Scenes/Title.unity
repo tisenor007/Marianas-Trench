@@ -1067,7 +1067,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: blahblahblah
+  m_Text: 
 --- !u!222 &863234223
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1970,6 +1970,7 @@ MonoBehaviour:
   hullButtonTxt: {fileID: 0}
   propellerButtonTxt: {fileID: 0}
   pressureResistanceTxt: {fileID: 0}
+  upgradeButton: {fileID: 0}
 --- !u!4 &1292359453
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,7 +2094,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1497978101}
+  outOfFuelObject: {fileID: 0}
+  hullBrokenObject: {fileID: 0}
+  results: {fileID: 0}
+  resultsMoveToPosition: {x: 0, y: 0}
   running: 1
+  deathCheck: 1
 --- !u!4 &1493279126
 Transform:
   m_ObjectHideFlags: 0
@@ -2155,6 +2161,7 @@ MonoBehaviour:
   sub: {fileID: 673228951}
   subStatsCanvas: {fileID: 457592001}
   upgradeManager: {fileID: 102670693}
+  buttonManager: {fileID: 1292359451}
   UImanager: {fileID: 1493279125}
   subStats: {fileID: 0}
 --- !u!1 &1535248637
