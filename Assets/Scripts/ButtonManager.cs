@@ -46,13 +46,19 @@ public class ButtonManager : MonoBehaviour
             //resultsScreen = GameObject.Find("panel");
             
             upgradeButton = GameObject.Find("UpgradesMenuButton");
-            upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
+            if (upgradeButton != null)
+            {
+                upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
+            }
             Debug.Log("FOUND BUTTON");
         }
         if (diveAgainButton == null)
         {
             diveAgainButton = GameObject.Find("DiveAgainButton");
-            diveAgainButton.GetComponent<Button>().onClick.AddListener(StartGamePlay);
+            if (diveAgainButton != null)
+            {
+                diveAgainButton.GetComponent<Button>().onClick.AddListener(StartGamePlay);
+            }
             Debug.Log("FOUND dive BUTTON");
         }
     }
