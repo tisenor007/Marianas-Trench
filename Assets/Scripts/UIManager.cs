@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
             {
                 results = GameObject.Find("panel").GetComponent<RectTransform>();
                 resultsMoveToPosition = new Vector2(results.localPosition.x, results.localPosition.y);
-                results.transform.position = new Vector2(Screen.width / 2, Screen.height + 300);
+                results.transform.position = new Vector2(Screen.width / 2, Screen.height * 1.5f);
                 deathCheck = true;
             }
 

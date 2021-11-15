@@ -39,6 +39,8 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
+
         if (upgradeButton == null)
         {
             //resultsScreen = GameObject.Find("panel");
@@ -47,8 +49,6 @@ public class ButtonManager : MonoBehaviour
             upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
             Debug.Log("FOUND BUTTON");
         }
-        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
-
         if (diveAgainButton == null)
         {
             diveAgainButton = GameObject.Find("DiveAgainButton");
