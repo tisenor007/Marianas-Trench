@@ -692,6 +692,7 @@ MonoBehaviour:
   MoneyTxt: {fileID: 462137090}
   fuelTxt: {fileID: 248627842}
   depthTxt: {fileID: 925177886}
+  subCamera: {fileID: 1286312102}
   upgradeManager: {fileID: 102670694}
   currentFuelUpgrade: 0
   currentEngineUpgrade: 0
@@ -1852,7 +1853,6 @@ GameObject:
   - component: {fileID: 1286312105}
   - component: {fileID: 1286312104}
   - component: {fileID: 1286312103}
-  - component: {fileID: 1286312106}
   m_Layer: 0
   m_Name: SubCamera
   m_TagString: MainCamera
@@ -1925,19 +1925,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1286312106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286312102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75eee20694f8e7b43be11037f6a237c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sub: {fileID: 673228951}
 --- !u!1 &1292359451
 GameObject:
   m_ObjectHideFlags: 0

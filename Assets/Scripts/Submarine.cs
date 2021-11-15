@@ -10,6 +10,7 @@ public class Submarine : Character
     public Text MoneyTxt;
     public Text fuelTxt;
     public Text depthTxt;
+    public GameObject subCamera;
     public UpgradeManager upgradeManager;
 
     [Header("Can set these for testing")]
@@ -31,6 +32,7 @@ public class Submarine : Character
     private int pressureHitTime = 5;
     private int originPressureHitTime;
     private int pressureDamage = 5;
+    private int slowTime = 1;
 
 
 
@@ -45,6 +47,9 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rb.velocity.y);
+        subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
+
         if (transform.position.x < -(Screen.width / 100) + 2)
         {
             transform.position = new Vector2(-(Screen.width / 100) + 2, transform.position.y);
@@ -86,7 +91,7 @@ public class Submarine : Character
                     }
                     if (Input.GetKey(KeyCode.A))
                     {
-                        rb.AddForce(Vector3.left * (speed * 3f) * Time.deltaTime);
+                        rb.AddForce(Vector3.left * (speed * 5f) * Time.deltaTime);
                         useFuel();
                     }
                     if (Input.GetKey(KeyCode.S))
@@ -96,12 +101,21 @@ public class Submarine : Character
                     }
                     if (Input.GetKey(KeyCode.D))
                     {
-                        rb.AddForce(Vector3.right * (speed * 3f) * Time.deltaTime);
+                        rb.AddForce(Vector3.right * (speed * 5f) * Time.deltaTime);
                         useFuel();
                     }
                     else if (!Input.anyKey)
-                    { 
-                        rb.velocity = new Vector3(0, -0.15f, 0);
+                    {
+                        if (rb.velocity.y < -0.15f)
+                        {
+                            if (Time.time > slowTime)
+                            {
+                                Debug.Log("WORKS");
+                                rb.velocity = new Vector2(rb.velocity.x * 0.5f, rb.velocity.y * 0.5f);
+                                slowTime = Mathf.RoundToInt(Time.time) + 1;
+                            }
+                        }
+                        else if (rb.velocity.y >= -0.15f) { rb.velocity = new Vector2(rb.velocity.x, -0.15f); }
                     }
                 }
 
@@ -204,15 +218,15 @@ public class Submarine : Character
     {
         if (other.gameObject.tag == "LightEnemy")
         {
-            TakeDamage(10);
+            TakeDamage(5);
         }
         if (other.gameObject.tag == "MediumFish")
         {
-            TakeDamage(15);
+            TakeDamage(25);
         }
         if (other.gameObject.tag == "HeavyFish")
         {
-            TakeDamage(30);
+            TakeDamage(15);
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
