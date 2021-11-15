@@ -5,18 +5,16 @@ using UnityEngine;
 public class MediumFish : Enemy
 {
     // Start is called before the first frame update
-    public bool right;
 
     void Start()
     {
-
         minY = -110;
         maxY = -85;
         randomY = Random.Range(minY, maxY);
 
         isDead = false;
         rb = GetComponent<Rigidbody2D>();
-        right = true;
+        //right = true;
 
         health = 50;
         attackDamage = 20;
@@ -25,32 +23,19 @@ public class MediumFish : Enemy
         maxHealth = health;
 
         transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
+
+        state = State.roam;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (right)
+        switch (state)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-            if (transform.position.x > (Screen.width / 100) + 2)
-            {
-                right = false;
-            }
+            case State.roam:
+                Roam();
+                break;
         }
-
-
-        if (right == false)
-        {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
-
-            if (transform.position.x < -(Screen.width / 100) - 2)
-            {
-                right = true;
-            }
-        }
-
     }
 
     public void OnCollisionEnter2D(Collision2D other)

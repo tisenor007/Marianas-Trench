@@ -894,47 +894,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightFishPrefab: {fileID: 3636057754706157487, guid: 8a255bb671ecfaa4a88db74bb7cd0613, type: 3}
-  lightFishes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   octopusEnemyPrefab: {fileID: 7112599299423774516, guid: 80811214f28497e4c8e0fdefb31d9f01, type: 3}
-  octopusEnemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   mediumFishPrefab: {fileID: 582333491703804208, guid: 6e2bccc1e4557ac41bb139f6f5ae6698, type: 3}
-  mediumFishes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  heavyEnemyPrefab: {fileID: 6730582873871498779, guid: e262142d328d1c249a94b2d1287eb5cf, type: 3}
   startX: -7.5
 --- !u!4 &852285869
 Transform:

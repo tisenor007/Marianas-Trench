@@ -5,25 +5,66 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
+    public enum State
+    {
+        roam,
+        chasing,
+        attacking,
+        retreating
+    }
+    
     public float minY;
     public float maxY;
 
     public float randomY;
+    protected bool right = true;
+    protected GameObject target;
+    protected float targetDistance;
+    protected State state;
 
     void Start()
     {
-        //randomY = Random.Range(minY, maxY);
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+    }
+    public void Roam()
+    {
+        if (right)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
 
+            if (transform.position.x > (Screen.width / 100) + 2)
+            {
+                right = false;
+            }
+        }
 
+        if (right == false)
+        {
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
 
+            if (transform.position.x < -(Screen.width / 100) - 2)
+            {
+                right = true;
+            }
+        }
     }
 
-    
+    public void CheckPlayerInRange()
+    {
+        if (target != null)
+        {
+            if (targetDistance <= 5f)
+            {
+                state = State.chasing;
+            }
+        }
+    }
+
+
 }
