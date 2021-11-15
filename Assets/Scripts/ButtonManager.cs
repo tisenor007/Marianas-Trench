@@ -19,8 +19,8 @@ public class ButtonManager : MonoBehaviour
     protected GameObject gameManager;
     protected GameManager gameManagerScript;
 
-    //public GameObject resultsScreen;
     public GameObject upgradeButton;
+    public GameObject diveAgainButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +42,19 @@ public class ButtonManager : MonoBehaviour
         if (upgradeButton == null)
         {
             //resultsScreen = GameObject.Find("panel");
+            
             upgradeButton = GameObject.Find("UpgradesMenuButton");
             upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
             Debug.Log("FOUND BUTTON");
         }
         upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
+
+        if (diveAgainButton == null)
+        {
+            diveAgainButton = GameObject.Find("DiveAgainButton");
+            diveAgainButton.GetComponent<Button>().onClick.AddListener(StartGamePlay);
+            Debug.Log("FOUND dive BUTTON");
+        }
     }
     public void SaveGame()
     {
@@ -110,7 +118,6 @@ public class ButtonManager : MonoBehaviour
     public void GoToUpgradeScreen()
     {
         //Debug.Log("THIS BUTTON WORKS");
-
         SceneManager.LoadScene(Global.upgradeSceneName, LoadSceneMode.Single);
     }
     public void Options()
@@ -119,6 +126,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void StartGamePlay()
     {
+        gameManagerScript.subStats.ResetStats();
         SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
     }
     public void RestartGame()

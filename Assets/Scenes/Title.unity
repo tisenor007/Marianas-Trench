@@ -698,6 +698,8 @@ MonoBehaviour:
   currentHullUpgrade: 0
   currentPropellerUpgrade: 0
   currentPressureResistanceUpgrade: 0
+  coinsCollected: 0
+  coinWorth: 15
 --- !u!50 &673228954
 Rigidbody2D:
   serializedVersion: 4
@@ -1971,6 +1973,7 @@ MonoBehaviour:
   propellerButtonTxt: {fileID: 0}
   pressureResistanceTxt: {fileID: 0}
   upgradeButton: {fileID: 0}
+  diveAgainButton: {fileID: 0}
 --- !u!4 &1292359453
 Transform:
   m_ObjectHideFlags: 0
@@ -2096,10 +2099,14 @@ MonoBehaviour:
   gameManager: {fileID: 1497978101}
   outOfFuelObject: {fileID: 0}
   hullBrokenObject: {fileID: 0}
+  diveAgainButton: {fileID: 0}
   results: {fileID: 0}
   resultsMoveToPosition: {x: 0, y: 0}
+  diveAgainButtonMoveToPosition: {x: 0, y: 0}
   running: 1
   deathCheck: 1
+  depthText: {fileID: 0}
+  coinsText: {fileID: 0}
 --- !u!4 &1493279126
 Transform:
   m_ObjectHideFlags: 0

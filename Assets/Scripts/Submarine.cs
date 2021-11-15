@@ -19,6 +19,8 @@ public class Submarine : Character
     public int currentPropellerUpgrade = 0;
     public int currentPressureResistanceUpgrade = 0;
 
+    public int coinsCollected;
+    public int coinWorth = 15; 
     protected bool treasureFound = false;
     protected int fuel;
     protected int engineEfficiency;
@@ -112,7 +114,10 @@ public class Submarine : Character
     }
     public void ResetStats()
     {
+        coinsCollected = 0;
         isDead = false;
+        hullIsBroken = false;
+        outOfFuel = false;
         currentDepth = 0;
         fuel = upgradeManager.fuelUpgrades[currentFuelUpgrade];
         engineEfficiency = upgradeManager.engineUpgrades[currentEngineUpgrade];
@@ -121,6 +126,7 @@ public class Submarine : Character
         speed = upgradeManager.propellerUpgrades[currentPropellerUpgrade];
         pressureTimer = Mathf.RoundToInt(Time.time) + pressureHitTime;
         transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.identity;
     }
     public void clearGameStats()
     {
@@ -211,13 +217,14 @@ public class Submarine : Character
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Coin")
+        /*if (other.gameObject.tag == "Coin")
         {
             addMoney(25);
-        }
+        }*/
         if (other.gameObject.tag == "Treasure")
         {
             treasureFound = true;
         }
     }
+    
 }

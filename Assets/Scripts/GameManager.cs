@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private Vector3 subCamOriginPos;
     private Scene currentScene;
     private string sceneName;
-    private int earnedMoney;
+    public int earnedMoney;
 
     //private GameObject deathUI;
     //private GameObject deathMessage;
@@ -66,17 +66,19 @@ public class GameManager : MonoBehaviour
         //if (deathMessage != null) { deathMessageTxt = deathMessage.GetComponent<Text>(); }
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
+
+        earnedMoney = (int)(subStats.GetCurrentDepth() * 1.5f) + (subStats.coinsCollected * subStats.coinWorth);
         if (subStats.GetIsDead() == false)
         {
             if (subStats.getHealth() <= 0)
             { 
-                subStats.SetIsDead(true);
-                subStats.addMoney(subStats.GetCurrentDepth()); 
+                subStats.SetIsHullBroken(true);
+                subStats.addMoney(earnedMoney); 
             }
             else if (subStats.getFuel() <= 0)
-            { 
-                subStats.SetIsDead(true);
-                subStats.addMoney(subStats.GetCurrentDepth());
+            {
+                subStats.SetIsOutOfFuel(true);
+                subStats.addMoney(earnedMoney);
                 
             }
            
@@ -99,6 +101,7 @@ public class GameManager : MonoBehaviour
         }
         if (sceneName == Global.upgradeSceneName)
         {
+
             upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(true);
             subCam.SetActive(true);
@@ -120,7 +123,7 @@ public class GameManager : MonoBehaviour
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
         }
-        if (sceneName == Global.gameOverSceneName)
+        /*if (sceneName == Global.gameOverSceneName)
         {
             Save();
             upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
@@ -132,7 +135,7 @@ public class GameManager : MonoBehaviour
             upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.setInShopStatus(true);
-        }
+        }*/
         if (sceneName == Global.winSceneName)
         {
             Save();
