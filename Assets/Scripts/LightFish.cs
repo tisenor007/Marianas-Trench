@@ -5,18 +5,16 @@ using UnityEngine.UI;
 
 public class LightFish : Enemy
 {
-    public bool right;
 
     void Start()
     {
-
         minY = -30;
         maxY = -1;
         randomY = Random.Range(minY, maxY);
 
         isDead = false;
         rb = GetComponent<Rigidbody2D>();
-        right = true;
+        //right = true;
         
         health = 20;
         attackDamage = 10;
@@ -25,30 +23,18 @@ public class LightFish : Enemy
         maxHealth = health;
 
         transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
+
+        state = State.roam;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (right)
+        switch (state)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-            if (transform.position.x > (Screen.width / 100) + 2)
-            {
-                right = false;
-            }
-        }
-
-
-        if (right == false)
-        {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
-
-            if (transform.position.x < -(Screen.width / 100) - 2)
-            {
-                right = true;
-            }
+            case State.roam:
+                Roam();
+                break;
         }
 
     }

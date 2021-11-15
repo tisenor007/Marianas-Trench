@@ -11,6 +11,7 @@ TagManager:
   - MediumFish
   - HeavyFish
   - Treasure
+  - HeavyEnemy
   layers:
   - Default
   - TransparentFX

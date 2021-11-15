@@ -45,7 +45,7 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.velocity.y);
+        //Debug.Log(rb.velocity.y);
         subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
 
         if (transform.position.x < -(Screen.width / 100) + 2)
@@ -110,7 +110,7 @@ public class Submarine : Character
                         {
                             if (Time.time > slowTime)
                             {
-                                Debug.Log("WORKS");
+                                //Debug.Log("WORKS");
                                 rb.velocity = new Vector2(rb.velocity.x * 0.5f, rb.velocity.y * 0.5f);
                                 slowTime = Mathf.RoundToInt(Time.time) + 1;
                             }

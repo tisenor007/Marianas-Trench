@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class OctopusEnemy : Enemy
 {
-    public GameObject submarine;
-    public Vector2 visibleScreen;
+    private Vector2 visibleScreen;
 
     void Start()
     {
@@ -14,23 +13,30 @@ public class OctopusEnemy : Enemy
         attackDamage = 10;
 
         //Vector2 visibleScreen = new Vector3((Screen.width / 100), submarine.transform.position.y + ((Screen.height / 100) / 2) + 3);
+
+        state = State.roam;
     }
 
-    
+
     void Update()
     {
-        submarine = GameObject.FindGameObjectWithTag("Player");
-        if (submarine.transform.position.y < -30 && submarine.transform.position.y > -90)
+        switch (state) 
         {
-            visibleScreen = new Vector3((Screen.width / 100), submarine.transform.position.y + ((Screen.height / 100) / 2) + 16);
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
-            //Debug.Log(Screen.height / 100);
+            case State.roam:
+                target = GameObject.FindGameObjectWithTag("Player");
+                if (target.transform.position.y < -30 && target.transform.position.y > -90)
+                {
+                    visibleScreen = new Vector3((Screen.width / 100), target.transform.position.y + ((Screen.height / 100) / 2) + 16);
+                    transform.Translate(Vector2.up * speed * Time.deltaTime);
+                    //Debug.Log(Screen.height / 100);
 
-            if (gameObject.transform.position.y > visibleScreen.y && submarine.transform.position.y > -70)
-            {
-                Debug.Log("TRIGGERED");
-                gameObject.transform.position = new Vector2(transform.position.x, (submarine.transform.position.y + -((Screen.height / 100) / 2) - 16));
-            }
+                    if (gameObject.transform.position.y > visibleScreen.y && target.transform.position.y > -70)
+                    {
+                        Debug.Log("TRIGGERED");
+                        gameObject.transform.position = new Vector2(transform.position.x, (target.transform.position.y + -((Screen.height / 100) / 2) - 16));
+                    }
+                }
+                break;
         }
 
         
