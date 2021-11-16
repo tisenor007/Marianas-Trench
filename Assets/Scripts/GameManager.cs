@@ -67,23 +67,23 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
-        earnedMoney = (int)(subStats.GetCurrentDepth() * 1.5f) + (subStats.coinsCollected * subStats.coinWorth);
-        if (subStats.GetIsDead() == false)
+        earnedMoney = (int)(subStats.currentDepth * 1.5f) + (subStats.coinsCollected * subStats.coinWorth);
+        if (subStats.isDead == false)
         {
-            if (subStats.getHealth() <= 0)
+            if (subStats.health <= 0)
             { 
-                subStats.SetIsHullBroken(true);
+                subStats.hullIsBroken = true;
                 subStats.addMoney(earnedMoney); 
             }
-            else if (subStats.getFuel() <= 0)
+            else if (subStats.fuel <= 0)
             {
-                subStats.SetIsOutOfFuel(true);
+                subStats.outOfFuel = true;
                 subStats.addMoney(earnedMoney);
                 
             }
            
         }
-        else if (subStats.GetIsDead() == true)
+        else if (subStats.isDead == true)
         {
             //if (deathUI != null) { deathUI.SetActive(true); }
         }
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
             sub.SetActive(true);
             upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
-            subStats.setInShopStatus(false);
+            subStats.inShop = false;
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
             upgradeManagerScript.insufficientFundsMessage.SetActive(false);
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
             upgradeManagerScript.insufficientFundsMessage.SetActive(true);
-            subStats.setInShopStatus(true);
+            subStats.inShop = true;
             subCam.transform.position = subCamOriginPos;
             sub.transform.position = originSubPos;
             sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
-            subStats.setInShopStatus(true);
+            subStats.inShop = true;
         }
         /*if (sceneName == Global.gameOverSceneName)
         {
@@ -140,14 +140,14 @@ public class GameManager : MonoBehaviour
         {
             Save();
             upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
-            earnedMoney = subStats.GetCurrentDepth();
+            earnedMoney = subStats.currentDepth;
             upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
-            subStats.setInShopStatus(true);
+            subStats.inShop = true;
         }
     }
     public void NewGame()
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
         PlayerData data = new PlayerData();
 
-        data.currentMoney = subStats.GetMoney();
+        data.currentMoney = subStats.currentMoney;
         data.currentFuelUpgrade = subStats.currentFuelUpgrade;
         data.currentEngineUpgrade = subStats.currentEngineUpgrade;
         data.currentHullUpgrade = subStats.currentHullUpgrade;
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            subStats.SetMoney(data.currentMoney);
+            subStats.currentMoney = data.currentMoney;
             subStats.currentFuelUpgrade = data.currentFuelUpgrade;
             subStats.currentEngineUpgrade = data.currentEngineUpgrade;
             subStats.currentHullUpgrade = data.currentHullUpgrade;

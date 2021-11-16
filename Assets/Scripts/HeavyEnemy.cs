@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeavyEnemy : Enemy
 {   
     // Start is called before the first frame update
+    protected static float viewDistance = 5f;
     void Start()
     {
         minY = -115;
@@ -28,7 +29,7 @@ public class HeavyEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(targetDistance);
+        Debug.Log(state);
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
@@ -37,10 +38,16 @@ public class HeavyEnemy : Enemy
         {
             case State.roam:
                 Roam();
-                CheckPlayerInRange();
+                CheckPlayerInSight();
                 break;
             case State.chasing:
                 Chase();
+                CheckToRetreat();
+                break;
+            case State.retreating:
+                Retreat();
+                CheckPlayerInSight();
+                CheckToRoam();
                 break;
         }
         
@@ -63,6 +70,48 @@ public class HeavyEnemy : Enemy
         else if (target.transform.position.x < this.transform.position.x - 1)
         {
             this.transform.Translate(-0.001f * speed, 0, 0);
+        }
+    }
+
+    private void Retreat()
+    {
+       
+        if (randomY > this.transform.position.y + 1)
+        {
+            this.transform.Translate(0, 0.001f * speed, 0);
+        }
+        else if (randomY < this.transform.position.y - 1)
+        {
+            this.transform.Translate(0, -0.001f * speed, 0);
+        }
+    }
+    private void CheckToRoam()
+    {
+        if (this.transform.position.y <= randomY + 2f && this.transform.position.y >= randomY - 2f)
+        {
+            state = State.roam;
+        }
+    }
+
+    private void CheckPlayerInSight()
+    {
+        if (target != null)
+        {
+            if (targetDistance <= viewDistance)
+            {
+                state = State.chasing;
+            }
+        }
+    }
+
+    private void CheckToRetreat()
+    {
+        if (target != null)
+        {
+            if (targetDistance > viewDistance)
+            {
+                state = State.retreating;
+            }
         }
     }
     

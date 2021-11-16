@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
-
     public GameObject coinPrefab;
-    public GameObject[] coins = new GameObject[75];
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
+
+    private static int coinAmount = 50;
+    private GameObject[] coins = new GameObject[coinAmount];
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class CoinManager : MonoBehaviour
         minY = -145;
         maxY = -1;
 
-        for (int i = 0; i < 150; i++)
+        for (int i = 0; i < coinAmount; i++)
         {
             coins[i] = Instantiate(coinPrefab, new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY)), Quaternion.identity);
 

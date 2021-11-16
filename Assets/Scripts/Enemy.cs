@@ -55,16 +55,7 @@ public class Enemy : Character
         }
     }
 
-    public void CheckPlayerInRange()
-    {
-        if (target != null)
-        {
-            if (targetDistance <= 5f)
-            {
-                state = State.chasing;
-            }
-        }
-    }
+   
 
 
 }

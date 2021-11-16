@@ -53,7 +53,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradePressureResistance()
     {
-        if (subStats.GetMoney() >= pressureResistanceCost)
+        if (subStats.currentMoney >= pressureResistanceCost)
         {
             if (subStats.currentPressureResistanceUpgrade >= upgradeAmount - 1)
             {
@@ -65,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
                 subStats.currentPressureResistanceUpgrade = subStats.currentPressureResistanceUpgrade + 1;
             }
         }
-        else if (subStats.GetMoney() < fuelCost)
+        else if (subStats.currentMoney < fuelCost)
         {
             insufficientFundsCanvas.alpha = 1;
             StartCoroutine(FadeCanvas(true));
@@ -73,7 +73,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeFuel()
     {
-        if (subStats.GetMoney() >= fuelCost)
+        if (subStats.currentMoney >= fuelCost)
         {
             if (subStats.currentFuelUpgrade >= upgradeAmount - 1)
             {
@@ -85,7 +85,7 @@ public class UpgradeManager : MonoBehaviour
                 subStats.currentFuelUpgrade = subStats.currentFuelUpgrade + 1;
             }
         }
-        else if (subStats.GetMoney() < fuelCost)
+        else if (subStats.currentMoney < fuelCost)
         {
             insufficientFundsCanvas.alpha = 1;
             StartCoroutine(FadeCanvas(true));
@@ -94,7 +94,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpgradeEngine()
     {
-        if (subStats.GetMoney() >= engineCost)
+        if (subStats.currentMoney >= engineCost)
         {
             if (subStats.currentEngineUpgrade >= upgradeAmount - 1)
             {
@@ -106,7 +106,7 @@ public class UpgradeManager : MonoBehaviour
                 subStats.removeMoney(engineCost);
             }
         }
-        else if (subStats.GetMoney() < engineCost)
+        else if (subStats.currentMoney < engineCost)
         {
             insufficientFundsCanvas.alpha = 1;
             StartCoroutine(FadeCanvas(true));
@@ -114,7 +114,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeHullArmour()
     {
-        if (subStats.GetMoney() >= hullCost)
+        if (subStats.currentMoney >= hullCost)
         {
             if (subStats.currentHullUpgrade >= upgradeAmount - 1)
             {
@@ -126,7 +126,7 @@ public class UpgradeManager : MonoBehaviour
                 subStats.removeMoney(hullCost);
             }
         }
-        else if (subStats.GetMoney() < hullCost)
+        else if (subStats.currentMoney < hullCost)
         {
             insufficientFundsCanvas.alpha = 1;
             StartCoroutine(FadeCanvas(true));
@@ -134,7 +134,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradePropeller()
     {
-        if (subStats.GetMoney() >= propellerCost)
+        if (subStats.currentMoney >= propellerCost)
         {
             if (subStats.currentPropellerUpgrade >= upgradeAmount - 1)
             {
@@ -146,7 +146,7 @@ public class UpgradeManager : MonoBehaviour
                 subStats.removeMoney(propellerCost);
             }
         }
-        else if (subStats.GetMoney() < propellerCost)
+        else if (subStats.currentMoney < propellerCost)
         {
             insufficientFundsCanvas.alpha = 1;
             StartCoroutine(FadeCanvas(true));

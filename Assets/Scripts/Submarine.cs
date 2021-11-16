@@ -22,12 +22,37 @@ public class Submarine : Character
 
     public int coinsCollected;
     public int coinWorth = 15; 
-    protected bool treasureFound = false;
-    protected int fuel;
+    protected bool _treasureFound = false;
+    public bool treasureFound
+    {
+        get { return _treasureFound; }
+        set { _treasureFound = value; }
+    }
+    protected int _fuel;
+    public int fuel
+    {
+        get { return _fuel; }
+        set { _fuel = value; }
+    }
     protected int engineEfficiency;
-    protected bool inShop;
-    protected int currentDepth;
-    protected int currentMoney = 0;
+    protected bool _inShop;
+    public bool inShop
+    {
+        get { return _inShop; }
+        set { _inShop = value; }
+    }
+    protected int _currentDepth;
+    public int currentDepth
+    {
+        get { return _currentDepth; }
+        set { _currentDepth = value; }
+    }
+    protected int _currentMoney = 0;
+    public int currentMoney
+    {
+        get { return _currentMoney; }
+        set { _currentMoney = value; }
+    }
     private int pressureTimer = 0;
     private int pressureHitTime = 5;
     private int originPressureHitTime;
@@ -75,7 +100,7 @@ public class Submarine : Character
             
             if (treasureFound == true && inShop == false) { treasureFound = false; SceneManager.LoadScene(Global.winSceneName, LoadSceneMode.Single); }
             
-            if (GetIsDead() == false)
+            if (isDead == false)
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
@@ -120,7 +145,7 @@ public class Submarine : Character
                 }
 
             }
-            if (GetIsDead() == true)
+            if (isDead == true)
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
             }
@@ -145,7 +170,7 @@ public class Submarine : Character
     public void clearGameStats()
     {
         ResetStats();
-        SetMoney(0);
+        currentMoney = 0;
         currentHullUpgrade = 0;
         currentFuelUpgrade = 0;
         currentEngineUpgrade = 0;
@@ -186,21 +211,9 @@ public class Submarine : Character
             fuel = 0;
         }
     }
-    public int getFuel() { return fuel; }
-    public int GetCurrentDepth(){return currentDepth;}
-    //shop status
-    public bool getInShopStatus(){return inShop;}
-    public void setInShopStatus(bool status){inShop = status;}
-    public bool isTeasureFound() { return treasureFound; }
+    
+    //public bool isTeasureFound() { return treasureFound; }
     //money
-    public int GetMoney()
-    {
-        return currentMoney;
-    }
-    public void SetMoney(int amount)
-    {
-        currentMoney = amount;
-    }
     public void addMoney(int amount)
     {
         currentMoney = currentMoney + amount;

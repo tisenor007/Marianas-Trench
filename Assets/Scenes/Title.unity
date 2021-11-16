@@ -159,7 +159,7 @@ MonoBehaviour:
   earnedMoneyTxt: {fileID: 863234222}
   fuelUpgrades: 40420f000a0000000f00000014000000190000001e0000002300000028000000
   engineUpgrades: 020000000400000006000000080000000a0000000c0000000e00000010000000
-  hullUpgrades: a08601000f000000190000002800000037000000460000005500000064000000
+  hullUpgrades: 010000000f000000190000002800000037000000460000005500000064000000
   propellerUpgrades: 640000000400000006000000080000000a0000000c0000000e00000010000000
   pressureResistanceUpgrades: f401000014000000280000003c00000050000000640000007300000087000000
   pricePerUpgrade: 64000000c80000002c01000090010000f401000058020000bc02000020030000
@@ -685,9 +685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0aeb00ea55c97342be84b1605357933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  speed: 0
-  health: 100
   healthTxt: {fileID: 1874761938}
   MoneyTxt: {fileID: 462137090}
   fuelTxt: {fileID: 248627842}
@@ -2094,6 +2091,7 @@ MonoBehaviour:
   deathCheck: 1
   depthText: {fileID: 0}
   coinsText: {fileID: 0}
+  totalText: {fileID: 0}
 --- !u!4 &1493279126
 Transform:
   m_ObjectHideFlags: 0
@@ -2158,6 +2156,7 @@ MonoBehaviour:
   buttonManager: {fileID: 1292359451}
   UImanager: {fileID: 1493279125}
   subStats: {fileID: 0}
+  earnedMoney: 0
 --- !u!1 &1535248637
 GameObject:
   m_ObjectHideFlags: 0
