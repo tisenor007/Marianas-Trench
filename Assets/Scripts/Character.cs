@@ -4,14 +4,44 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public int attackDamage;
-    public float speed;
-    public int health;
+    protected int _attackDamage;
+    public int attackDamage
+    {
+        get { return _attackDamage; }
+        set { _attackDamage = value; }
+    }
+    protected float _speed;
+    public float speed
+    {
+        get { return _speed; }
+        set { _speed = value; }
+    }
+    protected int _health;
+    public int health
+    {
+        get { return _health; }
+        set { _health = value; }
+    }
     protected int maxHealth;
 
-    protected bool outOfFuel;
-    protected bool hullIsBroken;
-    protected bool isDead;
+    protected bool _outOfFuel;
+    public bool outOfFuel
+    {
+        get { return _outOfFuel; }
+        set { _outOfFuel = value; isDead = value; }
+    }
+    protected bool _hullIsBroken;
+    public bool hullIsBroken
+    {
+        get { return _hullIsBroken; }
+        set { _hullIsBroken = value; isDead = value; }
+    }
+    protected bool _isDead;
+    public bool isDead
+    {
+        get { return _isDead; }
+        set { _isDead = value; }
+    }
     protected Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -23,36 +53,6 @@ public class Character : MonoBehaviour
     void Update()
     {
         
-    }
-    public int getHealth()
-    {
-        return health;
-    }
-    public bool GetIsDead()
-    {
-        return isDead;
-    }
-    public bool GetIsOutOfFuel()
-    {
-        return outOfFuel;
-    }
-    public bool GetIsHullBroken()
-    {
-        return hullIsBroken;
-    }
-    public void SetIsDead(bool status)
-    {
-        isDead = status;
-    }
-    public void SetIsOutOfFuel(bool status)
-    {
-        outOfFuel = status;
-        isDead = status;
-    }
-    public void SetIsHullBroken(bool status)
-    {
-        hullIsBroken = status;
-        isDead = status;
     }
     public void TakeDamage(int damage)
     {

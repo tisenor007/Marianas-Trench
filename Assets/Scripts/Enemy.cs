@@ -34,8 +34,10 @@ public class Enemy : Character
     }
     public void Roam()
     {
+       
         if (right)
         {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             transform.Translate(Vector2.right * speed * Time.deltaTime);
 
             if (transform.position.x > (Screen.width / 100) + 2)
@@ -46,7 +48,8 @@ public class Enemy : Character
 
         if (right == false)
         {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
 
             if (transform.position.x < -(Screen.width / 100) - 2)
             {
@@ -55,16 +58,7 @@ public class Enemy : Character
         }
     }
 
-    public void CheckPlayerInRange()
-    {
-        if (target != null)
-        {
-            if (targetDistance <= 5f)
-            {
-                state = State.chasing;
-            }
-        }
-    }
+   
 
 
 }

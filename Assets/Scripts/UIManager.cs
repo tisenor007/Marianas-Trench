@@ -105,10 +105,10 @@ public class UIManager : MonoBehaviour
 
             if (deathCheck)
             {
-                if (gameManager.subStats.GetIsDead() == true)
+                if (gameManager.subStats.isDead == true)
                 {
                     depthText = results.GetChild(2).GetChild(4).GetChild(0).GetComponent<Text>();
-                    depthText.text = gameManager.subStats.GetCurrentDepth().ToString() + "ft = $" + (int)(gameManager.subStats.GetCurrentDepth() * 1.5f);
+                    depthText.text = gameManager.subStats.currentDepth.ToString() + "ft = $" + (int)(gameManager.subStats.currentDepth * 1.5f);
 
                     coinsText = results.GetChild(2).GetChild(4).GetChild(1).GetComponent<Text>();
                     coinsText.text = gameManager.subStats.coinsCollected.ToString() + " = $" + (gameManager.subStats.coinsCollected * gameManager.subStats.coinWorth).ToString();
@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
                     totalText = results.GetChild(2).GetChild(4).GetChild(3).GetComponent<Text>();
                     totalText.text = "$" + gameManager.earnedMoney.ToString(); //((gameManager.subStats.coinsCollected * gameManager.subStats.coinWorth) + (int)(gameManager.subStats.GetCurrentDepth() * 1.5f)).ToString();
 
-                    if (gameManager.subStats.GetIsHullBroken() == true)
+                    if (gameManager.subStats.hullIsBroken == true)
                     {
                         hullBrokenObject.SetActive(true);
                         LeanTween.scale(hullBrokenObject, Vector2.zero, 0f);
@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
                         });
                     }
 
-                    if (gameManager.subStats.GetIsOutOfFuel() == true)
+                    if (gameManager.subStats.outOfFuel == true)
                     {
                         outOfFuelObject.SetActive(true);
                         LeanTween.scale(outOfFuelObject, Vector2.zero, 0f);

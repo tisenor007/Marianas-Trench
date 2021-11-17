@@ -17,7 +17,7 @@ public class LightFish : Enemy
         //right = true;
         
         health = 20;
-        attackDamage = 10;
+        attackDamage = 2;
         speed = Random.Range(2, 6);
         
         maxHealth = health;
