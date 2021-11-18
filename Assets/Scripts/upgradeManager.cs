@@ -265,14 +265,14 @@ public class UpgradeManager : MonoBehaviour
         fuelUpgrades[6] = 35;
         fuelUpgrades[7] = 40;
 
-        engineUpgrades[0] = 2;
-        engineUpgrades[1] = 4;
-        engineUpgrades[2] = 6;
-        engineUpgrades[3] = 8;
-        engineUpgrades[4] = 10;
-        engineUpgrades[5] = 12;
-        engineUpgrades[6] = 14;
-        engineUpgrades[7] = 16;
+        engineUpgrades[0] = 4;
+        engineUpgrades[1] = 8;
+        engineUpgrades[2] = 12;
+        engineUpgrades[3] = 16;
+        engineUpgrades[4] = 20;
+        engineUpgrades[5] = 24;
+        engineUpgrades[6] = 28;
+        engineUpgrades[7] = 32;
 
         hullUpgrades[0] = 10;
         hullUpgrades[1] = 15;

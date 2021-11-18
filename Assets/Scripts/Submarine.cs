@@ -72,7 +72,6 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentFuelUpgrade);
         subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
 
         if (transform.position.x < -(Screen.width / 100) + 2)
@@ -175,6 +174,7 @@ public class Submarine : Character
         currentFuelUpgrade = 0;
         currentEngineUpgrade = 0;
         currentPropellerUpgrade = 0;
+        currentPressureResistanceUpgrade = 0;
     }
     public void CheckForPressure()
     {

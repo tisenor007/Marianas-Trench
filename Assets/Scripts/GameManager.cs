@@ -73,13 +73,16 @@ public class GameManager : MonoBehaviour
             if (subStats.health <= 0)
             { 
                 subStats.hullIsBroken = true;
-                subStats.addMoney(earnedMoney); 
+                subStats.addMoney(earnedMoney);
+                Save();
+                subStats.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             }
             else if (subStats.fuel <= 0)
             {
                 subStats.outOfFuel = true;
                 subStats.addMoney(earnedMoney);
-                
+                Save();
+                subStats.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             }
            
         }
@@ -165,6 +168,7 @@ public class GameManager : MonoBehaviour
         data.currentEngineUpgrade = subStats.currentEngineUpgrade;
         data.currentHullUpgrade = subStats.currentHullUpgrade;
         data.currentPropellerUpgrade = subStats.currentPropellerUpgrade;
+        data.currentPressureResistanceUpgrade = subStats.currentPressureResistanceUpgrade;
 
         bf.Serialize(file, data);
         file.Close();
@@ -184,6 +188,7 @@ public class GameManager : MonoBehaviour
             subStats.currentEngineUpgrade = data.currentEngineUpgrade;
             subStats.currentHullUpgrade = data.currentHullUpgrade;
             subStats.currentPropellerUpgrade = data.currentPropellerUpgrade;
+            subStats.currentPressureResistanceUpgrade = data.currentPressureResistanceUpgrade;
 
         }
     }
@@ -196,4 +201,5 @@ class PlayerData
     public int currentEngineUpgrade;
     public int currentHullUpgrade;
     public int currentPropellerUpgrade;
+    public int currentPressureResistanceUpgrade;
 }

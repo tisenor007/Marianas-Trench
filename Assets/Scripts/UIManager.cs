@@ -107,6 +107,7 @@ public class UIManager : MonoBehaviour
             {
                 if (gameManager.subStats.isDead == true)
                 {
+                    
                     depthText = results.GetChild(2).GetChild(4).GetChild(0).GetComponent<Text>();
                     depthText.text = gameManager.subStats.currentDepth.ToString() + "ft = $" + (int)(gameManager.subStats.currentDepth * 1.5f);
 
