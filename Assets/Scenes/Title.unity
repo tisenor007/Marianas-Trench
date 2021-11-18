@@ -157,12 +157,12 @@ MonoBehaviour:
   moneyCanvas: {fileID: 973700250}
   insufficientFundsMessage: {fileID: 888620867}
   earnedMoneyTxt: {fileID: 863234222}
-  fuelUpgrades: 40420f000a0000000f00000014000000190000001e0000002300000028000000
-  engineUpgrades: 020000000400000006000000080000000a0000000c0000000e00000010000000
-  hullUpgrades: 102700000f000000190000002800000037000000460000005500000064000000
-  propellerUpgrades: 640000000400000006000000080000000a0000000c0000000e00000010000000
-  pressureResistanceUpgrades: f401000014000000280000003c00000050000000640000007300000087000000
-  pricePerUpgrade: 64000000c80000002c01000090010000f401000058020000bc02000020030000
+  fuelUpgrades: 6400000000000000000000000000000000000000000000000000000000000000
+  engineUpgrades: 6400000000000000000000000000000000000000000000000000000000000000
+  hullUpgrades: 6400000000000000000000000000000000000000000000000000000000000000
+  propellerUpgrades: 6400000000000000000000000000000000000000000000000000000000000000
+  pressureResistanceUpgrades: 6400000000000000000000000000000000000000000000000000000000000000
+  pricePerUpgrade: 6400000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &102670695
 Transform:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ Transform:
   - {fileID: 1705158847}
   - {fileID: 888620868}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &248627840
 GameObject:
@@ -784,7 +784,7 @@ Transform:
   - {fileID: 973700254}
   - {fileID: 457592002}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740337481
 GameObject:
@@ -1832,7 +1832,7 @@ RectTransform:
   - {fileID: 951280846}
   - {fileID: 633921829}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1920,7 +1920,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292359451
 GameObject:

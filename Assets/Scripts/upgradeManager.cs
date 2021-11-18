@@ -11,14 +11,27 @@ public class UpgradeManager : MonoBehaviour
     public GameObject insufficientFundsMessage;
     public Text earnedMoneyTxt;
 
-    [Header("Set these for game play")]
-    public int[] fuelUpgrades = new int[upgradeAmount];
-    public int[] engineUpgrades = new int[upgradeAmount];
-    public int[] hullUpgrades = new int[upgradeAmount];
-    public int[] propellerUpgrades = new int[upgradeAmount];
-    public int[] pressureResistanceUpgrades = new int[upgradeAmount];
+    protected static int _upgradeAmount = 8;
+    public static int upgradeAmount
+    {
+        get { return _upgradeAmount; }
+        set { _upgradeAmount = value; }
+    }
+    //[Header("Set these for game play")]
 
+    [HideInInspector]
+    public int[] fuelUpgrades = new int[upgradeAmount];
+    [HideInInspector]
+    public int[] engineUpgrades = new int[upgradeAmount];
+    [HideInInspector]
+    public int[] hullUpgrades = new int[upgradeAmount];
+    [HideInInspector]
+    public int[] propellerUpgrades = new int[upgradeAmount];
+    [HideInInspector]
+    public int[] pressureResistanceUpgrades = new int[upgradeAmount];
+    [HideInInspector]
     public int[] pricePerUpgrade = new int[upgradeAmount];
+
     protected int fuelCost;
     protected int engineCost;
     protected int hullCost;
@@ -27,12 +40,14 @@ public class UpgradeManager : MonoBehaviour
 
     protected CanvasGroup insufficientFundsCanvas;
 
-    protected static int upgradeAmount = 8;
-
-
+    private void Awake()
+    {
+        SetGameplayStats();
+    }
     // Start is called before the first frame update
     void Start()
     {
+        //SetGameplayStats();
         insufficientFundsCanvas = insufficientFundsMessage.GetComponent<CanvasGroup>();
         StartCoroutine(FadeCanvas(true));
     }
@@ -40,6 +55,7 @@ public class UpgradeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(fuelUpgrades.Length);
         fuelCost = pricePerUpgrade[subStats.currentFuelUpgrade];
         engineCost = pricePerUpgrade[subStats.currentEngineUpgrade];
         hullCost = pricePerUpgrade[subStats.currentHullUpgrade];
@@ -222,7 +238,6 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-
     public IEnumerator FadeCanvas(bool fadeOut)
     {
         if (fadeOut == true)
@@ -234,10 +249,66 @@ public class UpgradeManager : MonoBehaviour
             }
         }
     }
+    //public int GetUpgradeAmount()
+    //{
+    //    return upgradeAmount;
+    //}
 
-    public int GetUpgradeAmount()
+    public void SetGameplayStats()
     {
-        return upgradeAmount;
-    }
+        fuelUpgrades[0] = 5;
+        fuelUpgrades[1] = 10;
+        fuelUpgrades[2] = 15;
+        fuelUpgrades[3] = 20;
+        fuelUpgrades[4] = 25;
+        fuelUpgrades[5] = 30;
+        fuelUpgrades[6] = 35;
+        fuelUpgrades[7] = 40;
 
+        engineUpgrades[0] = 2;
+        engineUpgrades[1] = 4;
+        engineUpgrades[2] = 6;
+        engineUpgrades[3] = 8;
+        engineUpgrades[4] = 10;
+        engineUpgrades[5] = 12;
+        engineUpgrades[6] = 14;
+        engineUpgrades[7] = 16;
+
+        hullUpgrades[0] = 10;
+        hullUpgrades[1] = 15;
+        hullUpgrades[2] = 25;
+        hullUpgrades[3] = 40;
+        hullUpgrades[4] = 55;
+        hullUpgrades[5] = 70;
+        hullUpgrades[6] = 85;
+        hullUpgrades[7] = 100;
+
+        propellerUpgrades[0] = 2;
+        propellerUpgrades[1] = 4;
+        propellerUpgrades[2] = 6;
+        propellerUpgrades[3] = 8;
+        propellerUpgrades[4] = 10;
+        propellerUpgrades[5] = 12;
+        propellerUpgrades[6] = 14;
+        propellerUpgrades[7] = 16;
+
+        pressureResistanceUpgrades[0] = 15;
+        pressureResistanceUpgrades[1] = 20;
+        pressureResistanceUpgrades[2] = 40;
+        pressureResistanceUpgrades[3] = 60;
+        pressureResistanceUpgrades[4] = 80;
+        pressureResistanceUpgrades[5] = 100;
+        pressureResistanceUpgrades[6] = 115;
+        pressureResistanceUpgrades[7] = 135;
+
+        pricePerUpgrade[0] = 100;
+        pricePerUpgrade[1] = 200;
+        pricePerUpgrade[2] = 300;
+        pricePerUpgrade[3] = 400;
+        pricePerUpgrade[4] = 500;
+        pricePerUpgrade[5] = 600;
+        pricePerUpgrade[6] = 700;
+        pricePerUpgrade[7] = 800;
+
+    }
 }

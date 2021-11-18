@@ -50,7 +50,7 @@ public class ButtonManager : MonoBehaviour
             {
                 upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
             }
-            Debug.Log("FOUND BUTTON");
+            //Debug.Log("FOUND BUTTON");
         }
         if (diveAgainButton == null)
         {
@@ -59,7 +59,7 @@ public class ButtonManager : MonoBehaviour
             {
                 diveAgainButton.GetComponent<Button>().onClick.AddListener(StartGamePlay);
             }
-            Debug.Log("FOUND dive BUTTON");
+            //Debug.Log("FOUND dive BUTTON");
         }
     }
     public void SaveGame()

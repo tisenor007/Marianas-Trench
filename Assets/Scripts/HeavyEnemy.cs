@@ -61,23 +61,23 @@ public class HeavyEnemy : Enemy
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, (speed * 10) * Time.deltaTime);
-        if (target.transform.position.y > this.transform.position.y + 1)
-        {
-            this.transform.Translate(0, 0.001f * speed, 0);
-        }
-        else if (target.transform.position.y < this.transform.position.y - 1)
-        {
-            this.transform.Translate(0, -0.001f * speed, 0);
-        }
+        //if (target.transform.position.y > this.transform.position.y + 1)
+        //{
+        //    this.transform.Translate(0, 0.001f * speed, 0);
+        //}
+        //else if (target.transform.position.y < this.transform.position.y - 1)
+        //{
+        //    this.transform.Translate(0, -0.001f * speed, 0);
+        //}
 
-        if (target.transform.position.x > this.transform.position.x + 1)
-        {
+        //if (target.transform.position.x > this.transform.position.x + 1)
+        //{
+        //    this.transform.Translate(0.001f * speed, 0, 0);
+        //}
+        //else if (target.transform.position.x < this.transform.position.x - 1)
+        //{
             this.transform.Translate(0.001f * speed, 0, 0);
-        }
-        else if (target.transform.position.x < this.transform.position.x - 1)
-        {
-            this.transform.Translate(-0.001f * speed, 0, 0);
-        }
+        //}
     }
 
     private void Retreat()
