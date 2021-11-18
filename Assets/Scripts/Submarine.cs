@@ -165,6 +165,7 @@ public class Submarine : Character
         pressureTimer = Mathf.RoundToInt(Time.time) + pressureHitTime;
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
     }
     public void clearGameStats()
     {
