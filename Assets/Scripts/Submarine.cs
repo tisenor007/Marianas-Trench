@@ -72,7 +72,6 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(rb.velocity.y);
         subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
 
         if (transform.position.x < -(Screen.width / 100) + 2)
@@ -102,11 +101,11 @@ public class Submarine : Character
             
             if (isDead == false)
             {
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
                 CheckForPressure();
-                if (Input.GetKey(KeyCode.W))
-                rb.AddForce(Vector3.up * speed * Time.deltaTime);
+                //if (Input.GetKey(KeyCode.W))
+                //rb.AddForce(Vector3.up * speed * Time.deltaTime);
                 if (fuel > 0)
                 {
                     if (Input.GetKey(KeyCode.W))
@@ -175,6 +174,7 @@ public class Submarine : Character
         currentFuelUpgrade = 0;
         currentEngineUpgrade = 0;
         currentPropellerUpgrade = 0;
+        currentPressureResistanceUpgrade = 0;
     }
     public void CheckForPressure()
     {
