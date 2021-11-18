@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3636057754706157491}
   - component: {fileID: 3636057754706157490}
   - component: {fileID: 3636057754706157486}
+  - component: {fileID: 7503374362555121962}
   m_Layer: 0
   m_Name: LightFish
   m_TagString: LightEnemy
@@ -134,9 +135,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43fdbee79b9a5564598e81f17d94c402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  speed: 0
-  health: 0
   minY: 0
   maxY: 0
   randomY: 0
+--- !u!70 &7503374362555121962
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636057754706157487}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.95, y: 0}
+  m_Size: {x: 10.35, y: 3.53}
+  m_Direction: 1

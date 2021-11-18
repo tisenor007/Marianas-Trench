@@ -166,6 +166,7 @@ public class Submarine : Character
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     public void clearGameStats()
     {
@@ -230,18 +231,18 @@ public class Submarine : Character
     //collison
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "LightEnemy")
-        {
-            TakeDamage(5);
-        }
-        if (other.gameObject.tag == "MediumFish")
-        {
-            TakeDamage(25);
-        }
-        if (other.gameObject.tag == "HeavyFish")
-        {
-            TakeDamage(15);
-        }
+        //if (other.gameObject.tag == "LightEnemy")
+        //{
+        //    TakeDamage(5);
+        //}
+        //if (other.gameObject.tag == "MediumFish")
+        //{
+        //    TakeDamage(25);
+        //}
+        //if (other.gameObject.tag == "HeavyFish")
+        //{
+            //TakeDamage(15);
+        //}
     }
     public void OnTriggerEnter2D(Collider2D other)
     {

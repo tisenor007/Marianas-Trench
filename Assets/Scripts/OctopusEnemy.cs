@@ -11,6 +11,8 @@ public class OctopusEnemy : Enemy
         //submarine = GameObject.FindGameObjectWithTag("Player");
         speed = Random.Range(1f, 5f);
         attackDamage = 10;
+        attackDistance = 3;
+        attackSpeed = 3;
 
         //Vector2 visibleScreen = new Vector3((Screen.width / 100), submarine.transform.position.y + ((Screen.height / 100) / 2) + 3);
 
@@ -20,6 +22,16 @@ public class OctopusEnemy : Enemy
 
     void Update()
     {
+        if (target != null)
+        {
+            targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
+            targetScript = target.GetComponent<Character>();
+        }
+        if (target == null)
+        {
+            targetDistance = 0;
+            targetScript = null;
+        }
         switch (state) 
         {
             case State.roam:
@@ -36,6 +48,11 @@ public class OctopusEnemy : Enemy
                         gameObject.transform.position = new Vector2(transform.position.x, (target.transform.position.y + -((Screen.height / 100) / 2) - 16));
                     }
                 }
+                CheckToAttack();
+                break;
+            case State.attacking:
+                Attack();
+                CheckToRoam();
                 break;
         }
 

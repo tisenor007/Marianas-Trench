@@ -19,8 +19,12 @@ public class Enemy : Character
     public float randomY;
     protected bool right = true;
     protected GameObject target;
+    protected Character targetScript;
     protected float targetDistance;
     protected State state;
+    protected float attackDistance;
+    protected int attackSpeed;
+    private int attackTime = 1;
 
     void Start()
     {
@@ -32,7 +36,43 @@ public class Enemy : Character
     {
 
     }
-    public void Roam()
+    protected void CheckToAttack()
+    {
+        if (targetScript != null)
+        {
+            if (targetScript.isDead == false)
+            {
+                if (targetDistance <= attackDistance) { state = State.attacking; }
+            }
+        }
+    }
+    protected void Attack()
+    {
+        if (target != null)
+        {
+            if (Time.time > attackTime)
+            {
+                //Debug.Log("WORKS");
+                targetScript.TakeDamage(this.attackDamage);
+                attackTime = Mathf.RoundToInt(Time.time) + attackSpeed;
+            }
+        }
+    }
+    protected void CheckToRoam()
+    {   
+        if (this.transform.position.y <= randomY + 2f && this.transform.position.y >= randomY - 2f)
+        {
+            state = State.roam;
+        }
+        else if (targetDistance > attackDistance) { state = State.roam; }
+        else if (target == null)
+        {
+            state = State.roam;
+        }
+     
+    }
+
+    protected void Roam()
     {
        
         if (right)
@@ -58,7 +98,22 @@ public class Enemy : Character
         }
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            target = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            target = null;
+        }
+    }
+
 
 
 }

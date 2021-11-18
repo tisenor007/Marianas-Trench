@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 582333491703804204}
   - component: {fileID: 582333491703804205}
   - component: {fileID: -4696683094549542001}
+  - component: {fileID: 6745631325073188194}
   m_Layer: 0
   m_Name: 'MediumFish '
-  m_TagString: MediumFish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,9 +135,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ce3ec9f1b0e56449a2ab2a12ad449c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  speed: 0
-  health: 0
   minY: 0
   maxY: 0
   randomY: 0
+--- !u!70 &6745631325073188194
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582333491703804208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.7, y: 0}
+  m_Size: {x: 94.3, y: 27.19}
+  m_Direction: 1

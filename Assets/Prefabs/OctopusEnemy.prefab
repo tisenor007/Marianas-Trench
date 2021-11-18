@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1634346468939080899}
   - component: {fileID: 7380976172134183146}
   - component: {fileID: 3879165637380937356}
+  - component: {fileID: 7990151862480111590}
   m_Layer: 0
   m_Name: OctopusEnemy
-  m_TagString: HeavyFish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +113,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c6380cb4e4f3a45a65fe2e19a266eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  speed: 0
-  health: 0
   minY: 0
   maxY: 0
   randomY: 0
+--- !u!70 &7990151862480111590
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112599299423774516}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.92}
+  m_Size: {x: 4.1, y: 12.63}
+  m_Direction: 0

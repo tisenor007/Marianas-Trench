@@ -18,6 +18,8 @@ public class MediumFish : Enemy
 
         health = 50;
         attackDamage = 20;
+        attackDistance = 5;
+        attackSpeed = 4;
         speed = Random.Range(4, 8);
 
         maxHealth = health;
@@ -30,27 +32,42 @@ public class MediumFish : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (target != null)
+        {
+            targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
+            targetScript = target.GetComponent<Character>();
+        }
+        if (target == null)
+        {
+            targetDistance = 0;
+            targetScript = null;
+        }
         switch (state)
         {
             case State.roam:
                 Roam();
+                CheckToAttack();
+                break;
+            case State.attacking:
+                Attack();
+                CheckToRoam();
                 break;
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "LightEnemy")
-        {
-            if (right == true)
-            {
-                right = false;
-            }
-            else if (right == false)
-            {
-                right = true;
-            }
-        }
+    //public void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" || other.gameObject.tag == "LightEnemy")
+    //    {
+    //        if (right == true)
+    //        {
+    //            right = false;
+    //        }
+    //        else if (right == false)
+    //        {
+    //            right = true;
+    //        }
+    //    }
 
-    }
+    //}
 }

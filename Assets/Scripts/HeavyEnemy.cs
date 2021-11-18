@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeavyEnemy : Enemy
 {   
     // Start is called before the first frame update
-    protected static float viewDistance = 10f;
+    protected static float viewDistance = 16f;
     void Start()
     {
         minY = -115;
@@ -20,6 +20,8 @@ public class HeavyEnemy : Enemy
 
         health = 40;
         attackDamage = 35;
+        attackDistance = 6;
+        attackSpeed = 5;
         speed = Random.Range(1, 3);
         maxHealth = health;
         state = State.roam;
@@ -30,9 +32,16 @@ public class HeavyEnemy : Enemy
     void Update()
     {
         Debug.Log(state);
+        Debug.Log(targetDistance);
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
+            targetScript = target.GetComponent<Character>();
+        }
+        if (target == null) 
+        {
+            targetDistance = 0;
+            targetScript = null; 
         }
         switch (state)
         {
@@ -43,41 +52,32 @@ public class HeavyEnemy : Enemy
             case State.chasing:
                 Chase();
                 CheckToRetreat();
+                CheckToAttack();
                 break;
             case State.retreating:
                 Retreat();
                 CheckPlayerInSight();
                 CheckToRoam();
+                CheckToAttack();
+                break;
+            case State.attacking:
+                Attack();
+                CheckPlayerInSight();
                 break;
         }
         
     }
     private void Chase()
     {
-        //Vector3 diff = (target.transform.position - this.transform.position);
-        //float angle = Mathf.Atan2(diff.y, diff.x);
-        //transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
-
-        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, (speed * 10) * Time.deltaTime);
-        //if (target.transform.position.y > this.transform.position.y + 1)
-        //{
-        //    this.transform.Translate(0, 0.001f * speed, 0);
-        //}
-        //else if (target.transform.position.y < this.transform.position.y - 1)
-        //{
-        //    this.transform.Translate(0, -0.001f * speed, 0);
-        //}
-
-        //if (target.transform.position.x > this.transform.position.x + 1)
-        //{
-        //    this.transform.Translate(0.001f * speed, 0, 0);
-        //}
-        //else if (target.transform.position.x < this.transform.position.x - 1)
-        //{
+       
+        if (target != null)
+        {
+            float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, (speed * 10) * Time.deltaTime);
+            
             this.transform.Translate(0.001f * speed, 0, 0);
-        //}
+        }
     }
 
     private void Retreat()
@@ -92,19 +92,12 @@ public class HeavyEnemy : Enemy
             this.transform.Translate(0, -0.001f * speed, 0);
         }
     }
-    private void CheckToRoam()
-    {
-        if (this.transform.position.y <= randomY + 2f && this.transform.position.y >= randomY - 2f)
-        {
-            state = State.roam;
-        }
-    }
 
     private void CheckPlayerInSight()
     {
         if (target != null)
         {
-            if (targetDistance <= viewDistance)
+            if (targetDistance <= viewDistance && targetDistance > attackDistance)
             {
                 state = State.chasing;
             }
@@ -120,14 +113,10 @@ public class HeavyEnemy : Enemy
                 state = State.retreating;
             }
         }
-    }
-    
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Player")
+        else if (target == null)
         {
-            target = other.gameObject;
+            state = State.retreating;
         }
     }
+    
 }

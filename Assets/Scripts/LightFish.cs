@@ -17,7 +17,10 @@ public class LightFish : Enemy
         //right = true;
         
         health = 20;
+        health = 50;
         attackDamage = 2;
+        attackDistance = 4;
+        attackSpeed = 1;
         speed = Random.Range(2, 6);
         
         maxHealth = health;
@@ -30,28 +33,43 @@ public class LightFish : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (target != null)
+        {
+            targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
+            targetScript = target.GetComponent<Character>();
+        }
+        if (target == null)
+        {
+            targetDistance = 0;
+            targetScript = null;
+        }
         switch (state)
         {
             case State.roam:
                 Roam();
+                CheckToAttack();
+                break;
+            case State.attacking:
+                Attack();
+                CheckToRoam();
                 break;
         }
 
     }
 
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "LightEnemy")
-        {
-            if (right == true)
-            {
-                right = false;
-            }
-            else if (right == false)
-            {
-                right = true;
-            }
-        }
+    //public void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" || other.gameObject.tag == "LightEnemy")
+    //    {
+    //        if (right == true)
+    //        {
+    //            right = false;
+    //        }
+    //        else if (right == false)
+    //        {
+    //            right = true;
+    //        }
+    //    }
         
-    }
+    //}
 }
