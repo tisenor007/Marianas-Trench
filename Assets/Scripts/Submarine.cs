@@ -218,8 +218,20 @@ public class Submarine : Character
     public void addFuel(int value)
     {
         fuel = fuel + value;
+        if (fuel >= upgradeManager.fuelUpgrades[currentFuelUpgrade])
+        {
+            fuel = upgradeManager.fuelUpgrades[currentFuelUpgrade];
+        }
     }
-    
+    public void Heal(int hp)
+    {
+        health = health + hp;
+        if (health >= upgradeManager.hullUpgrades[currentHullUpgrade])
+        {
+            health = upgradeManager.hullUpgrades[currentHullUpgrade];
+        }
+    }
+
     //public bool isTeasureFound() { return treasureFound; }
     //money
     public void addMoney(int amount)

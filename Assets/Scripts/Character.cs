@@ -70,9 +70,4 @@ public class Character : MonoBehaviour
             //isDead = true;
         }
     }
-
-    public void Heal(int hp)
-    {
-        health = health + hp;
-    }
 }
