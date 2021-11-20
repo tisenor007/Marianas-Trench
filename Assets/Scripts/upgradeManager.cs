@@ -256,7 +256,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void SetGameplayStats()
     {
-        fuelUpgrades[0] = 10000;
+        fuelUpgrades[0] = 5;
         fuelUpgrades[1] = 10;
         fuelUpgrades[2] = 15;
         fuelUpgrades[3] = 20;
@@ -274,7 +274,7 @@ public class UpgradeManager : MonoBehaviour
         engineUpgrades[6] = 28;
         engineUpgrades[7] = 32;
 
-        hullUpgrades[0] = 100;
+        hullUpgrades[0] = 10;
         hullUpgrades[1] = 15;
         hullUpgrades[2] = 25;
         hullUpgrades[3] = 40;
@@ -283,16 +283,16 @@ public class UpgradeManager : MonoBehaviour
         hullUpgrades[6] = 85;
         hullUpgrades[7] = 100;
 
-        propellerUpgrades[0] = 200;
-        propellerUpgrades[1] = 4;
-        propellerUpgrades[2] = 6;
-        propellerUpgrades[3] = 8;
-        propellerUpgrades[4] = 10;
-        propellerUpgrades[5] = 12;
-        propellerUpgrades[6] = 14;
-        propellerUpgrades[7] = 16;
+        propellerUpgrades[0] = 5;
+        propellerUpgrades[1] = 10;
+        propellerUpgrades[2] = 15;
+        propellerUpgrades[3] = 20;
+        propellerUpgrades[4] = 25;
+        propellerUpgrades[5] = 30;
+        propellerUpgrades[6] = 35;
+        propellerUpgrades[7] = 40;
 
-        pressureResistanceUpgrades[0] = 150;
+        pressureResistanceUpgrades[0] = 15;
         pressureResistanceUpgrades[1] = 20;
         pressureResistanceUpgrades[2] = 40;
         pressureResistanceUpgrades[3] = 60;

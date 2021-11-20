@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3127706121783008587}
   - component: {fileID: 1634346468939080899}
-  - component: {fileID: 7380976172134183146}
   - component: {fileID: 3879165637380937356}
   - component: {fileID: 7990151862480111590}
+  - component: {fileID: 2916489822335068410}
   m_Layer: 0
   m_Name: OctopusEnemy
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7112599299423774516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72, y: -79.47657, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.64764, y: 0.64764, z: 0.64764}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,22 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &7380976172134183146
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112599299423774516}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.8, y: 7.13}
-  m_Direction: 0
 --- !u!114 &3879165637380937356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,4 +115,20 @@ CapsuleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.92}
   m_Size: {x: 4.1, y: 12.63}
+  m_Direction: 0
+--- !u!70 &2916489822335068410
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112599299423774516}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.8, y: 7.13}
   m_Direction: 0

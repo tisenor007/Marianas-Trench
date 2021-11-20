@@ -72,15 +72,17 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-        subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
-
-        if (transform.position.x < -(Screen.width / 100) + 2)
+        if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {
-            transform.position = new Vector2(-(Screen.width / 100) + 2, transform.position.y);
+            subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
         }
-        else if (transform.position.x > (Screen.width / 100) - 2)
+        if (transform.position.x < -((Screen.width / 100) / 2))
         {
-            transform.position = new Vector2(Screen.width / 100 - 2, transform.position.y);
+            transform.position = new Vector2(-((Screen.width / 100) / 2), transform.position.y);
+        }
+        else if (transform.position.x > ((Screen.width / 100) / 2))
+        {
+            transform.position = new Vector2(((Screen.width / 100) / 2), transform.position.y);
         }
         healthTxt.text = "Sub Hull Armour: " + health.ToString();
         MoneyTxt.text = "Your Money: $" + currentMoney.ToString();
@@ -212,6 +214,10 @@ public class Submarine : Character
         {
             fuel = 0;
         }
+    }
+    public void addFuel(int value)
+    {
+        fuel = fuel + value;
     }
     
     //public bool isTeasureFound() { return treasureFound; }

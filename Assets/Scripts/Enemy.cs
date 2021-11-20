@@ -65,7 +65,7 @@ public class Enemy : Character
             state = State.roam;
         }
         else if (targetDistance > attackDistance) { state = State.roam; }
-        else if (target == null)
+        else if (target == null || targetScript.isDead == true)
         {
             state = State.roam;
         }

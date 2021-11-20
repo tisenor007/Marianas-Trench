@@ -21,7 +21,7 @@ public class HeavyEnemy : Enemy
         health = 40;
         attackDamage = 35;
         attackDistance = 6;
-        attackSpeed = 5;
+        attackSpeed = 6;
         speed = Random.Range(1, 3);
         maxHealth = health;
         state = State.roam;
@@ -31,8 +31,8 @@ public class HeavyEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(state);
-        Debug.Log(targetDistance);
+        //Debug.Log(state);
+        //Debug.Log(targetDistance);
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);

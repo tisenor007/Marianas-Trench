@@ -9,6 +9,7 @@ public class Global : MonoBehaviour
     public static string gameSceneName = "GamePlay";
     public static string upgradeSceneName = "UpgradeScreen";
     public static string winSceneName = "WinScreen";
+    public static int mapLengthY = -148;
     // Start is called before the first frame update
     void Start()
     {
