@@ -19,11 +19,20 @@ public class ButtonManager : MonoBehaviour
     protected GameObject gameManager;
     protected GameManager gameManagerScript;
 
+    protected GameObject uiManager;
+    protected UIManager uiManagerScript;
+
     public GameObject upgradeButton;
     public GameObject diveAgainButton;
+    public GameObject dismissButton;
+
+    public int pageNum = 0;
     // Start is called before the first frame update
     void Start()
     {
+        pageNum = 0;
+
+        uiManager = GameObject.Find("UIManager");
         upgradeManager = GameObject.FindWithTag("UpgradeManager");
         gameManager = GameObject.FindWithTag("GameManager");
         if (upgradeManager != null)
@@ -33,6 +42,10 @@ public class ButtonManager : MonoBehaviour
         if (gameManager != null)
         {
             gameManagerScript = gameManager.GetComponent<GameManager>();
+        }
+        if (uiManager != null)
+        {
+            uiManagerScript = uiManager.GetComponent<UIManager>();
         }
     }
 
@@ -57,9 +70,18 @@ public class ButtonManager : MonoBehaviour
             diveAgainButton = GameObject.Find("DiveAgainButton");
             if (diveAgainButton != null)
             {
-                diveAgainButton.GetComponent<Button>().onClick.AddListener(StartGamePlay);
+                diveAgainButton.GetComponent<Button>().onClick.AddListener(DiveAgain);
             }
             //Debug.Log("FOUND dive BUTTON");
+        }
+        if (dismissButton == null)
+        {
+            dismissButton = GameObject.Find("DismissButton");
+            if (dismissButton != null)
+            {
+                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked1);
+            }
+            Debug.Log("FOUND dismiss BUTTON");
         }
     }
     public void SaveGame()
@@ -81,9 +103,22 @@ public class ButtonManager : MonoBehaviour
     {
         if (gameManagerScript != null)
         {
+            //uiManagerScript.inTutorial = true;
+            //uiManagerScript.hideTutorial = false;
+            
             gameManagerScript.NewGame();
             StartGamePlay();
         }
+    }
+
+    public void OnDismissClicked1()
+    {
+        uiManagerScript.tutorialPages[pageNum].SetActive(false);
+        pageNum++;
+        if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
+        //else { uiManagerScript.hideTutorial = true; }
+        dismissButton = null;
+
     }
     public void upgradePressureResistance()
     {
@@ -133,7 +168,18 @@ public class ButtonManager : MonoBehaviour
     public void StartGamePlay()
     {
         gameManagerScript.subStats.ResetStats();
+        
         SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
+        gameManagerScript.UImanager.inTutorial = true;
+        gameManagerScript.UImanager.hideTutorial = false;
+    }
+    public void DiveAgain()
+    {
+        gameManagerScript.subStats.ResetStats();
+        
+        SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
+        gameManagerScript.UImanager.inTutorial = false;
+        gameManagerScript.UImanager.hideTutorial = true;
     }
     public void RestartGame()
     {
