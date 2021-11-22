@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 470378485}
   - component: {fileID: 470378484}
   m_Layer: 5
-  m_Name: DismissButton
+  m_Name: DismissButton2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1595,7 +1595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590287532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -144.17, z: 0}
+  m_LocalPosition: {x: 0, y: -146.84, z: 0}
   m_LocalScale: {x: 0.50088805, y: 0.50088805, z: 0.50088805}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4493,7 +4493,7 @@ GameObject:
   - component: {fileID: 2039944724}
   - component: {fileID: 2039944723}
   m_Layer: 5
-  m_Name: DismissButton
+  m_Name: DismissButton3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -25,6 +25,8 @@ public class ButtonManager : MonoBehaviour
     public GameObject upgradeButton;
     public GameObject diveAgainButton;
     public GameObject dismissButton;
+    public GameObject dismissButton2;
+    public GameObject dismissButton3;
 
     public int pageNum = 0;
     // Start is called before the first frame update
@@ -83,6 +85,24 @@ public class ButtonManager : MonoBehaviour
             }
             Debug.Log("FOUND dismiss BUTTON");
         }
+        if (dismissButton2 == null)
+        {
+            dismissButton = GameObject.Find("DismissButton2");
+            if (dismissButton != null)
+            {
+                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked2);
+            }
+            Debug.Log("FOUND dismiss BUTTON 2");
+        }
+        if (dismissButton3 == null)
+        {
+            dismissButton = GameObject.Find("DismissButton3");
+            if (dismissButton != null)
+            {
+                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked3);
+            }
+            Debug.Log("FOUND dismiss BUTTON 2");
+        }
     }
     public void SaveGame()
     {
@@ -113,12 +133,27 @@ public class ButtonManager : MonoBehaviour
 
     public void OnDismissClicked1()
     {
-        uiManagerScript.tutorialPages[pageNum].SetActive(false);
-        pageNum++;
-        if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
-        //else { uiManagerScript.hideTutorial = true; }
-        dismissButton = null;
+        uiManagerScript.tutorialPages[0].SetActive(false);
+        uiManagerScript.tutorialPages[1].SetActive(true);
+        //uiManagerScript.tutorialPages[pageNum].SetActive(false);
+        //pageNum++;
+        //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
+        //dismissButton = null;
 
+    }
+    public void OnDismissClicked2()
+    {
+        uiManagerScript.tutorialPages[1].SetActive(false);
+        uiManagerScript.tutorialPages[2].SetActive(true);
+        //uiManagerScript.tutorialPages[pageNum].SetActive(false);
+        //pageNum++;
+        //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
+        //dismissButton = null;
+
+    }
+    public void OnDismissClicked3()
+    {
+        uiManagerScript.tutorialPages[2].SetActive(false);
     }
     public void upgradePressureResistance()
     {
