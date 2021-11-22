@@ -19,11 +19,22 @@ public class ButtonManager : MonoBehaviour
     protected GameObject gameManager;
     protected GameManager gameManagerScript;
 
+    protected GameObject uiManager;
+    protected UIManager uiManagerScript;
+
     public GameObject upgradeButton;
     public GameObject diveAgainButton;
+    public GameObject dismissButton;
+    public GameObject dismissButton2;
+    public GameObject dismissButton3;
+
+    public int pageNum = 0;
     // Start is called before the first frame update
     void Start()
     {
+        pageNum = 0;
+
+        uiManager = GameObject.Find("UIManager");
         upgradeManager = GameObject.FindWithTag("UpgradeManager");
         gameManager = GameObject.FindWithTag("GameManager");
         if (upgradeManager != null)
@@ -33,6 +44,10 @@ public class ButtonManager : MonoBehaviour
         if (gameManager != null)
         {
             gameManagerScript = gameManager.GetComponent<GameManager>();
+        }
+        if (uiManager != null)
+        {
+            uiManagerScript = uiManager.GetComponent<UIManager>();
         }
     }
 
@@ -57,9 +72,36 @@ public class ButtonManager : MonoBehaviour
             diveAgainButton = GameObject.Find("DiveAgainButton");
             if (diveAgainButton != null)
             {
-                diveAgainButton.GetComponent<Button>().onClick.AddListener(StartGamePlay);
+                diveAgainButton.GetComponent<Button>().onClick.AddListener(DiveAgain);
             }
             //Debug.Log("FOUND dive BUTTON");
+        }
+        if (dismissButton == null)
+        {
+            dismissButton = GameObject.Find("DismissButton");
+            if (dismissButton != null)
+            {
+                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked1);
+            }
+            Debug.Log("FOUND dismiss BUTTON");
+        }
+        if (dismissButton2 == null)
+        {
+            dismissButton = GameObject.Find("DismissButton2");
+            if (dismissButton != null)
+            {
+                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked2);
+            }
+            Debug.Log("FOUND dismiss BUTTON 2");
+        }
+        if (dismissButton3 == null)
+        {
+            dismissButton = GameObject.Find("DismissButton3");
+            if (dismissButton != null)
+            {
+                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked3);
+            }
+            Debug.Log("FOUND dismiss BUTTON 2");
         }
     }
     public void SaveGame()
@@ -81,9 +123,37 @@ public class ButtonManager : MonoBehaviour
     {
         if (gameManagerScript != null)
         {
+            //uiManagerScript.inTutorial = true;
+            //uiManagerScript.hideTutorial = false;
+            
             gameManagerScript.NewGame();
             StartGamePlay();
         }
+    }
+
+    public void OnDismissClicked1()
+    {
+        uiManagerScript.tutorialPages[0].SetActive(false);
+        uiManagerScript.tutorialPages[1].SetActive(true);
+        //uiManagerScript.tutorialPages[pageNum].SetActive(false);
+        //pageNum++;
+        //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
+        //dismissButton = null;
+
+    }
+    public void OnDismissClicked2()
+    {
+        uiManagerScript.tutorialPages[1].SetActive(false);
+        uiManagerScript.tutorialPages[2].SetActive(true);
+        //uiManagerScript.tutorialPages[pageNum].SetActive(false);
+        //pageNum++;
+        //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
+        //dismissButton = null;
+
+    }
+    public void OnDismissClicked3()
+    {
+        uiManagerScript.tutorialPages[2].SetActive(false);
     }
     public void upgradePressureResistance()
     {
@@ -133,7 +203,18 @@ public class ButtonManager : MonoBehaviour
     public void StartGamePlay()
     {
         gameManagerScript.subStats.ResetStats();
+        
         SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
+        gameManagerScript.UImanager.inTutorial = true;
+        gameManagerScript.UImanager.hideTutorial = false;
+    }
+    public void DiveAgain()
+    {
+        gameManagerScript.subStats.ResetStats();
+        
+        SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
+        gameManagerScript.UImanager.inTutorial = false;
+        gameManagerScript.UImanager.hideTutorial = true;
     }
     public void RestartGame()
     {

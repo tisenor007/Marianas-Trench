@@ -19,10 +19,14 @@ public class UIManager : MonoBehaviour
     public Vector2 diveAgainButtonMoveToPosition;
     public bool running = true;
     public bool deathCheck = true;
+    public bool hideTutorial;
+    public bool inTutorial;
 
     public Text depthText;
     public Text coinsText;
     public Text totalText;
+
+    public GameObject[] tutorialPages;
 
     void Awake()
     {
@@ -31,7 +35,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        
+        inTutorial = true;
+        tutorialPages = new GameObject[3];
     }
 
     // Update is called once per frame
@@ -73,9 +78,33 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == Global.gameSceneName)
         {
+            if (inTutorial)
+            {
+                tutorialPages[0] = GameObject.Find("welcomePanel");
+                tutorialPages[1] = GameObject.Find("tutorialPanel 1");
+                tutorialPages[2] = GameObject.Find("tutorialPanel 2");
+
+                tutorialPages[1].SetActive(false);
+                tutorialPages[2].SetActive(false);
+                inTutorial = false;
+            }
+
+            if (hideTutorial)
+            {
+                tutorialPages[0] = GameObject.Find("welcomePanel");
+                tutorialPages[1] = GameObject.Find("tutorialPanel 1");
+                tutorialPages[2] = GameObject.Find("tutorialPanel 2");
+
+                tutorialPages[0].SetActive(false);
+                tutorialPages[1].SetActive(false);
+                tutorialPages[2].SetActive(false);
+                hideTutorial = false;
+            }
+            
+
             if (results == null)
             {
-                results = GameObject.Find("panel").GetComponent<RectTransform>();
+                results = GameObject.Find("resultsPanel").GetComponent<RectTransform>();
                 resultsMoveToPosition = new Vector2(results.localPosition.x, results.localPosition.y);
                 results.transform.position = new Vector2(Screen.width / 2, Screen.height * 1.5f);
                 deathCheck = true;
@@ -147,5 +176,10 @@ public class UIManager : MonoBehaviour
             
             
         }
+    }
+
+    public void LoadTutorial()
+    {
+        tutorialPages[0].SetActive(true);
     }
 }

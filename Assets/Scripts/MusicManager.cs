@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MusicManager : MonoBehaviour
+{
+    protected GameObject gameManager;
+    protected GameManager gameManagerScript;
+
+    public GameObject music;
+
+    void Start()
+    {
+        gameManager = GameObject.FindWithTag("GameManager");
+
+        if (gameManager != null)
+        {
+            gameManagerScript = gameManager.GetComponent<GameManager>();
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        //if (sceneName == Global.titleSceneName)
+        //{
+            if (music == null)
+            {
+                music = GameObject.Find("Music");
+                music.GetComponent<AudioSource>().Play(0);
+            }
+        //}
+    }
+}

@@ -126,19 +126,6 @@ public class GameManager : MonoBehaviour
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.inShop = true;
         }
-        /*if (sceneName == Global.gameOverSceneName)
-        {
-            Save();
-            upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
-            earnedMoney = subStats.GetCurrentDepth();
-            upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
-            sub.SetActive(false);
-            subCam.SetActive(false);
-            subStatsCanvas.SetActive(false);
-            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
-            upgradeManagerScript.moneyCanvas.SetActive(false);
-            subStats.setInShopStatus(true);
-        }*/
         if (sceneName == Global.winSceneName)
         {
             Save();
@@ -155,6 +142,8 @@ public class GameManager : MonoBehaviour
     }
     public void NewGame()
     {
+        //UImanager.hideTutorial = false;
+        //UImanager.inTutorial = true;
         subStats.clearGameStats();
     }
     public void Save()
@@ -191,6 +180,9 @@ public class GameManager : MonoBehaviour
             subStats.currentPressureResistanceUpgrade = data.currentPressureResistanceUpgrade;
 
         }
+
+        UImanager.hideTutorial = true;
+        UImanager.inTutorial = false;
     }
 }
 [Serializable]
