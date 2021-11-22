@@ -16,14 +16,16 @@ public class GameManager : MonoBehaviour
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
     public GameObject buttonManager;
-    private UpgradeManager upgradeManagerScript;
-    public UIManager UImanager;
+    public UIManager uiManager;
     public Submarine subStats;
+    public int earnedMoney;
+    public bool hideTutorial;
+    public bool inTutorial;
+    private UpgradeManager upgradeManagerScript;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
     private Scene currentScene;
     private string sceneName;
-    public int earnedMoney;
 
     //private GameObject deathUI;
     //private GameObject deathMessage;
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(upgradeManager);
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
-            DontDestroyOnLoad(UImanager);
+            DontDestroyOnLoad(uiManager);
             DontDestroyOnLoad(buttonManager);
             control = this;
         }
@@ -181,8 +183,8 @@ public class GameManager : MonoBehaviour
 
         }
 
-        UImanager.hideTutorial = true;
-        UImanager.inTutorial = false;
+        hideTutorial = true;
+        inTutorial = false;
     }
 }
 [Serializable]

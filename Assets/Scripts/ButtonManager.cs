@@ -13,6 +13,12 @@ public class ButtonManager : MonoBehaviour
     public Text propellerButtonTxt;
     public Text pressureResistanceTxt;
 
+    public GameObject upgradeButton;
+    public GameObject diveAgainButton;
+    public GameObject dismissButton;
+    public GameObject dismissButton2;
+    public GameObject dismissButton3;
+
     protected GameObject upgradeManager;
     protected UpgradeManager upgradeManagerScript;
 
@@ -22,11 +28,6 @@ public class ButtonManager : MonoBehaviour
     protected GameObject uiManager;
     protected UIManager uiManagerScript;
 
-    public GameObject upgradeButton;
-    public GameObject diveAgainButton;
-    public GameObject dismissButton;
-    public GameObject dismissButton2;
-    public GameObject dismissButton3;
 
     public int pageNum = 0;
     // Start is called before the first frame update
@@ -145,6 +146,8 @@ public class ButtonManager : MonoBehaviour
     {
         uiManagerScript.tutorialPages[1].SetActive(false);
         uiManagerScript.tutorialPages[2].SetActive(true);
+        gameManagerScript.inTutorial = false;
+        gameManagerScript.hideTutorial = true;
         //uiManagerScript.tutorialPages[pageNum].SetActive(false);
         //pageNum++;
         //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
@@ -205,16 +208,16 @@ public class ButtonManager : MonoBehaviour
         gameManagerScript.subStats.ResetStats();
         
         SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
-        gameManagerScript.UImanager.inTutorial = true;
-        gameManagerScript.UImanager.hideTutorial = false;
+        gameManagerScript.inTutorial = true;
+        gameManagerScript.hideTutorial = false;
     }
     public void DiveAgain()
     {
         gameManagerScript.subStats.ResetStats();
         
         SceneManager.LoadScene(Global.gameSceneName, LoadSceneMode.Single);
-        gameManagerScript.UImanager.inTutorial = false;
-        gameManagerScript.UImanager.hideTutorial = true;
+        gameManagerScript.inTutorial = false;
+        gameManagerScript.hideTutorial = true;
     }
     public void RestartGame()
     {

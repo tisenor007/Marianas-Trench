@@ -19,8 +19,8 @@ public class UIManager : MonoBehaviour
     public Vector2 diveAgainButtonMoveToPosition;
     public bool running = true;
     public bool deathCheck = true;
-    public bool hideTutorial;
-    public bool inTutorial;
+    //public bool hideTutorial;
+    //public bool inTutorial;
 
     public Text depthText;
     public Text coinsText;
@@ -35,10 +35,10 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        inTutorial = true;
+        gameManager.inTutorial = true;
         tutorialPages = new GameObject[3];
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -78,29 +78,54 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == Global.gameSceneName)
         {
-            if (inTutorial)
+
+            if (gameManager.inTutorial)
+            {
+                //tutorialPages[0] = GameObject.Find("welcomePanel");
+                //tutorialPages[1] = GameObject.Find("tutorialPanel 1");
+                //tutorialPages[2] = GameObject.Find("tutorialPanel 2");
+
+                tutorialPages[0] = GameObject.Find("welcomePanel");
+                tutorialPages[1] = GameObject.Find("tutorialPanel 1");
+                tutorialPages[2] = GameObject.Find("tutorialPanel 2");
+
+
+                if (tutorialPages[0] != null || tutorialPages[0] != null && tutorialPages[0].activeSelf == false) tutorialPages[0].SetActive(true);
+                if (tutorialPages[1] != null || tutorialPages[1] != null && tutorialPages[1].activeSelf == true) tutorialPages[1].SetActive(false);
+                if (tutorialPages[2] != null || tutorialPages[2] != null && tutorialPages[2].activeSelf == true) tutorialPages[2].SetActive(false);
+
+                gameManager.inTutorial = false;
+
+                if (tutorialPages[0] != null && tutorialPages[1] != null && tutorialPages[2] != null) { Time.timeScale = 0; }
+
+                //tutorialPages[1].SetActive(false);
+                //tutorialPages[2].SetActive(false);
+
+                
+            }
+
+            if (gameManager.hideTutorial)
             {
                 tutorialPages[0] = GameObject.Find("welcomePanel");
                 tutorialPages[1] = GameObject.Find("tutorialPanel 1");
                 tutorialPages[2] = GameObject.Find("tutorialPanel 2");
 
-                tutorialPages[1].SetActive(false);
-                tutorialPages[2].SetActive(false);
-                inTutorial = false;
+                //if (tutorialPages[0] == null) { tutorialPages[0] = GameObject.Find("welcomePanel"); }
+                //if (tutorialPages[1] == null) { tutorialPages[1] = GameObject.Find("tutorialPanel 1"); }
+                //if (tutorialPages[2] == null) { tutorialPages[2] = GameObject.Find("tutorialPanel 2"); }
+
+                if (tutorialPages[0] != null || tutorialPages[0] != null && tutorialPages[0].activeSelf == true) tutorialPages[0].SetActive(false);
+                if (tutorialPages[1] != null || tutorialPages[1] != null && tutorialPages[1].activeSelf == true) tutorialPages[1].SetActive(false);
+                if (tutorialPages[2] != null || tutorialPages[2] != null && tutorialPages[2].activeSelf == true) tutorialPages[2].SetActive(false);
+
+                Time.timeScale = 1;
+                //tutorialPages[0].SetActive(false);
+                //tutorialPages[1].SetActive(false);
+                //tutorialPages[2].SetActive(false);
+
+                //hideTutorial = false;
             }
 
-            if (hideTutorial)
-            {
-                tutorialPages[0] = GameObject.Find("welcomePanel");
-                tutorialPages[1] = GameObject.Find("tutorialPanel 1");
-                tutorialPages[2] = GameObject.Find("tutorialPanel 2");
-
-                tutorialPages[0].SetActive(false);
-                tutorialPages[1].SetActive(false);
-                tutorialPages[2].SetActive(false);
-                hideTutorial = false;
-            }
-            
 
             if (results == null)
             {
