@@ -148,6 +148,7 @@ public class ButtonManager : MonoBehaviour
         uiManagerScript.tutorialPages[2].SetActive(true);
         gameManagerScript.inTutorial = false;
         gameManagerScript.hideTutorial = true;
+        Time.timeScale = 1;
         //uiManagerScript.tutorialPages[pageNum].SetActive(false);
         //pageNum++;
         //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }

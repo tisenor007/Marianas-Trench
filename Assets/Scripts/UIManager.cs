@@ -81,14 +81,10 @@ public class UIManager : MonoBehaviour
 
             if (gameManager.inTutorial)
             {
-                //tutorialPages[0] = GameObject.Find("welcomePanel");
-                //tutorialPages[1] = GameObject.Find("tutorialPanel 1");
-                //tutorialPages[2] = GameObject.Find("tutorialPanel 2");
 
                 tutorialPages[0] = GameObject.Find("welcomePanel");
                 tutorialPages[1] = GameObject.Find("tutorialPanel 1");
                 tutorialPages[2] = GameObject.Find("tutorialPanel 2");
-
 
                 if (tutorialPages[0] != null || tutorialPages[0] != null && tutorialPages[0].activeSelf == false) tutorialPages[0].SetActive(true);
                 if (tutorialPages[1] != null || tutorialPages[1] != null && tutorialPages[1].activeSelf == true) tutorialPages[1].SetActive(false);
@@ -97,10 +93,6 @@ public class UIManager : MonoBehaviour
                 gameManager.inTutorial = false;
 
                 if (tutorialPages[0] != null && tutorialPages[1] != null && tutorialPages[2] != null) { Time.timeScale = 0; }
-
-                //tutorialPages[1].SetActive(false);
-                //tutorialPages[2].SetActive(false);
-
                 
             }
 
@@ -110,20 +102,10 @@ public class UIManager : MonoBehaviour
                 tutorialPages[1] = GameObject.Find("tutorialPanel 1");
                 tutorialPages[2] = GameObject.Find("tutorialPanel 2");
 
-                //if (tutorialPages[0] == null) { tutorialPages[0] = GameObject.Find("welcomePanel"); }
-                //if (tutorialPages[1] == null) { tutorialPages[1] = GameObject.Find("tutorialPanel 1"); }
-                //if (tutorialPages[2] == null) { tutorialPages[2] = GameObject.Find("tutorialPanel 2"); }
-
                 if (tutorialPages[0] != null || tutorialPages[0] != null && tutorialPages[0].activeSelf == true) tutorialPages[0].SetActive(false);
                 if (tutorialPages[1] != null || tutorialPages[1] != null && tutorialPages[1].activeSelf == true) tutorialPages[1].SetActive(false);
                 if (tutorialPages[2] != null || tutorialPages[2] != null && tutorialPages[2].activeSelf == true) tutorialPages[2].SetActive(false);
-
-                Time.timeScale = 1;
-                //tutorialPages[0].SetActive(false);
-                //tutorialPages[1].SetActive(false);
-                //tutorialPages[2].SetActive(false);
-
-                //hideTutorial = false;
+                
             }
 
 
@@ -178,7 +160,7 @@ public class UIManager : MonoBehaviour
                         LeanTween.scale(hullBrokenObject, Vector2.one, 2f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
                         {
                             LeanTween.scale(hullBrokenObject, Vector2.zero, 0f).setDelay(3f);
-                            LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f));
+                            LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f).setOnComplete(() => Time.timeScale = 0));
 
                         });
                     }
@@ -189,15 +171,16 @@ public class UIManager : MonoBehaviour
                         LeanTween.scale(outOfFuelObject, Vector2.zero, 0f);
                         LeanTween.scale(outOfFuelObject, Vector2.one, 2f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
                         {
-                            LeanTween.scale(outOfFuelObject, Vector2.zero, 0f).setDelay(3f);
-                            LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f));
+                        LeanTween.scale(outOfFuelObject, Vector2.zero, 0f).setDelay(3f);
+                        LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f).setOnComplete(() => Time.timeScale = 0));
 
                         });
                     }
                     deathCheck = false;
                 }
+                else if (gameManager.subStats.isDead == false && gameManager.hideTutorial == true) { Time.timeScale = 1; }
             }
-            
+           
             
             
         }
