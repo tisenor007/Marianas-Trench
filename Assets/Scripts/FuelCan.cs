@@ -22,6 +22,7 @@ public class FuelCan : Collectable
         if (other.tag == "Player")
         {
             gameManager.subStats.addFuel(refillAmount);
+            gameManager.soundManagerScript.PlayPickupSound(this.GetComponent<AudioSource>());
             gameObject.GetComponent<Collider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }

@@ -21,6 +21,7 @@ public class RepairKit : Collectable
         if (other.tag == "Player")
         {
             gameManager.subStats.Heal(healAmount);
+            gameManager.soundManagerScript.PlayPickupSound(this.GetComponent<AudioSource>());
             gameObject.GetComponent<Collider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }

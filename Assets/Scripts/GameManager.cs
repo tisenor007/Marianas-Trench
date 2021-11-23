@@ -16,11 +16,17 @@ public class GameManager : MonoBehaviour
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
     public GameObject buttonManager;
+    public GameObject soundManager;
     public UIManager uiManager;
     public Submarine subStats;
     public int earnedMoney;
     public bool hideTutorial;
     public bool inTutorial;
+    private SoundManager _soundManagerScript;
+    public SoundManager soundManagerScript
+    {
+        get { return _soundManagerScript; }
+    }
     private UpgradeManager upgradeManagerScript;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
@@ -40,6 +46,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
             DontDestroyOnLoad(uiManager);
+            DontDestroyOnLoad(soundManager);
             DontDestroyOnLoad(buttonManager);
             control = this;
         }
@@ -49,6 +56,9 @@ public class GameManager : MonoBehaviour
             Destroy(upgradeManager);
             Destroy(sub);
             Destroy(subCam);
+            Destroy(uiManager);
+            Destroy(soundManager);
+            Destroy(buttonManager);
         }
     }
     // Start is called before the first frame update
@@ -56,6 +66,7 @@ public class GameManager : MonoBehaviour
     {
         subStats = sub.GetComponent<Submarine>();
         upgradeManagerScript = upgradeManager.GetComponent<UpgradeManager>();
+        _soundManagerScript = soundManager.GetComponent<SoundManager>();
         originSubPos = sub.transform.position;
         subCamOriginPos = subCam.transform.position;
     }

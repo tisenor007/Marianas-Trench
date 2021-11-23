@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MusicManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     protected GameObject gameManager;
     protected GameManager gameManagerScript;
 
     public GameObject music;
-
+    // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager");
@@ -28,11 +28,21 @@ public class MusicManager : MonoBehaviour
 
         //if (sceneName == Global.titleSceneName)
         //{
-            if (music == null)
+        if (music == null)
+        {
+            music = GameObject.Find("BackgroundMusic");
+            if (music != null)
             {
-                music = GameObject.Find("Music");
                 music.GetComponent<AudioSource>().Play(0);
             }
+        }
+        
         //}
     }
+
+    public void PlayPickupSound(AudioSource pickup)
+    {
+        pickup.Play();
+    }
+    
 }

@@ -26,11 +26,14 @@ public class HeavyEnemy : Enemy
         maxHealth = health;
         state = State.roam;
 
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        FindGameManager();
         //Debug.Log(state);
         //Debug.Log(targetDistance);
         if (target != null)
