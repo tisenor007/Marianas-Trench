@@ -10,6 +10,7 @@ public class UpgradeManager : MonoBehaviour
     public GameObject moneyCanvas;
     public GameObject insufficientFundsMessage;
     public Text earnedMoneyTxt;
+    public GameManager gameManager;
 
     protected static int _upgradeAmount = 8;
     public static int upgradeAmount
@@ -79,6 +80,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.removeMoney(pressureResistanceCost);
                 subStats.currentPressureResistanceUpgrade = subStats.currentPressureResistanceUpgrade + 1;
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
         else if (subStats.currentMoney < fuelCost)
@@ -99,6 +101,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.removeMoney(fuelCost);
                 subStats.currentFuelUpgrade = subStats.currentFuelUpgrade + 1;
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
         else if (subStats.currentMoney < fuelCost)
@@ -120,6 +123,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.currentEngineUpgrade = subStats.currentEngineUpgrade + 1;
                 subStats.removeMoney(engineCost);
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
         else if (subStats.currentMoney < engineCost)
@@ -140,6 +144,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.currentHullUpgrade = subStats.currentHullUpgrade + 1;
                 subStats.removeMoney(hullCost);
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
         else if (subStats.currentMoney < hullCost)
@@ -160,6 +165,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.currentPropellerUpgrade = subStats.currentPropellerUpgrade + 1;
                 subStats.removeMoney(propellerCost);
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
         else if (subStats.currentMoney < propellerCost)

@@ -56,7 +56,7 @@ public class Submarine : Character
     private int pressureTimer = 0;
     private int pressureHitTime = 5;
     private int originPressureHitTime;
-    private int pressureDamage = 5;
+    private int pressureDamage = 2;
     private int slowTime = 1;
 
 
@@ -72,6 +72,7 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
+        FindGameManager();
         if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {
             subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
@@ -152,6 +153,12 @@ public class Submarine : Character
             }
         }
     }
+    public override void TakeDamage(int damage)
+    {
+        gameManager.soundManagerScript.PlayDamageSound(this.GetComponent<AudioSource>());
+        base.TakeDamage(damage);
+    }
+
     public void ResetStats()
     {
         coinsCollected = 0;

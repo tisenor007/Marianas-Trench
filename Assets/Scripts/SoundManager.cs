@@ -36,6 +36,10 @@ public class SoundManager : MonoBehaviour
                 music.GetComponent<AudioSource>().Play(0);
             }
         }
+        if (music != null && music.GetComponent<AudioSource>().isPlaying == false)
+        {
+            music.GetComponent<AudioSource>().Play(0);
+        }
         
         //}
     }
@@ -44,5 +48,14 @@ public class SoundManager : MonoBehaviour
     {
         pickup.Play();
     }
-    
+
+    public void PlayDamageSound(AudioSource damage)
+    {
+        damage.Play();
+    }
+
+    public void PlayUpgradeSound(AudioSource upgrade)
+    {
+        upgrade.Play();
+    }
 }

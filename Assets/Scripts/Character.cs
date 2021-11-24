@@ -68,7 +68,7 @@ public class Character : MonoBehaviour
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         }
     }
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health = health - damage;
         if (health <= 0)

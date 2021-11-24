@@ -128,14 +128,14 @@ public class UIManager : MonoBehaviour
             {
                 outOfFuelObject = GameObject.Find("Out of Fuel");
                 outOfFuelObject.SetActive(false);
-                Debug.Log("FOUND");
+               //Debug.Log("FOUND");
             }
 
             if (hullBrokenObject == null)
             {
                 hullBrokenObject = GameObject.Find("Hull Broken");
                 hullBrokenObject.SetActive(false);
-                Debug.Log("FOUND");
+                //Debug.Log("FOUND");
             }
 
 

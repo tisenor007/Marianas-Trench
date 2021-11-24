@@ -84,7 +84,7 @@ public class ButtonManager : MonoBehaviour
             {
                 dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked1);
             }
-            Debug.Log("FOUND dismiss BUTTON");
+            //Debug.Log("FOUND dismiss BUTTON");
         }
         if (dismissButton2 == null)
         {
@@ -93,7 +93,7 @@ public class ButtonManager : MonoBehaviour
             {
                 dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked2);
             }
-            Debug.Log("FOUND dismiss BUTTON 2");
+            //Debug.Log("FOUND dismiss BUTTON 2");
         }
         if (dismissButton3 == null)
         {
@@ -102,7 +102,7 @@ public class ButtonManager : MonoBehaviour
             {
                 dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked3);
             }
-            Debug.Log("FOUND dismiss BUTTON 2");
+            //Debug.Log("FOUND dismiss BUTTON 2");
         }
     }
     public void SaveGame()
