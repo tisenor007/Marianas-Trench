@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 public class ButtonManager : MonoBehaviour
 {
     [Header("Upgrade Buttons")]
-    public Text fuelButtonTxt;
-    public Text engineButtonTxt;
-    public Text hullButtonTxt;
-    public Text propellerButtonTxt;
-    public Text pressureResistanceTxt;
+    public GameObject fuelButton;
+    public GameObject engineButtonTxt;
+    public GameObject hullButton;
+    public GameObject propellerButton;
+    public GameObject pressureResistanceButton;
 
     public GameObject upgradeButton;
     public GameObject diveAgainButton;
@@ -55,7 +55,7 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        upgradeManagerScript.updateButtons(fuelButtonTxt, engineButtonTxt, hullButtonTxt, propellerButtonTxt, pressureResistanceTxt);
+        upgradeManagerScript.updateButtons(fuelButton, engineButtonTxt, hullButton, propellerButton, pressureResistanceButton);
 
         if (upgradeButton == null)
         {

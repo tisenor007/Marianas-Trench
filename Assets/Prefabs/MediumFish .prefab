@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 582333491703804206}
   - component: {fileID: 582333491703804205}
   - component: {fileID: -4696683094549542001}
-  - component: {fileID: 6745631325073188194}
   - component: {fileID: 4938989091941148413}
+  - component: {fileID: 6745631325073188194}
   m_Layer: 0
   m_Name: 'MediumFish '
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,22 +122,6 @@ MonoBehaviour:
   minY: 0
   maxY: 0
   randomY: 0
---- !u!70 &6745631325073188194
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582333491703804208}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 8.7, y: 0}
-  m_Size: {x: 68.9, y: 16}
-  m_Direction: 1
 --- !u!70 &4938989091941148413
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,4 +137,20 @@ CapsuleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 31.36, y: 7.4}
+  m_Direction: 1
+--- !u!70 &6745631325073188194
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582333491703804208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.7, y: 0}
+  m_Size: {x: 68.9, y: 16}
   m_Direction: 1

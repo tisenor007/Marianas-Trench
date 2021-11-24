@@ -256,18 +256,10 @@ public class Submarine : Character
     //collison
     public void OnCollisionEnter2D(Collision2D other)
     {
-        //if (other.gameObject.tag == "LightEnemy")
-        //{
-        //    TakeDamage(5);
-        //}
-        //if (other.gameObject.tag == "MediumFish")
-        //{
-        //    TakeDamage(25);
-        //}
-        //if (other.gameObject.tag == "HeavyFish")
-        //{
-            //TakeDamage(15);
-        //}
+       if (other.gameObject.tag == "Rock" && rb.velocity.y >= 6)
+       {
+            TakeDamage(6);
+       }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
