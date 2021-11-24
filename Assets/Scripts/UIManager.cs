@@ -27,6 +27,10 @@ public class UIManager : MonoBehaviour
     public Text totalText;
 
     public GameObject[] tutorialPages;
+    public Image pressureGaugeImage;
+    public Sprite[] pressureGauge = new Sprite[5];
+
+    public GameObject fuelTank;
 
     void Awake()
     {
@@ -121,16 +125,18 @@ public class UIManager : MonoBehaviour
             {
                 outOfFuelObject = GameObject.Find("Out of Fuel");
                 outOfFuelObject.SetActive(false);
-                Debug.Log("FOUND");
+                //Debug.Log("FOUND");
             }
 
             if (hullBrokenObject == null)
             {
                 hullBrokenObject = GameObject.Find("Hull Broken");
                 hullBrokenObject.SetActive(false);
-                Debug.Log("FOUND");
+                //Debug.Log("FOUND");
             }
 
+            pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
+            UpdateFuelTank();
 
             if (deathCheck)
             {
@@ -181,5 +187,10 @@ public class UIManager : MonoBehaviour
     public void LoadTutorial()
     {
         tutorialPages[0].SetActive(true);
+    }
+
+    public void UpdateFuelTank()
+    {
+        fuelTank.GetComponent<Slider>().value = gameManager.subStats.fuel;
     }
 }

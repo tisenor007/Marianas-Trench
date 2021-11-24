@@ -9,7 +9,7 @@ public class Submarine : Character
     public Text healthTxt;
     public Text MoneyTxt;
     public Text fuelTxt;
-    public Text depthTxt;
+    //public Text depthTxt;
     public GameObject subCamera;
     public UpgradeManager upgradeManager;
 
@@ -21,7 +21,7 @@ public class Submarine : Character
     public int currentPressureResistanceUpgrade = 0;
 
     public int coinsCollected;
-    public int coinWorth = 15; 
+    public int coinWorth = 15;
     protected bool _treasureFound = false;
     public bool treasureFound
     {
@@ -53,8 +53,13 @@ public class Submarine : Character
         get { return _currentMoney; }
         set { _currentMoney = value; }
     }
+    protected int _pressureHitTime = 5;
+    public int pressureHitTime
+    {
+        get { return _pressureHitTime; }
+        set { _pressureHitTime = value; }
+    }
     private int pressureTimer = 0;
-    private int pressureHitTime = 5;
     private int originPressureHitTime;
     private int pressureDamage = 5;
     private int slowTime = 1;
@@ -87,7 +92,7 @@ public class Submarine : Character
         healthTxt.text = "Sub Hull Armour: " + health.ToString();
         MoneyTxt.text = "Your Money: $" + currentMoney.ToString();
         fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
-        depthTxt.text = "Current Depth: " + currentDepth.ToString() + "ft";
+        //depthTxt.text = "Current Depth: " + currentDepth.ToString() + "ft";
 
         if (inShop == true)
         {
@@ -182,6 +187,7 @@ public class Submarine : Character
     }
     public void CheckForPressure()
     {
+        Debug.Log(pressureHitTime);
         if (currentDepth > upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade] && isDead == false)
         {
             if (Time.time > pressureTimer)
