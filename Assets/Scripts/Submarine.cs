@@ -72,6 +72,7 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(currentMoney);
         FindGameManager();
         if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {

@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
 
             //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(false);
-            subCam.SetActive(true);
+            subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
             //upgradeManagerScript.insufficientFundsMessage.SetActive(true);
@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         {
             Save();
             //upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
-            earnedMoney = subStats.currentDepth;
+            //earnedMoney = subStats.currentDepth;
             //upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
             sub.SetActive(false);
             subCam.SetActive(false);
