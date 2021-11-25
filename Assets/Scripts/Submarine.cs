@@ -61,7 +61,7 @@ public class Submarine : Character
     }
     private int pressureTimer = 0;
     private int originPressureHitTime;
-    private int pressureDamage = 5;
+    private int pressureDamage = 2;
     private int slowTime = 1;
 
 
@@ -77,6 +77,8 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(currentMoney);
+        FindGameManager();
         if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {
             subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
@@ -157,6 +159,12 @@ public class Submarine : Character
             }
         }
     }
+    public override void TakeDamage(int damage)
+    {
+        gameManager.soundManagerScript.PlayDamageSound(this.GetComponent<AudioSource>());
+        base.TakeDamage(damage);
+    }
+
     public void ResetStats()
     {
         coinsCollected = 0;
@@ -255,18 +263,10 @@ public class Submarine : Character
     //collison
     public void OnCollisionEnter2D(Collision2D other)
     {
-        //if (other.gameObject.tag == "LightEnemy")
-        //{
-        //    TakeDamage(5);
-        //}
-        //if (other.gameObject.tag == "MediumFish")
-        //{
-        //    TakeDamage(25);
-        //}
-        //if (other.gameObject.tag == "HeavyFish")
-        //{
-            //TakeDamage(15);
-        //}
+       if (other.gameObject.tag == "Rock" && rb.velocity.y >= 6)
+       {
+            TakeDamage(6);
+       }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {

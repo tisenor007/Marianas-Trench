@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     protected int _attackDamage;
+    protected GameManager gameManager;
     public int attackDamage
     {
         get { return _attackDamage; }
@@ -60,8 +61,14 @@ public class Character : MonoBehaviour
     {
         
     }
-
-    public void TakeDamage(int damage)
+    protected void FindGameManager()
+    {
+        if (gameManager == null)
+        {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+    }
+    public virtual void TakeDamage(int damage)
     {
         health = health - damage;
         if (health <= 0)

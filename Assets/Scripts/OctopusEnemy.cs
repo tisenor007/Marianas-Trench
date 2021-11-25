@@ -22,6 +22,7 @@ public class OctopusEnemy : Enemy
 
     void Update()
     {
+        FindGameManager();
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);

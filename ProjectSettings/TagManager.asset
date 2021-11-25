@@ -4,15 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - LightEnemy
   - Coin
   - UpgradeManager
   - GameManager
-  - MediumFish
-  - HeavyFish
   - Treasure
   - deathUI
   - OutOfFuel
+  - Rock
+  - Enemy
   layers:
   - Default
   - TransparentFX

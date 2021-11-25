@@ -16,14 +16,22 @@ public class GameManager : MonoBehaviour
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
     public GameObject buttonManager;
-    private UpgradeManager upgradeManagerScript;
-    public UIManager UImanager;
+    public GameObject soundManager;
+    public UIManager uiManager;
     public Submarine subStats;
+    public int earnedMoney;
+    public bool hideTutorial;
+    public bool inTutorial;
+    private SoundManager _soundManagerScript;
+    public SoundManager soundManagerScript
+    {
+        get { return _soundManagerScript; }
+    }
+    private UpgradeManager upgradeManagerScript;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
     private Scene currentScene;
     private string sceneName;
-    public int earnedMoney;
 
     //private GameObject deathUI;
     //private GameObject deathMessage;
@@ -37,7 +45,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(upgradeManager);
             DontDestroyOnLoad(sub);
             DontDestroyOnLoad(subCam);
-            DontDestroyOnLoad(UImanager);
+            DontDestroyOnLoad(uiManager);
+            DontDestroyOnLoad(soundManager);
             DontDestroyOnLoad(buttonManager);
             control = this;
         }
@@ -47,6 +56,9 @@ public class GameManager : MonoBehaviour
             Destroy(upgradeManager);
             Destroy(sub);
             Destroy(subCam);
+            Destroy(uiManager);
+            Destroy(soundManager);
+            Destroy(buttonManager);
         }
     }
     // Start is called before the first frame update
@@ -54,6 +66,7 @@ public class GameManager : MonoBehaviour
     {
         subStats = sub.GetComponent<Submarine>();
         upgradeManagerScript = upgradeManager.GetComponent<UpgradeManager>();
+        _soundManagerScript = soundManager.GetComponent<SoundManager>();
         originSubPos = sub.transform.position;
         subCamOriginPos = subCam.transform.position;
     }
@@ -94,48 +107,48 @@ public class GameManager : MonoBehaviour
         if (sceneName == Global.gameSceneName)
         {
             sub.SetActive(true);
-            upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
+            //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             subStats.inShop = false;
             subCam.SetActive(true);
             subStatsCanvas.SetActive(true);
-            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
+            //upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         if (sceneName == Global.upgradeSceneName)
         {
 
-            upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
-            sub.SetActive(true);
-            subCam.SetActive(true);
-            subStatsCanvas.SetActive(false);
-            upgradeManagerScript.moneyCanvas.SetActive(true);
-            upgradeManagerScript.insufficientFundsMessage.SetActive(true);
-            subStats.inShop = true;
-            subCam.transform.position = subCamOriginPos;
-            sub.transform.position = originSubPos;
-            sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        }
-        if (sceneName == Global.titleSceneName)
-        {
-            upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
+            //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.moneyCanvas.SetActive(true);
+            //upgradeManagerScript.insufficientFundsMessage.SetActive(true);
+            subStats.inShop = true;
+            subCam.transform.position = subCamOriginPos;
+            sub.transform.position = originSubPos;
+            //sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        if (sceneName == Global.titleSceneName)
+        {
+            //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
+            sub.SetActive(false);
+            subCam.SetActive(false);
+            subStatsCanvas.SetActive(false);
+            //upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.inShop = true;
         }
         if (sceneName == Global.winSceneName)
         {
             Save();
-            upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
-            earnedMoney = subStats.currentDepth;
-            upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
+            //upgradeManagerScript.earnedMoneyCanvas.SetActive(true);
+            //earnedMoney = subStats.currentDepth;
+            //upgradeManagerScript.earnedMoneyTxt.text = "Money Earned: $" + earnedMoney;
             sub.SetActive(false);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
-            upgradeManagerScript.insufficientFundsMessage.SetActive(false);
+            //upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.inShop = true;
         }
@@ -181,8 +194,8 @@ public class GameManager : MonoBehaviour
 
         }
 
-        UImanager.hideTutorial = true;
-        UImanager.inTutorial = false;
+        hideTutorial = true;
+        inTutorial = false;
     }
 }
 [Serializable]

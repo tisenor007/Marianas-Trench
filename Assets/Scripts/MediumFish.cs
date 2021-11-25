@@ -32,6 +32,7 @@ public class MediumFish : Enemy
     // Update is called once per frame
     void Update()
     {
+        FindGameManager();
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);

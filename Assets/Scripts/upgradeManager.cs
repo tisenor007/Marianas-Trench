@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class UpgradeManager : MonoBehaviour
 {
     public Submarine subStats;
-    public GameObject earnedMoneyCanvas;
+   // public GameObject earnedMoneyCanvas;
     public GameObject moneyCanvas;
-    public GameObject insufficientFundsMessage;
-    public Text earnedMoneyTxt;
+    //public GameObject insufficientFundsMessage;
+    //public Text earnedMoneyTxt;
+    public GameManager gameManager;
+    public Color enabledColour;
+    public Color disabledColour;
 
     protected static int _upgradeAmount = 8;
     public static int upgradeAmount
@@ -38,7 +41,7 @@ public class UpgradeManager : MonoBehaviour
     protected int propellerCost;
     protected int pressureResistanceCost;
 
-    protected CanvasGroup insufficientFundsCanvas;
+    //protected CanvasGroup insufficientFundsCanvas;
 
     private void Awake()
     {
@@ -48,8 +51,8 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         //SetGameplayStats();
-        insufficientFundsCanvas = insufficientFundsMessage.GetComponent<CanvasGroup>();
-        StartCoroutine(FadeCanvas(true));
+        //insufficientFundsCanvas = insufficientFundsMessage.GetComponent<CanvasGroup>();
+        //StartCoroutine(FadeCanvas(true));
     }
 
     // Update is called once per frame
@@ -62,10 +65,14 @@ public class UpgradeManager : MonoBehaviour
         propellerCost = pricePerUpgrade[subStats.currentPropellerUpgrade];
         pressureResistanceCost = pricePerUpgrade[subStats.currentPressureResistanceUpgrade];
 
-        if (insufficientFundsCanvas.alpha <= 0)
-        {
-            StopCoroutine(FadeCanvas(false));
-        }
+        //if (insufficientFundsCanvas.alpha <= 0)
+        //{
+        //    StopCoroutine(FadeCanvas(false));
+        //}
+        //else if (insufficientFundsCanvas.alpha > 0)
+        //{
+        //    StartCoroutine(FadeCanvas(true));
+        //}
     }
     public void UpgradePressureResistance()
     {
@@ -79,13 +86,14 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.removeMoney(pressureResistanceCost);
                 subStats.currentPressureResistanceUpgrade = subStats.currentPressureResistanceUpgrade + 1;
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
-        else if (subStats.currentMoney < fuelCost)
-        {
-            insufficientFundsCanvas.alpha = 1;
-            StartCoroutine(FadeCanvas(true));
-        }
+        //else if (subStats.currentMoney < fuelCost)
+        //{
+        //    insufficientFundsCanvas.alpha = 1;
+        //    StartCoroutine(FadeCanvas(true));
+        //}
     }
     public void UpgradeFuel()
     {
@@ -99,13 +107,14 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.removeMoney(fuelCost);
                 subStats.currentFuelUpgrade = subStats.currentFuelUpgrade + 1;
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
-        else if (subStats.currentMoney < fuelCost)
-        {
-            insufficientFundsCanvas.alpha = 1;
-            StartCoroutine(FadeCanvas(true));
-        }
+        //else if (subStats.currentMoney < fuelCost)
+        //{
+        //    insufficientFundsCanvas.alpha = 1;
+        //    StartCoroutine(FadeCanvas(true));
+        //}
     }
 
     public void UpgradeEngine()
@@ -120,13 +129,14 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.currentEngineUpgrade = subStats.currentEngineUpgrade + 1;
                 subStats.removeMoney(engineCost);
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
-        else if (subStats.currentMoney < engineCost)
-        {
-            insufficientFundsCanvas.alpha = 1;
-            StartCoroutine(FadeCanvas(true));
-        }
+        //else if (subStats.currentMoney < engineCost)
+        //{
+        //    insufficientFundsCanvas.alpha = 1;
+        //    StartCoroutine(FadeCanvas(true));
+        //}
     }
     public void UpgradeHullArmour()
     {
@@ -140,13 +150,14 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.currentHullUpgrade = subStats.currentHullUpgrade + 1;
                 subStats.removeMoney(hullCost);
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
-        else if (subStats.currentMoney < hullCost)
-        {
-            insufficientFundsCanvas.alpha = 1;
-            StartCoroutine(FadeCanvas(true));
-        }
+        //else if (subStats.currentMoney < hullCost)
+        //{
+        //    insufficientFundsCanvas.alpha = 1;
+        //    StartCoroutine(FadeCanvas(true));
+        //}
     }
     public void UpgradePropeller()
     {
@@ -160,95 +171,104 @@ public class UpgradeManager : MonoBehaviour
             {
                 subStats.currentPropellerUpgrade = subStats.currentPropellerUpgrade + 1;
                 subStats.removeMoney(propellerCost);
+                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
             }
         }
-        else if (subStats.currentMoney < propellerCost)
-        {
-            insufficientFundsCanvas.alpha = 1;
-            StartCoroutine(FadeCanvas(true));
-        }
+        //else if (subStats.currentMoney < propellerCost)
+        //{
+        //    insufficientFundsCanvas.alpha = 1;
+        //    StartCoroutine(FadeCanvas(true));
+        //}
     }
-    public void updateButtons(Text fuelButtonTxt, Text engineButtonTxt, Text hullButtonTxt, Text propellerButtonTxt, Text PRButtonTxt)
+    public void updateButtons(GameObject fuelButton, GameObject engineButton, GameObject hullButton, GameObject propellerButton, GameObject PRButton)
     {
-        if (fuelButtonTxt != null)
+        if (fuelButton != null)
         {
-            if (subStats.currentFuelUpgrade >= upgradeAmount - 1)
+            fuelButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentFuelUpgrade + 1).ToString();
+            fuelButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $"+fuelCost;
+            if (subStats.currentMoney < fuelCost)
             {
-                fuelButtonTxt.text = "Fuel MAXED";
+                fuelButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
+                fuelButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
             }
-            else if (subStats.currentFuelUpgrade < upgradeAmount - 1)
+            else if (subStats.currentMoney >= fuelCost)
             {
-                fuelButtonTxt.text = "$" + fuelCost + " - Upgrade to Fuel Tank Level " + (subStats.currentFuelUpgrade + 1);
+                fuelButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
+                fuelButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
         }
-        if (engineButtonTxt != null)
+        if (engineButton != null)
         {
-            if (subStats.currentEngineUpgrade >= upgradeAmount - 1)
-            {
-                engineButtonTxt.text = "Engine MAXED";
+            engineButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentEngineUpgrade + 1).ToString();
+            engineButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + engineCost;
+            if (subStats.currentMoney < engineCost){
+                engineButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
+                engineButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
             }
-            else if (subStats.currentEngineUpgrade < upgradeAmount - 1)
+            else if (subStats.currentMoney >= engineCost)
             {
-                engineButtonTxt.text = "$" + engineCost + " - Upgrade to Engine Level " + (subStats.currentEngineUpgrade + 1);
+                engineButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
+                engineButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
         }
-        if (hullButtonTxt != null)
+        if (hullButton != null)
         {
-            if (subStats.currentHullUpgrade >= upgradeAmount - 1)
+            hullButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentHullUpgrade + 1).ToString();
+            hullButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + hullCost;
+            if (subStats.currentMoney < hullCost)
             {
-                hullButtonTxt.text = "Hull Armour MAXED";
+                hullButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
+                hullButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
             }
-            else if (subStats.currentHullUpgrade < upgradeAmount - 1)
+            else if (subStats.currentMoney >= hullCost)
             {
-                hullButtonTxt.text = "$" + hullCost + " - Upgrade to Hull Armour Level " + (subStats.currentHullUpgrade + 1);
+                hullButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
+                hullButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
         }
-        if (propellerButtonTxt != null)
+        if (propellerButton != null)
         {
-            if (subStats.currentPropellerUpgrade >= upgradeAmount - 1)
+            propellerButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPropellerUpgrade + 1).ToString();
+            propellerButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + propellerCost;
+            if (subStats.currentMoney < propellerCost)
             {
-                propellerButtonTxt.text = "Propeller MAXED";
+                propellerButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
+                propellerButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
             }
-            else if (subStats.currentPropellerUpgrade < upgradeAmount - 1)
+            else if (subStats.currentMoney >= propellerCost)
             {
-                propellerButtonTxt.text = "$" + propellerCost + " - Upgrade to Propeller Level " + (subStats.currentPropellerUpgrade + 1);
+                propellerButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
+                propellerButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
         }
-        if (fuelButtonTxt != null)
+        if (PRButton != null)
         {
-            if (subStats.currentFuelUpgrade >= upgradeAmount - 1)
+            PRButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPressureResistanceUpgrade + 1).ToString();
+            PRButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + pressureResistanceCost;
+            if (subStats.currentMoney < pressureResistanceCost)
             {
-                fuelButtonTxt.text = "Fuel MAXED";
+                PRButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
+                PRButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
             }
-            else if (subStats.currentFuelUpgrade < upgradeAmount - 1)
+            else if (subStats.currentMoney >= pressureResistanceCost)
             {
-                fuelButtonTxt.text = "$" + fuelCost + " - Upgrade to Fuel Tank Level " + (subStats.currentFuelUpgrade + 1);
-            }
-        }
-        if (PRButtonTxt != null)
-        {
-            if (subStats.currentPressureResistanceUpgrade >= upgradeAmount - 1)
-            {
-                PRButtonTxt.text = "Pressure Resistance MAXED";
-            }
-            else if (subStats.currentPressureResistanceUpgrade < upgradeAmount - 1)
-            {
-                PRButtonTxt.text = "$" + pressureResistanceCost + " - Upgrade to Pressure Resistance Level " + (subStats.currentPressureResistanceUpgrade + 1);
+                PRButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
+                PRButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
         }
     }
 
-    public IEnumerator FadeCanvas(bool fadeOut)
-    {
-        if (fadeOut == true)
-        {
-            for (float i = 1; i >= 0; i -= Time.deltaTime)
-            {
-                insufficientFundsCanvas.alpha = i;
-                yield return null;
-            }
-        }
-    }
+    //public IEnumerator FadeCanvas(bool fadeOut)
+    //{
+    //    if (fadeOut == true)
+    //    {
+    //        for (float i = 1; i >= 0; i -= Time.deltaTime)
+    //        {
+    //            insufficientFundsCanvas.alpha = i;
+    //            yield return null;
+    //        }
+    //    }
+    //}
     //public int GetUpgradeAmount()
     //{
     //    return upgradeAmount;
