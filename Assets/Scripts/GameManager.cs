@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject sub;
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
-    public GameObject buttonManager;
+    //public GameObject buttonManager;
     public GameObject soundManager;
     public UIManager uiManager;
     public Submarine subStats;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(subCam);
             DontDestroyOnLoad(uiManager);
             DontDestroyOnLoad(soundManager);
-            DontDestroyOnLoad(buttonManager);
+            //DontDestroyOnLoad(buttonManager);
             control = this;
         }
         else if (control != this)
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             Destroy(subCam);
             Destroy(uiManager);
             Destroy(soundManager);
-            Destroy(buttonManager);
+            //Destroy(buttonManager);
         }
     }
     // Start is called before the first frame update
