@@ -77,7 +77,7 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentMoney);
+        //Debug.Log(currentMoney);
         FindGameManager();
         if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {
@@ -92,7 +92,7 @@ public class Submarine : Character
             transform.position = new Vector2(((Screen.width / 100) / 2), transform.position.y);
         }
         healthTxt.text = "Sub Hull Armour: " + health.ToString();
-        MoneyTxt.text = "Your Money: $" + currentMoney.ToString();
+        MoneyTxt.text = "$" + currentMoney.ToString();
         fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
         //depthTxt.text = "Current Depth: " + currentDepth.ToString() + "ft";
 
@@ -182,6 +182,8 @@ public class Submarine : Character
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        MoneyTxt.text = "$" + currentMoney.ToString();
+        transform.position = Vector3.zero;
     }
     public void clearGameStats()
     {
@@ -195,7 +197,7 @@ public class Submarine : Character
     }
     public void CheckForPressure()
     {
-        Debug.Log(pressureHitTime);
+        //Debug.Log((int)transform.position.y);
         if (currentDepth > upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade] && isDead == false)
         {
             if (Time.time > pressureTimer)

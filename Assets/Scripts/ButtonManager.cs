@@ -152,6 +152,7 @@ public class ButtonManager : MonoBehaviour
     public void GoToUpgradeScreen()
     {
         //Debug.Log("THIS BUTTON WORKS");
+        gameManagerScript.subStats.ResetStats();
         SceneManager.LoadScene(Global.upgradeSceneName, LoadSceneMode.Single);
     }
     public void Options()

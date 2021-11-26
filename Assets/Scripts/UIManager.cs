@@ -142,7 +142,8 @@ public class UIManager : MonoBehaviour
                 //Debug.Log("FOUND");
             }
 
-            pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
+            UpdatePressureGauge();
+            //pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
             UpdateFuelTank();
 
             if (deathCheck)
@@ -200,5 +201,28 @@ public class UIManager : MonoBehaviour
     public void UpdateFuelTank()
     {
         fuelTank.GetComponent<Slider>().value = gameManager.subStats.fuel;
+    }
+    public void UpdatePressureGauge()
+    {
+        if (gameManager.sub.transform.position.y < -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 4) && gameManager.sub.transform.position.y >= -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 3))
+        {
+            pressureGaugeImage.sprite = pressureGauge[3];
+        }
+        else if (gameManager.sub.transform.position.y < -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 3) && gameManager.sub.transform.position.y >= -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 2))
+        {
+            pressureGaugeImage.sprite = pressureGauge[2];
+        }
+        else if (gameManager.sub.transform.position.y < -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 2) && gameManager.sub.transform.position.y >= -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 1))
+        {
+            pressureGaugeImage.sprite = pressureGauge[1];
+        }
+        else if (gameManager.sub.transform.position.y < -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade]))
+        {
+            pressureGaugeImage.sprite = pressureGauge[0];
+        }
+        else if (gameManager.sub.transform.position.y > -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 4))
+        {
+            pressureGaugeImage.sprite = pressureGauge[4];
+        }
     }
 }

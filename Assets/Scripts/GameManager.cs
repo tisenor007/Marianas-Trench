@@ -113,20 +113,21 @@ public class GameManager : MonoBehaviour
             subStatsCanvas.SetActive(true);
             //upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
+            sub.GetComponent<SpriteRenderer>().enabled = true;
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         if (sceneName == Global.upgradeSceneName)
         {
 
             //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
-            sub.SetActive(false);
+            sub.SetActive(true);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
             //upgradeManagerScript.insufficientFundsMessage.SetActive(true);
             subStats.inShop = true;
             subCam.transform.position = subCamOriginPos;
-            sub.transform.position = originSubPos;
+            sub.GetComponent<SpriteRenderer>().enabled = false;
             //sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
         if (sceneName == Global.titleSceneName)
