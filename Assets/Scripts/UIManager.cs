@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -26,7 +24,9 @@ public class UIManager : MonoBehaviour
     public Text coinsText;
     public Text totalText;
 
+    public GameObject shadePanel;
     public GameObject[] tutorialPages;
+    public Text subHull;
     public Image pressureGaugeImage;
     public Sprite[] pressureGauge = new Sprite[5];
 
@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
         {
             if (running)
             {
+                
                 RectTransform title = GameObject.Find("Title").GetComponent<RectTransform>();
                 Vector2 titleMoveToPosition = new Vector2(title.localPosition.x, title.localPosition.y);
 
@@ -119,6 +120,7 @@ public class UIManager : MonoBehaviour
                 resultsMoveToPosition = new Vector2(results.localPosition.x, results.localPosition.y);
                 results.transform.position = new Vector2(Screen.width / 2, Screen.height * 1.5f);
                 deathCheck = true;
+                
             }
 
             if (diveAgainButton == null)
@@ -142,21 +144,27 @@ public class UIManager : MonoBehaviour
                 //Debug.Log("FOUND");
             }
 
-            pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
-            UpdateFuelTank();
+            if (shadePanel == null)
+            {
+                shadePanel = GameObject.Find("ShadePanel");
+                StartCoroutine(FadeImage(false));
+                shadePanel.SetActive(false);
+            }
+
+            UpdateSubHUD();
 
             if (deathCheck)
             {
                 if (gameManager.subStats.isDead == true)
                 {
                     
-                    depthText = results.GetChild(2).GetChild(4).GetChild(0).GetComponent<Text>();
+                    depthText = results.GetChild(1).GetChild(3).GetChild(0).GetComponent<Text>();
                     depthText.text = gameManager.subStats.currentDepth.ToString() + "ft = $" + (int)(gameManager.subStats.currentDepth * 1.5f);
 
-                    coinsText = results.GetChild(2).GetChild(4).GetChild(1).GetComponent<Text>();
+                    coinsText = results.GetChild(1).GetChild(3).GetChild(1).GetComponent<Text>();
                     coinsText.text = gameManager.subStats.coinsCollected.ToString() + " = $" + (gameManager.subStats.coinsCollected * gameManager.subStats.coinWorth).ToString();
 
-                    totalText = results.GetChild(2).GetChild(4).GetChild(3).GetComponent<Text>();
+                    totalText = results.GetChild(1).GetChild(3).GetChild(2).GetComponent<Text>();
                     totalText.text = "$" + gameManager.earnedMoney.ToString(); //((gameManager.subStats.coinsCollected * gameManager.subStats.coinWorth) + (int)(gameManager.subStats.GetCurrentDepth() * 1.5f)).ToString();
 
                     if (gameManager.subStats.hullIsBroken == true)
@@ -165,6 +173,8 @@ public class UIManager : MonoBehaviour
                         LeanTween.scale(hullBrokenObject, Vector2.zero, 0f);
                         LeanTween.scale(hullBrokenObject, Vector2.one, 2f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
                         {
+                            shadePanel.SetActive(true);
+                            StartCoroutine(FadeImage(true));
                             LeanTween.scale(hullBrokenObject, Vector2.zero, 0f).setDelay(3f);
                             LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f).setOnComplete(() => Time.timeScale = 0));
 
@@ -177,11 +187,14 @@ public class UIManager : MonoBehaviour
                         LeanTween.scale(outOfFuelObject, Vector2.zero, 0f);
                         LeanTween.scale(outOfFuelObject, Vector2.one, 2f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
                         {
-                        LeanTween.scale(outOfFuelObject, Vector2.zero, 0f).setDelay(3f);
-                        LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f).setOnComplete(() => Time.timeScale = 0));
+                            shadePanel.SetActive(true);
+                            StartCoroutine(FadeImage(true));
+                            LeanTween.scale(outOfFuelObject, Vector2.zero, 0f).setDelay(3f);
+                            LeanTween.move(results, resultsMoveToPosition, 1.0f).setOnComplete(() => LeanTween.moveY(diveAgainButton, diveAgainButtonMoveToPosition.y, 0.5f).setOnComplete(() => Time.timeScale = 0));
 
                         });
                     }
+
                     deathCheck = false;
                 }
                 else if (gameManager.subStats.isDead == false && gameManager.hideTutorial == true) { Time.timeScale = 1; }
@@ -197,8 +210,33 @@ public class UIManager : MonoBehaviour
         tutorialPages[0].SetActive(true);
     }
 
-    public void UpdateFuelTank()
+    public void UpdateSubHUD()
     {
         fuelTank.GetComponent<Slider>().value = gameManager.subStats.fuel;
+        pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
+        subHull.text = gameManager.subStats.health.ToString();
+        //Debug.Log(gameManager.subStats.health);
+    }
+
+    IEnumerator FadeImage(bool fadeAway)
+    {
+        // fade from opaque to transparent
+        if (fadeAway)
+        {
+            // loop over 1 second backwards
+            for (float i = 0; i <= 0.75f; i += Time.deltaTime)
+            {
+                // set color with i as alpha
+                shadePanel.GetComponent<Image>().color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+        }
+        // fade from transparent to opaque
+        else
+        {
+            shadePanel.GetComponent<Image>().color = new Color(0, 0, 0, 0.0f);
+
+
+        }
     }
 }

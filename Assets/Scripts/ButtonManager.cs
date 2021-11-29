@@ -202,7 +202,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void Options()
     {
-        Debug.Log("THIS BUTTON WORKS");
+        //Debug.Log("THIS BUTTON WORKS");
     }
     public void StartGamePlay()
     {

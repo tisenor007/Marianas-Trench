@@ -77,7 +77,7 @@ public class Submarine : Character
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentMoney);
+        //Debug.Log(currentMoney);
         FindGameManager();
         if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {
@@ -195,7 +195,7 @@ public class Submarine : Character
     }
     public void CheckForPressure()
     {
-        Debug.Log(pressureHitTime);
+        //Debug.Log(pressureHitTime);
         if (currentDepth > upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade] && isDead == false)
         {
             if (Time.time > pressureTimer)
