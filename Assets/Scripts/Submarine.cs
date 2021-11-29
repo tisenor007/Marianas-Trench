@@ -48,6 +48,7 @@ public class Submarine : Character
         set { _currentDepth = value; }
     }
     protected int _currentMoney = 0;
+    [SerializeField]
     public int currentMoney
     {
         get { return _currentMoney; }

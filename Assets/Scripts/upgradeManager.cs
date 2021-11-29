@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UpgradeManager : MonoBehaviour
 {
     public Submarine subStats;
-   // public GameObject earnedMoneyCanvas;
+    // public GameObject earnedMoneyCanvas;
     public GameObject moneyCanvas;
     //public GameObject insufficientFundsMessage;
     //public Text earnedMoneyTxt;
@@ -34,6 +34,8 @@ public class UpgradeManager : MonoBehaviour
     public int[] pressureResistanceUpgrades = new int[upgradeAmount];
     [HideInInspector]
     public int[] pricePerUpgrade = new int[upgradeAmount];
+
+    public Transform[] pips = new Transform[8];
 
     protected int fuelCost;
     protected int engineCost;
@@ -186,6 +188,7 @@ public class UpgradeManager : MonoBehaviour
         {
             fuelButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentFuelUpgrade + 1).ToString();
             fuelButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $"+fuelCost;
+
             if (subStats.currentMoney < fuelCost)
             {
                 fuelButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
@@ -196,6 +199,8 @@ public class UpgradeManager : MonoBehaviour
                 fuelButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
                 fuelButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
+
+            UpdatePips(fuelButton, subStats.currentFuelUpgrade);
         }
         if (engineButton != null)
         {
@@ -210,6 +215,8 @@ public class UpgradeManager : MonoBehaviour
                 engineButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
                 engineButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
+
+            UpdatePips(engineButton, subStats.currentEngineUpgrade);
         }
         if (hullButton != null)
         {
@@ -225,6 +232,8 @@ public class UpgradeManager : MonoBehaviour
                 hullButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
                 hullButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
+
+            UpdatePips(hullButton, subStats.currentHullUpgrade);
         }
         if (propellerButton != null)
         {
@@ -240,6 +249,8 @@ public class UpgradeManager : MonoBehaviour
                 propellerButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
                 propellerButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
+
+            UpdatePips(propellerButton, subStats.currentPropellerUpgrade);
         }
         if (PRButton != null)
         {
@@ -255,7 +266,11 @@ public class UpgradeManager : MonoBehaviour
                 PRButton.transform.GetChild(2).GetComponent<Button>().enabled = true;
                 PRButton.transform.GetChild(2).GetComponent<Image>().color = enabledColour;
             }
+
+            UpdatePips(PRButton, subStats.currentPressureResistanceUpgrade);
         }
+
+
     }
 
     //public IEnumerator FadeCanvas(bool fadeOut)
@@ -273,6 +288,22 @@ public class UpgradeManager : MonoBehaviour
     //{
     //    return upgradeAmount;
     //}
+
+    public void UpdatePips(GameObject currentUpgrade, int upgradeAmount)
+    {
+        for (int i = 0; i < pips.Length; i++)
+        {
+            pips[i] = currentUpgrade.transform.GetChild(4).GetChild(i);
+            if (i <= upgradeAmount)
+            {
+                pips[i].GetComponent<Image>().color = new Color32(0, 220, 5, 225);
+            }
+            else
+            {
+                pips[i].GetComponent<Image>().color = new Color32(65, 65, 65, 255);
+            }
+        }
+    }
 
     public void SetGameplayStats()
     {
