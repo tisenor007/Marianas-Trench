@@ -178,6 +178,7 @@ public class Submarine : Character
         maxHealth = health;
         speed = upgradeManager.propellerUpgrades[currentPropellerUpgrade];
         pressureTimer = Mathf.RoundToInt(Time.time) + pressureHitTime;
+        MoneyTxt.text = "$" + currentMoney.ToString();
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
