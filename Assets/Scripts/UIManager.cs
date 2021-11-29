@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class UIManager : MonoBehaviour
@@ -23,6 +24,7 @@ public class UIManager : MonoBehaviour
     public Text depthText;
     public Text coinsText;
     public Text totalText;
+    public TMP_Text currentDepth;
 
     public GameObject shadePanel;
     public GameObject[] tutorialPages;
@@ -126,7 +128,7 @@ public class UIManager : MonoBehaviour
             if (diveAgainButton == null)
             {
                 diveAgainButton = GameObject.Find("DiveAgainButton").GetComponent<RectTransform>();
-                diveAgainButtonMoveToPosition = new Vector2(diveAgainButton.position.x, diveAgainButton.position.y);
+                diveAgainButtonMoveToPosition = new Vector2(diveAgainButton.position.x, transform.localScale.y * 2);
                 diveAgainButton.transform.position = new Vector2(Screen.width / 2, -100);
             }
 
@@ -165,7 +167,7 @@ public class UIManager : MonoBehaviour
                     coinsText = results.GetChild(1).GetChild(3).GetChild(1).GetComponent<Text>();
                     coinsText.text = gameManager.subStats.coinsCollected.ToString() + " = $" + (gameManager.subStats.coinsCollected * gameManager.subStats.coinWorth).ToString();
 
-                    totalText = results.GetChild(1).GetChild(3).GetChild(2).GetComponent<Text>();
+                    totalText = results.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>();
                     totalText.text = "$" + gameManager.earnedMoney.ToString(); //((gameManager.subStats.coinsCollected * gameManager.subStats.coinWorth) + (int)(gameManager.subStats.GetCurrentDepth() * 1.5f)).ToString();
 
                     if (gameManager.subStats.hullIsBroken == true)
@@ -214,6 +216,7 @@ public class UIManager : MonoBehaviour
     public void UpdateSubHUD()
     {
         fuelTank.GetComponent<Slider>().value = gameManager.subStats.fuel;
+        currentDepth.text = "— " + gameManager.subStats.currentDepth.ToString();
         
     }
 
@@ -234,8 +237,6 @@ public class UIManager : MonoBehaviour
         else
         {
             shadePanel.GetComponent<Image>().color = new Color(0, 0, 0, 0.0f);
-
-
         }
     }
     public void UpdatePressureGauge()

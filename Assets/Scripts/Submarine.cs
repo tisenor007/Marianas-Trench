@@ -91,9 +91,9 @@ public class Submarine : Character
         {
             transform.position = new Vector2(((Screen.width / 100) / 2), transform.position.y);
         }
-        healthTxt.text = "Sub Hull Armour: " + health.ToString();
-        MoneyTxt.text = "$" + currentMoney.ToString();
-        fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
+        //healthTxt.text = "Sub Hull Armour: " + health.ToString();
+        //MoneyTxt.text = "$" + currentMoney.ToString();
+        //fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
         //depthTxt.text = "Current Depth: " + currentDepth.ToString() + "ft";
 
         if (inShop == true)
