@@ -13,11 +13,11 @@ public class ButtonManager : MonoBehaviour
     public GameObject propellerButton;
     public GameObject pressureResistanceButton;
 
-    public GameObject upgradeButton;
-    public GameObject diveAgainButton;
-    public GameObject dismissButton;
-    public GameObject dismissButton2;
-    public GameObject dismissButton3;
+   // public GameObject upgradeButton;
+    //public GameObject diveAgainButton;
+    //public GameObject dismissButton;
+    //public GameObject dismissButton2;
+    //public GameObject dismissButton3;
 
     protected GameObject upgradeManager;
     protected UpgradeManager upgradeManagerScript;
@@ -29,7 +29,12 @@ public class ButtonManager : MonoBehaviour
     protected UIManager uiManagerScript;
 
 
-    public int pageNum = 0;
+    protected int _pageNum = 0;
+    public int pageNum {
+        get { return _pageNum; }
+        set { _pageNum = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,54 +61,6 @@ public class ButtonManager : MonoBehaviour
     void Update()
     {
         upgradeManagerScript.updateButtons(fuelButton, engineButtonTxt, hullButton, propellerButton, pressureResistanceButton);
-
-        if (upgradeButton == null)
-        {
-            //resultsScreen = GameObject.Find("panel");
-            
-            upgradeButton = GameObject.Find("UpgradesMenuButton");
-            if (upgradeButton != null)
-            {
-                upgradeButton.GetComponent<Button>().onClick.AddListener(GoToUpgradeScreen);
-            }
-            //Debug.Log("FOUND BUTTON");
-        }
-        if (diveAgainButton == null)
-        {
-            diveAgainButton = GameObject.Find("DiveAgainButton");
-            if (diveAgainButton != null)
-            {
-                diveAgainButton.GetComponent<Button>().onClick.AddListener(DiveAgain);
-            }
-            //Debug.Log("FOUND dive BUTTON");
-        }
-        if (dismissButton == null)
-        {
-            dismissButton = GameObject.Find("DismissButton");
-            if (dismissButton != null)
-            {
-                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked1);
-            }
-            //Debug.Log("FOUND dismiss BUTTON");
-        }
-        if (dismissButton2 == null)
-        {
-            dismissButton = GameObject.Find("DismissButton2");
-            if (dismissButton != null)
-            {
-                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked2);
-            }
-            //Debug.Log("FOUND dismiss BUTTON 2");
-        }
-        if (dismissButton3 == null)
-        {
-            dismissButton = GameObject.Find("DismissButton3");
-            if (dismissButton != null)
-            {
-                dismissButton.GetComponent<Button>().onClick.AddListener(OnDismissClicked3);
-            }
-            //Debug.Log("FOUND dismiss BUTTON 2");
-        }
     }
     public void SaveGame()
     {
@@ -132,32 +89,29 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    public void OnDismissClicked1()
+    public void FlipThroughPage()
     {
-        uiManagerScript.tutorialPages[0].SetActive(false);
-        uiManagerScript.tutorialPages[1].SetActive(true);
-        //uiManagerScript.tutorialPages[pageNum].SetActive(false);
-        //pageNum++;
-        //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
-        //dismissButton = null;
+        if (pageNum == 0)
+        {
+            uiManagerScript.tutorialPages[0].SetActive(false);
+            uiManagerScript.tutorialPages[1].SetActive(true);
+            pageNum++;
+        }
+        else if (pageNum == 1)
+        {
+            uiManagerScript.tutorialPages[1].SetActive(false);
+            uiManagerScript.tutorialPages[2].SetActive(true);
+            pageNum++;
+        }
+        else if (pageNum == 2)
+        {
+            uiManagerScript.tutorialPages[2].SetActive(false);
+            Time.timeScale = 1;
+            gameManagerScript.inTutorial = false;
+            gameManagerScript.hideTutorial = true;
+        }
 
-    }
-    public void OnDismissClicked2()
-    {
-        uiManagerScript.tutorialPages[1].SetActive(false);
-        uiManagerScript.tutorialPages[2].SetActive(true);
-        gameManagerScript.inTutorial = false;
-        gameManagerScript.hideTutorial = true;
-        Time.timeScale = 1;
-        //uiManagerScript.tutorialPages[pageNum].SetActive(false);
-        //pageNum++;
-        //if (pageNum < uiManagerScript.tutorialPages.Length) { uiManagerScript.tutorialPages[pageNum].SetActive(true);  }
-        //dismissButton = null;
 
-    }
-    public void OnDismissClicked3()
-    {
-        uiManagerScript.tutorialPages[2].SetActive(false);
     }
     public void upgradePressureResistance()
     {
@@ -198,6 +152,7 @@ public class ButtonManager : MonoBehaviour
     public void GoToUpgradeScreen()
     {
         //Debug.Log("THIS BUTTON WORKS");
+        gameManagerScript.subStats.ResetStats();
         SceneManager.LoadScene(Global.upgradeSceneName, LoadSceneMode.Single);
     }
     public void Options()

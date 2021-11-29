@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject sub;
     public GameObject subStatsCanvas;
     public GameObject upgradeManager;
-    public GameObject buttonManager;
+    //public GameObject buttonManager;
     public GameObject soundManager;
     public UIManager uiManager;
     public Submarine subStats;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(subCam);
             DontDestroyOnLoad(uiManager);
             DontDestroyOnLoad(soundManager);
-            DontDestroyOnLoad(buttonManager);
+            //DontDestroyOnLoad(buttonManager);
             control = this;
         }
         else if (control != this)
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             Destroy(subCam);
             Destroy(uiManager);
             Destroy(soundManager);
-            Destroy(buttonManager);
+            //Destroy(buttonManager);
         }
     }
     // Start is called before the first frame update
@@ -113,20 +113,21 @@ public class GameManager : MonoBehaviour
             subStatsCanvas.SetActive(true);
             //upgradeManagerScript.insufficientFundsMessage.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
+            sub.GetComponent<SpriteRenderer>().enabled = true;
             sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         if (sceneName == Global.upgradeSceneName)
         {
 
             //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
-            sub.SetActive(false);
+            sub.SetActive(true);
             subCam.SetActive(false);
             subStatsCanvas.SetActive(false);
             upgradeManagerScript.moneyCanvas.SetActive(true);
             //upgradeManagerScript.insufficientFundsMessage.SetActive(true);
             subStats.inShop = true;
             subCam.transform.position = subCamOriginPos;
-            sub.transform.position = originSubPos;
+            sub.GetComponent<SpriteRenderer>().enabled = false;
             //sub.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
         if (sceneName == Global.titleSceneName)
