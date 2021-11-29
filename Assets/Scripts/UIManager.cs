@@ -153,7 +153,6 @@ public class UIManager : MonoBehaviour
 
             UpdateSubHUD();
             UpdatePressureGauge();
-            UpdateFuelTank();
 
             if (deathCheck)
             {
@@ -215,6 +214,7 @@ public class UIManager : MonoBehaviour
     public void UpdateSubHUD()
     {
         fuelTank.GetComponent<Slider>().value = gameManager.subStats.fuel;
+        
     }
 
     IEnumerator FadeImage(bool fadeAway)
@@ -240,7 +240,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdatePressureGauge()
     {
-        //pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
+        pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];
         subHull.text = gameManager.subStats.health.ToString();
 
         if (gameManager.sub.transform.position.y < -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 4) && gameManager.sub.transform.position.y >= -(gameManager.upgradeManager.GetComponent<UpgradeManager>().pressureResistanceUpgrades[gameManager.subStats.currentPressureResistanceUpgrade] / 3))
