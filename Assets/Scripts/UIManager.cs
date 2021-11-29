@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
             if (diveAgainButton == null)
             {
                 diveAgainButton = GameObject.Find("DiveAgainButton").GetComponent<RectTransform>();
-                diveAgainButtonMoveToPosition = new Vector2(diveAgainButton.position.x, transform.localScale.y * 2);
+                diveAgainButtonMoveToPosition = new Vector2(diveAgainButton.position.x, diveAgainButton.GetComponent<RectTransform>().rect.height);
                 diveAgainButton.transform.position = new Vector2(Screen.width / 2, -100);
             }
 

@@ -243,6 +243,15 @@ MonoBehaviour:
   propellerUpgrades: 0000000000000000000000000000000000000000000000000000000000000000
   pressureResistanceUpgrades: 0000000000000000000000000000000000000000000000000000000000000000
   pricePerUpgrade: 0000000000000000000000000000000000000000000000000000000000000000
+  pips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &102670695
 Transform:
   m_ObjectHideFlags: 0
@@ -2212,7 +2221,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286312102}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1286312104
 Camera:
   m_ObjectHideFlags: 0
