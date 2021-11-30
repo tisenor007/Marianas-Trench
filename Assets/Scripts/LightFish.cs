@@ -58,19 +58,26 @@ public class LightFish : Enemy
 
     }
 
-    //public void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if (other.gameObject.tag == "Player" || other.gameObject.tag == "LightEnemy")
-    //    {
-    //        if (right == true)
-    //        {
-    //            right = false;
-    //        }
-    //        else if (right == false)
-    //        {
-    //            right = true;
-    //        }
-    //    }
-        
-    //}
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Rock" || other.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>());
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            target = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            target = null;
+        }
+    }
 }

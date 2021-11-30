@@ -22,7 +22,7 @@ public class HeavyEnemy : Enemy
         attackDamage = 35;
         attackDistance = 6;
         attackSpeed = 6;
-        speed = Random.Range(1, 3);
+        speed = Random.Range(3, 5);
         maxHealth = health;
         state = State.roam;
 
@@ -61,11 +61,12 @@ public class HeavyEnemy : Enemy
                 Retreat();
                 CheckPlayerInSight();
                 CheckToRoam();
-                CheckToAttack();
+                //CheckToAttack();
                 break;
             case State.attacking:
                 Attack();
                 CheckPlayerInSight();
+                CheckToRetreat();
                 break;
         }
         
@@ -121,5 +122,29 @@ public class HeavyEnemy : Enemy
             state = State.retreating;
         }
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Rock" || other.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>());
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            target = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            target = null;
+        }
+    }
+
+
 }

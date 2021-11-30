@@ -187,9 +187,10 @@ public class UpgradeManager : MonoBehaviour
         if (fuelButton != null)
         {
             //fuelButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentFuelUpgrade + 1).ToString();
-            fuelButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $"+fuelCost;
+            if (subStats.currentFuelUpgrade >= fuelUpgrades.Length - 1) { fuelButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "MAXED"; }
+            else if (subStats.currentFuelUpgrade < fuelUpgrades.Length - 1) { fuelButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + fuelCost; }
 
-            if (subStats.currentMoney < fuelCost)
+            if (subStats.currentMoney < fuelCost || subStats.currentFuelUpgrade >= fuelUpgrades.Length - 1)
             {
                 fuelButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
                 fuelButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
@@ -205,8 +206,10 @@ public class UpgradeManager : MonoBehaviour
         if (engineButton != null)
         {
             //engineButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentEngineUpgrade + 1).ToString();
-            engineButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + engineCost;
-            if (subStats.currentMoney < engineCost){
+            if (subStats.currentEngineUpgrade >= engineUpgrades.Length - 1) { engineButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "MAXED"; }
+            else if (subStats.currentEngineUpgrade < engineUpgrades.Length - 1) engineButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + engineCost;
+            if (subStats.currentMoney < engineCost || subStats.currentEngineUpgrade >= engineUpgrades.Length - 1)
+            {
                 engineButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
                 engineButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
             }
@@ -221,8 +224,9 @@ public class UpgradeManager : MonoBehaviour
         if (hullButton != null)
         {
             //hullButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentHullUpgrade + 1).ToString();
-            hullButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + hullCost;
-            if (subStats.currentMoney < hullCost)
+            if (subStats.currentHullUpgrade >= hullUpgrades.Length - 1) { hullButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "MAXED"; }
+            else if (subStats.currentHullUpgrade < hullUpgrades.Length - 1) { hullButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + hullCost; }
+            if (subStats.currentMoney < hullCost || subStats.currentHullUpgrade >= hullUpgrades.Length - 1)
             {
                 hullButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
                 hullButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
@@ -238,8 +242,9 @@ public class UpgradeManager : MonoBehaviour
         if (propellerButton != null)
         {
             //propellerButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPropellerUpgrade + 1).ToString();
-            propellerButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + propellerCost;
-            if (subStats.currentMoney < propellerCost)
+            if (subStats.currentPropellerUpgrade >= propellerUpgrades.Length - 1) { propellerButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "MAXED"; }
+            else if (subStats.currentPropellerUpgrade < propellerUpgrades.Length - 1) { propellerButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + propellerCost; }
+            if (subStats.currentMoney < propellerCost || subStats.currentPropellerUpgrade >= propellerUpgrades.Length - 1)
             {
                 propellerButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
                 propellerButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;
@@ -255,8 +260,9 @@ public class UpgradeManager : MonoBehaviour
         if (PRButton != null)
         {
             //PRButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPressureResistanceUpgrade + 1).ToString();
-            PRButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + pressureResistanceCost;
-            if (subStats.currentMoney < pressureResistanceCost)
+            if (subStats.currentPressureResistanceUpgrade >= pressureResistanceUpgrades.Length - 1) { PRButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "MAXED"; }
+            else if (subStats.currentPressureResistanceUpgrade < pressureResistanceUpgrades.Length - 1) { PRButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + pressureResistanceCost; }
+            if (subStats.currentMoney < pressureResistanceCost || subStats.currentPressureResistanceUpgrade >= pressureResistanceUpgrades.Length - 1)
             {
                 PRButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
                 PRButton.transform.GetChild(2).GetComponent<Image>().color = disabledColour;

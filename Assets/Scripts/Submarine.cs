@@ -84,14 +84,14 @@ public class Submarine : Character
         {
             subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
         }
-        if (transform.position.x < -((Screen.width / 100) / 2))
-        {
-            transform.position = new Vector2(-((Screen.width / 100) / 2), transform.position.y);
-        }
-        else if (transform.position.x > ((Screen.width / 100) / 2))
-        {
-            transform.position = new Vector2(((Screen.width / 100) / 2), transform.position.y);
-        }
+        //if (transform.position.x < -((Screen.width / 100) / 2))
+        //{
+        //    transform.position = new Vector2(-((Screen.width / 100) / 2), transform.position.y);
+        //}
+        //else if (transform.position.x > ((Screen.width / 100) / 2))
+        //{
+        //    transform.position = new Vector2(((Screen.width / 100) / 2), transform.position.y);
+        //}
         //healthTxt.text = "Sub Hull Armour: " + health.ToString();
         //MoneyTxt.text = "$" + currentMoney.ToString();
         //fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
