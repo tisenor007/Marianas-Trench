@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     public Text depthText;
     public Text coinsText;
     public Text totalText;
-    public TMP_Text currentDepth;
+    public TMP_Text[] currentDepth = new TMP_Text[3];
 
     public GameObject shadePanel;
     public GameObject[] tutorialPages;
@@ -216,8 +216,9 @@ public class UIManager : MonoBehaviour
     public void UpdateSubHUD()
     {
         fuelTank.GetComponent<Slider>().value = gameManager.subStats.fuel;
-        currentDepth.text = "— " + gameManager.subStats.currentDepth.ToString();
-        
+        currentDepth[0].text = "— " + (gameManager.subStats.currentDepth - 1).ToString();
+        currentDepth[1].text = "— " + gameManager.subStats.currentDepth.ToString();
+        currentDepth[2].text = "— " + (gameManager.subStats.currentDepth + 1).ToString();
     }
 
     IEnumerator FadeImage(bool fadeAway)
