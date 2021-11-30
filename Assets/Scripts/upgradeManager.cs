@@ -186,7 +186,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (fuelButton != null)
         {
-            fuelButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentFuelUpgrade + 1).ToString();
+            //fuelButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentFuelUpgrade + 1).ToString();
             fuelButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $"+fuelCost;
 
             if (subStats.currentMoney < fuelCost)
@@ -204,7 +204,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if (engineButton != null)
         {
-            engineButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentEngineUpgrade + 1).ToString();
+            //engineButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentEngineUpgrade + 1).ToString();
             engineButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + engineCost;
             if (subStats.currentMoney < engineCost){
                 engineButton.transform.GetChild(2).GetComponent<Button>().enabled = false;
@@ -220,7 +220,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if (hullButton != null)
         {
-            hullButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentHullUpgrade + 1).ToString();
+            //hullButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentHullUpgrade + 1).ToString();
             hullButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + hullCost;
             if (subStats.currentMoney < hullCost)
             {
@@ -237,7 +237,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if (propellerButton != null)
         {
-            propellerButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPropellerUpgrade + 1).ToString();
+            //propellerButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPropellerUpgrade + 1).ToString();
             propellerButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + propellerCost;
             if (subStats.currentMoney < propellerCost)
             {
@@ -254,7 +254,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if (PRButton != null)
         {
-            PRButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPressureResistanceUpgrade + 1).ToString();
+            //PRButton.transform.GetChild(1).GetComponent<Text>().text = (subStats.currentPressureResistanceUpgrade + 1).ToString();
             PRButton.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Buy $" + pressureResistanceCost;
             if (subStats.currentMoney < pressureResistanceCost)
             {
