@@ -140,6 +140,16 @@ public class GameManager : MonoBehaviour
             upgradeManagerScript.moneyCanvas.SetActive(false);
             subStats.inShop = true;
         }
+        if (sceneName == Global.creditScreenName)
+        {
+            //upgradeManagerScript.earnedMoneyCanvas.SetActive(false);
+            sub.SetActive(false);
+            subCam.SetActive(false);
+            subStatsCanvas.SetActive(false);
+            //upgradeManagerScript.insufficientFundsMessage.SetActive(false);
+            upgradeManagerScript.moneyCanvas.SetActive(false);
+            subStats.inShop = true;
+        }
         if (sceneName == Global.winSceneName)
         {
             Save();

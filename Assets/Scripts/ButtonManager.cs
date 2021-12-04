@@ -179,6 +179,12 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene(Global.titleSceneName, LoadSceneMode.Single);
     }
+
+    public void GoToCreditsScreen()
+    {
+        SceneManager.LoadScene(Global.creditScreenName, LoadSceneMode.Single);
+    }
+
     public void ExitGame()
     {
         Application.Quit();
