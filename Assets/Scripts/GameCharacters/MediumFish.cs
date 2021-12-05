@@ -1,39 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LightFish : Enemy
+public class MediumFish : Enemy
 {
 
     void Start()
     {
-        minY = -30;
-        maxY = -1;
+        //Start Stats....
+        minY = -110;
+        maxY = -85;
         randomY = Random.Range(minY, maxY);
-
         isDead = false;
         rb = GetComponent<Rigidbody2D>();
-        //right = true;
-        
-        health = 20;
         health = 50;
-        attackDamage = 2;
-        attackDistance = 4;
-        attackSpeed = 1;
-        speed = Random.Range(2, 6);
-        
+        attackDamage = 20;
+        attackDistance = 3;
+        attackSpeed = 4;
+        speed = Random.Range(4, 8);
         maxHealth = health;
-
         transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
-
         state = State.roam;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        FindGameManager();
+        SetGameManager();
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
@@ -44,6 +36,7 @@ public class LightFish : Enemy
             targetDistance = 0;
             targetScript = null;
         }
+        //STATE MACHINE
         switch (state)
         {
             case State.roam:
@@ -55,9 +48,9 @@ public class LightFish : Enemy
                 CheckToRoam();
                 break;
         }
-
     }
 
+    //Collision/Trigger Checks
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Rock" || other.gameObject.tag == "Enemy")
@@ -65,6 +58,7 @@ public class LightFish : Enemy
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>());
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

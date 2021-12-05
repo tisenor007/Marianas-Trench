@@ -8,8 +8,8 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    //VARIABLES
     public GameManager gameManager;
-
     public GameObject outOfFuelObject;
     public GameObject hullBrokenObject;
     public RectTransform diveAgainButton;
@@ -18,44 +18,33 @@ public class UIManager : MonoBehaviour
     public Vector2 diveAgainButtonMoveToPosition;
     public bool running = true;
     public bool deathCheck = true;
-    //public bool hideTutorial;
-    //public bool inTutorial;
-
     public Text depthText;
     public Text coinsText;
     public Text totalText;
     public TMP_Text[] currentDepth = new TMP_Text[3];
-
     public GameObject shadePanel;
     public GameObject[] tutorialPages;
     public Text subHull;
     public Image pressureGaugeImage;
     public Sprite[] pressureGauge = new Sprite[5];
-
     public GameObject fuelTank;
-
-    void Awake()
-    {
-
-    }
 
     void Start()
     {
         gameManager.inTutorial = true;
         tutorialPages = new GameObject[3];
     }
-    
-    // Update is called once per frame
+
     void Update()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
 
+        //sets ui based of scene
         if (sceneName == Global.titleSceneName)
         {
             if (running)
             {
-                
                 RectTransform title = GameObject.Find("Title").GetComponent<RectTransform>();
                 Vector2 titleMoveToPosition = new Vector2(title.localPosition.x, title.localPosition.y);
 
@@ -80,15 +69,12 @@ public class UIManager : MonoBehaviour
 
                 running = false;
             }
-
         }
 
         if (sceneName == Global.gameSceneName)
         {
-
             if (gameManager.inTutorial)
             {
-
                 tutorialPages[0] = GameObject.Find("welcomePanel");
                 tutorialPages[1] = GameObject.Find("tutorialPanel 1");
                 tutorialPages[2] = GameObject.Find("tutorialPanel 2");
@@ -100,9 +86,7 @@ public class UIManager : MonoBehaviour
                 gameManager.inTutorial = false;
 
                 if (tutorialPages[0] != null && tutorialPages[1] != null && tutorialPages[2] != null) { Time.timeScale = 0; }
-                
             }
-
             if (gameManager.hideTutorial)
             {
                 tutorialPages[0] = GameObject.Find("welcomePanel");
@@ -111,56 +95,43 @@ public class UIManager : MonoBehaviour
 
                 if (tutorialPages[0] != null || tutorialPages[0] != null && tutorialPages[0].activeSelf == true) tutorialPages[0].SetActive(false);
                 if (tutorialPages[1] != null || tutorialPages[1] != null && tutorialPages[1].activeSelf == true) tutorialPages[1].SetActive(false);
-                if (tutorialPages[2] != null || tutorialPages[2] != null && tutorialPages[2].activeSelf == true) tutorialPages[2].SetActive(false);
-                
+                if (tutorialPages[2] != null || tutorialPages[2] != null && tutorialPages[2].activeSelf == true) tutorialPages[2].SetActive(false);   
             }
-
-
             if (results == null)
             {
                 results = GameObject.Find("resultsPanel").GetComponent<RectTransform>();
                 resultsMoveToPosition = new Vector2(results.localPosition.x, results.localPosition.y);
                 results.transform.position = new Vector2(Screen.width / 2, Screen.height * 1.5f);
                 deathCheck = true;
-                
             }
-
             if (diveAgainButton == null)
             {
                 diveAgainButton = GameObject.Find("DiveAgainButton").GetComponent<RectTransform>();
                 diveAgainButtonMoveToPosition = new Vector2(diveAgainButton.position.x, diveAgainButton.GetComponent<RectTransform>().rect.height);
                 diveAgainButton.transform.position = new Vector2(Screen.width / 2, -100);
             }
-
             if (outOfFuelObject == null)
             {
                 outOfFuelObject = GameObject.Find("Out of Fuel");
                 outOfFuelObject.SetActive(false);
-
             }
-
             if (hullBrokenObject == null)
             {
                 hullBrokenObject = GameObject.Find("Hull Broken");
                 hullBrokenObject.SetActive(false);
-                //Debug.Log("FOUND");
             }
-
             if (shadePanel == null)
             {
                 shadePanel = GameObject.Find("ShadePanel");
                 StartCoroutine(FadeImage(false));
                 shadePanel.SetActive(false);
             }
-
             UpdateSubHUD();
             UpdatePressureGauge();
-
             if (deathCheck)
             {
                 if (gameManager.subStats.isDead == true)
                 {
-                    
                     depthText = results.GetChild(1).GetChild(3).GetChild(0).GetComponent<Text>();
                     depthText.text = gameManager.subStats.currentDepth.ToString() + "ft = $" + (int)(gameManager.subStats.currentDepth * 1.5f);
 
@@ -197,14 +168,10 @@ public class UIManager : MonoBehaviour
 
                         });
                     }
-
                     deathCheck = false;
                 }
                 else if (gameManager.subStats.isDead == false && gameManager.hideTutorial == true) { Time.timeScale = 1; }
             }
-           
-            
-            
         }
     }
 
@@ -240,6 +207,7 @@ public class UIManager : MonoBehaviour
             shadePanel.GetComponent<Image>().color = new Color(0, 0, 0, 0.0f);
         }
     }
+
     public void UpdatePressureGauge()
     {
         pressureGaugeImage.sprite = pressureGauge[gameManager.subStats.pressureHitTime - 1];

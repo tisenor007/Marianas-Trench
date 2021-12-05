@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class HeavyEnemy : Enemy
 {   
-    // Start is called before the first frame update
+    //VARIABLES
     protected static float viewDistance = 16f;
+
     void Start()
     {
+        //Starting Stats
         minY = -115;
         maxY = -135;
         randomY = Random.Range(minY, maxY);
-
         isDead = false;
         rb = GetComponent<Rigidbody2D>();
-        //right = true;
-
         transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
-
         health = 40;
         attackDamage = 35;
         attackDistance = 6;
@@ -25,17 +23,11 @@ public class HeavyEnemy : Enemy
         speed = Random.Range(3, 5);
         maxHealth = health;
         state = State.roam;
-
-        
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        FindGameManager();
-        //Debug.Log(state);
-        //Debug.Log(targetDistance);
+        SetGameManager();
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
@@ -46,6 +38,7 @@ public class HeavyEnemy : Enemy
             targetDistance = 0;
             targetScript = null; 
         }
+        //STATE MACHINE
         switch (state)
         {
             case State.roam:
@@ -71,15 +64,16 @@ public class HeavyEnemy : Enemy
         }
         
     }
+
+    //Methods for enemy specific states
     private void Chase()
     {
-       
         if (target != null)
         {
+            //math to get heavy enemy to look at target
             float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, (speed * 10) * Time.deltaTime);
-            
             this.transform.Translate(0.001f * speed, 0, 0);
         }
     }
@@ -123,6 +117,7 @@ public class HeavyEnemy : Enemy
         }
     }
 
+    //Collision/Trigger checks
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Rock" || other.gameObject.tag == "Enemy")
@@ -130,6 +125,7 @@ public class HeavyEnemy : Enemy
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>());
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

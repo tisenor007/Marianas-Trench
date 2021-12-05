@@ -4499,7 +4499,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2077759413}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: upgradeHull
+        m_MethodName: UpgradeHull
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5424,7 +5424,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2077759413}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: upgradePropeller
+        m_MethodName: UpgradePropeller
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6678,7 +6678,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2077759413}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: upgradeEngine
+        m_MethodName: UpgradeEngine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6962,7 +6962,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2077759413}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: upgradeFuel
+        m_MethodName: UpgradeFuel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7524,7 +7524,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2077759413}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: upgradePressureResistance
+        m_MethodName: UpgradePressureResistance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

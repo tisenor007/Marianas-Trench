@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    //VARIABES
     protected int _attackDamage;
     protected GameManager gameManager;
     public int attackDamage
@@ -50,24 +51,18 @@ public class Character : MonoBehaviour
     }
 
     protected Rigidbody2D rb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    protected void FindGameManager()
+   
+    //For entities that spawn after game manager, or are not in the same scene as game manager before start
+    //to give definition to gameManager
+    protected void SetGameManager()
     {
         if (gameManager == null)
         {
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         }
     }
+
+    //Only Player can takeDamager but enemies in the future (who are "Characters") could possibly take damage
     public virtual void TakeDamage(int damage)
     {
         health = health - damage;

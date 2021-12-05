@@ -5,29 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
+    //VARIABLES
     protected GameObject gameManager;
     protected GameManager gameManagerScript;
-
     public GameObject music;
-    // Start is called before the first frame update
+   
     void Start()
     {
+        //defines game manager
         gameManager = GameObject.FindWithTag("GameManager");
-
         if (gameManager != null)
         {
             gameManagerScript = gameManager.GetComponent<GameManager>();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
-
-        //if (sceneName == Global.titleSceneName)
-        //{
+        //if any scene has and audiosource object called "BackgroundMusic" that music will play
         if (music == null)
         {
             music = GameObject.Find("BackgroundMusic");
@@ -36,14 +31,14 @@ public class SoundManager : MonoBehaviour
                 music.GetComponent<AudioSource>().Play(0);
             }
         }
+        //music loop
         if (music != null && music.GetComponent<AudioSource>().isPlaying == false)
         {
             music.GetComponent<AudioSource>().Play(0);
         }
-        
-        //}
     }
 
+    //methods for playing pickup sounds, damage sounds, and upgrade sounds
     public void PlayPickupSound(AudioSource pickup)
     {
         pickup.Play();

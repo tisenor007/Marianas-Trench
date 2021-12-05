@@ -6,20 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class Submarine : Character
 {
+    //VARIABLES
     public Text healthTxt;
     public Text MoneyTxt;
     public Text fuelTxt;
-    //public Text depthTxt;
     public GameObject subCamera;
     public UpgradeManager upgradeManager;
-
     [Header("Can set these for testing")]
     public int currentFuelUpgrade = 0;
     public int currentEngineUpgrade = 0;
     public int currentHullUpgrade = 0;
     public int currentPropellerUpgrade = 0;
     public int currentPressureResistanceUpgrade = 0;
-
     public int coinsCollected;
     public int coinWorth = 15;
     protected bool _treasureFound = false;
@@ -28,12 +26,14 @@ public class Submarine : Character
         get { return _treasureFound; }
         set { _treasureFound = value; }
     }
+
     protected int _fuel;
     public int fuel
     {
         get { return _fuel; }
         set { _fuel = value; }
     }
+
     protected int engineEfficiency;
     protected bool _inShop;
     public bool inShop
@@ -41,81 +41,61 @@ public class Submarine : Character
         get { return _inShop; }
         set { _inShop = value; }
     }
+
     protected int _currentDepth;
     public int currentDepth
     {
         get { return _currentDepth; }
         set { _currentDepth = value; }
     }
+
     protected int _currentMoney = 0;
-    [SerializeField]
     public int currentMoney
     {
         get { return _currentMoney; }
         set { _currentMoney = value; }
     }
+
     protected int _pressureHitTime = 5;
     public int pressureHitTime
     {
         get { return _pressureHitTime; }
         set { _pressureHitTime = value; }
     }
+
     private int pressureTimer = 0;
     private int originPressureHitTime;
     private int pressureDamage = 2;
     private int slowTime = 1;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         ResetStats();
-         rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         originPressureHitTime = pressureHitTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log(currentMoney);
-        FindGameManager();
+        //although "FindGameManager" may not be needed here, it is here for extra layer of insurance 
+        SetGameManager();
+        //-148 is the map length
         if (transform.position.y >= -148 + ((Screen.height / 100)/2))
         {
             subCamera.transform.position = new Vector3(subCamera.transform.position.x, transform.position.y, subCamera.transform.position.z);
         }
-        //if (transform.position.x < -((Screen.width / 100) / 2))
-        //{
-        //    transform.position = new Vector2(-((Screen.width / 100) / 2), transform.position.y);
-        //}
-        //else if (transform.position.x > ((Screen.width / 100) / 2))
-        //{
-        //    transform.position = new Vector2(((Screen.width / 100) / 2), transform.position.y);
-        //}
-        //healthTxt.text = "Sub Hull Armour: " + health.ToString();
-        //MoneyTxt.text = "$" + currentMoney.ToString();
-        //fuelTxt.text = "Sub Fuel: " + fuel.ToString() + "L";
-        //depthTxt.text = "Current Depth: " + currentDepth.ToString() + "ft";
-
         if (inShop == true)
         {
             ResetStats();
             rb.velocity = Vector3.zero;
         }
-
         else if (inShop == false)
-        {
-            //All ways game could end
-            
+        {   
             if (treasureFound == true && inShop == false) { treasureFound = false; SceneManager.LoadScene(Global.winSceneName, LoadSceneMode.Single); }
-            
             if (isDead == false)
             {
-                //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                 currentDepth = Mathf.RoundToInt(-this.gameObject.transform.position.y);
                 CheckForPressure();
-                //if (Input.GetKey(KeyCode.W))
-                //rb.AddForce(Vector3.up * speed * Time.deltaTime);
                 if (fuel > 0)
                 {
                     if (Input.GetKey(KeyCode.W))
@@ -138,13 +118,13 @@ public class Submarine : Character
                         rb.AddForce(Vector3.right * (speed * 5f) * Time.deltaTime);
                         useFuel();
                     }
+                    //Slows Velocity....
                     else if (!Input.anyKey)
                     {
                         if (rb.velocity.y < -0.15f)
                         {
                             if (Time.time > slowTime)
                             {
-                                //Debug.Log("WORKS");
                                 rb.velocity = new Vector2(rb.velocity.x * 0.5f, rb.velocity.y * 0.5f);
                                 slowTime = Mathf.RoundToInt(Time.time) + 1;
                             }
@@ -152,7 +132,6 @@ public class Submarine : Character
                         else if (rb.velocity.y >= -0.15f) { rb.velocity = new Vector2(rb.velocity.x, -0.15f); }
                     }
                 }
-
             }
             if (isDead == true)
             {
@@ -160,12 +139,14 @@ public class Submarine : Character
             }
         }
     }
+
     public override void TakeDamage(int damage)
     {
         gameManager.soundManagerScript.PlayDamageSound(this.GetComponent<AudioSource>());
         base.TakeDamage(damage);
     }
 
+    //Resets stats for a level restart
     public void ResetStats()
     {
         coinsCollected = 0;
@@ -185,6 +166,8 @@ public class Submarine : Character
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
+
+    //Resets everything for a new game
     public void clearGameStats()
     {
         ResetStats();
@@ -195,42 +178,38 @@ public class Submarine : Character
         currentPropellerUpgrade = 0;
         currentPressureResistanceUpgrade = 0;
     }
+
+    //How pressure Damage is delt
     public void CheckForPressure()
     {
-        //Debug.Log(pressureHitTime);
         if (currentDepth > upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade] && isDead == false)
         {
             if (Time.time > pressureTimer)
             {
                 TakeDamage(pressureDamage);
                 pressureHitTime = pressureHitTime - 1;
-                if (pressureHitTime <= 1)
-                {
-                    pressureHitTime = 1;
-                }
+                if (pressureHitTime <= 1){pressureHitTime = 1;}
                 pressureTimer = Mathf.RoundToInt(Time.time) + pressureHitTime;
-                
             }
         }
         else if (currentDepth < upgradeManager.pressureResistanceUpgrades[currentPressureResistanceUpgrade])
         {
             pressureHitTime = originPressureHitTime;
         }
-
     }
+
+    //how fuel is used...
     public void useFuel()
     {
-       
         if (Time.time > engineEfficiency)
         {
             fuel = fuel - 1;
             engineEfficiency = Mathf.RoundToInt(Time.time) + upgradeManager.engineUpgrades[currentEngineUpgrade];
         }
-        if (fuel <= 0)
-        {
-            fuel = 0;
-        }
+        if (fuel <= 0){fuel = 0;}
     }
+
+    //Methods for adjusting values
     public void addFuel(int value)
     {
         fuel = fuel + value;
@@ -239,6 +218,7 @@ public class Submarine : Character
             fuel = upgradeManager.fuelUpgrades[currentFuelUpgrade];
         }
     }
+
     public void Heal(int hp)
     {
         health = health + hp;
@@ -248,12 +228,11 @@ public class Submarine : Character
         }
     }
 
-    //public bool isTeasureFound() { return treasureFound; }
-    //money
     public void addMoney(int amount)
     {
         currentMoney = currentMoney + amount;
     }
+
     public void removeMoney(int amount)
     {
         currentMoney = currentMoney - amount;
@@ -262,7 +241,8 @@ public class Submarine : Character
             currentMoney = 0;
         }
     }
-    //collison
+
+    //Collison/Trigger checks
     public void OnCollisionEnter2D(Collision2D other)
     {
        if (other.gameObject.tag == "Rock" && rb.velocity.y >= 6)
@@ -270,16 +250,12 @@ public class Submarine : Character
             TakeDamage(6);
        }
     }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
-        /*if (other.gameObject.tag == "Coin")
-        {
-            addMoney(25);
-        }*/
         if (other.gameObject.tag == "Treasure")
         {
             treasureFound = true;
         }
     }
-    
 }

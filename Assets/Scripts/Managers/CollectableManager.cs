@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectableManager : MonoBehaviour
 {
+    //VARIABLES
     public GameObject coinPrefab;
     public GameObject repairKitPrefab;
     public GameObject fuelCanPrefab;
@@ -20,32 +21,24 @@ public class CollectableManager : MonoBehaviour
 
     void Start()
     {
+        //sets ranges for collectable spawns
         xRangeMin = -9;
         xRangeMax = 9;
-
         yRangeMin = -145;
         yRangeMax = -1;
 
+        //spawns collectables
         for (int i = 0; i < coinAmount; i++)
         {
             coins[i] = Instantiate(coinPrefab, new Vector2(Random.Range(xRangeMin, xRangeMax), Random.Range(yRangeMin, yRangeMax)), Quaternion.identity);
-
         }
         for (int i = 0; i < repairKitAmount; i++)
         {
             repairKits[i] = Instantiate(repairKitPrefab, new Vector2(Random.Range(xRangeMin, xRangeMax), Random.Range(yRangeMin - 20, yRangeMax)), Quaternion.identity);
-
         }
         for (int i = 0; i < fuelCanAmount; i++)
         {
             fuelCans[i] = Instantiate(fuelCanPrefab, new Vector2(Random.Range(xRangeMin, xRangeMax), Random.Range(yRangeMin - 20, yRangeMax)), Quaternion.identity);
-
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

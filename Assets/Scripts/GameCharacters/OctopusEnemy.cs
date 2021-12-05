@@ -2,37 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MediumFish : Enemy
+public class OctopusEnemy : Enemy
 {
-    // Start is called before the first frame update
+    //VARIABLES
+    private Vector2 visibleScreen;
 
     void Start()
     {
-        minY = -110;
-        maxY = -85;
-        randomY = Random.Range(minY, maxY);
-
-        isDead = false;
-        rb = GetComponent<Rigidbody2D>();
-        //right = true;
-
-        health = 50;
-        attackDamage = 20;
+        speed = Random.Range(1f, 5f);
+        attackDamage = 10;
         attackDistance = 3;
-        attackSpeed = 4;
-        speed = Random.Range(4, 8);
-
-        maxHealth = health;
-
-        transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
-
+        attackSpeed = 3;
         state = State.roam;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        FindGameManager();
+        SetGameManager();
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
@@ -43,10 +29,11 @@ public class MediumFish : Enemy
             targetDistance = 0;
             targetScript = null;
         }
-        switch (state)
+        //STATE MACHINE
+        switch (state) 
         {
             case State.roam:
-                Roam();
+                VerticalRoam();
                 CheckToAttack();
                 break;
             case State.attacking:
@@ -56,6 +43,23 @@ public class MediumFish : Enemy
         }
     }
 
+    //Alternate Roam Method specific to this enemy type
+    public void VerticalRoam()
+    {
+        target = GameObject.FindGameObjectWithTag("Player");
+        if (target.transform.position.y < -30 && target.transform.position.y > -90)
+        {
+            visibleScreen = new Vector3((Screen.width / 100), target.transform.position.y + ((Screen.height / 100) / 2) + 16);
+            transform.Translate(Vector2.up * speed * Time.deltaTime);
+            if (gameObject.transform.position.y > visibleScreen.y && target.transform.position.y > -70)
+            {
+                Debug.Log("TRIGGERED");
+                gameObject.transform.position = new Vector2(transform.position.x, (target.transform.position.y + -((Screen.height / 100) / 2) - 16));
+            }
+        }
+    }
+
+    //Collision/Trigger Checks
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Rock" || other.gameObject.tag == "Enemy")
@@ -63,6 +67,7 @@ public class MediumFish : Enemy
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>());
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

@@ -1,28 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class OctopusEnemy : Enemy
+public class LightFish : Enemy
 {
-    private Vector2 visibleScreen;
 
     void Start()
     {
-        //submarine = GameObject.FindGameObjectWithTag("Player");
-        speed = Random.Range(1f, 5f);
-        attackDamage = 10;
-        attackDistance = 3;
-        attackSpeed = 3;
-
-        //Vector2 visibleScreen = new Vector3((Screen.width / 100), submarine.transform.position.y + ((Screen.height / 100) / 2) + 3);
-
+        //Start Stats
+        minY = -30;
+        maxY = -1;
+        randomY = Random.Range(minY, maxY);
+        isDead = false;
+        rb = GetComponent<Rigidbody2D>();
+        health = 20;
+        health = 50;
+        attackDamage = 2;
+        attackDistance = 4;
+        attackSpeed = 1;
+        speed = Random.Range(2, 6);
+        maxHealth = health;
+        transform.position = new Vector2(-(Screen.width / 100) - 2, randomY);
         state = State.roam;
     }
 
-
     void Update()
     {
-        FindGameManager();
+        SetGameManager();
         if (target != null)
         {
             targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
@@ -33,22 +38,10 @@ public class OctopusEnemy : Enemy
             targetDistance = 0;
             targetScript = null;
         }
-        switch (state) 
+        switch (state)
         {
             case State.roam:
-                target = GameObject.FindGameObjectWithTag("Player");
-                if (target.transform.position.y < -30 && target.transform.position.y > -90)
-                {
-                    visibleScreen = new Vector3((Screen.width / 100), target.transform.position.y + ((Screen.height / 100) / 2) + 16);
-                    transform.Translate(Vector2.up * speed * Time.deltaTime);
-                    //Debug.Log(Screen.height / 100);
-
-                    if (gameObject.transform.position.y > visibleScreen.y && target.transform.position.y > -70)
-                    {
-                        Debug.Log("TRIGGERED");
-                        gameObject.transform.position = new Vector2(transform.position.x, (target.transform.position.y + -((Screen.height / 100) / 2) - 16));
-                    }
-                }
+                Roam();
                 CheckToAttack();
                 break;
             case State.attacking:
@@ -56,10 +49,9 @@ public class OctopusEnemy : Enemy
                 CheckToRoam();
                 break;
         }
-
-        
     }
 
+    //Collision/Trigger Checks
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Rock" || other.gameObject.tag == "Enemy")
@@ -67,6 +59,7 @@ public class OctopusEnemy : Enemy
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>());
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

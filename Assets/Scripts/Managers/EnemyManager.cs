@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-   // public GameObject enemyManager;
+    //VARIABLES
     public GameObject lightFishPrefab;
     public GameObject octopusEnemyPrefab;
     public GameObject mediumFishPrefab;
@@ -24,30 +24,22 @@ public class EnemyManager : MonoBehaviour
 
     void Awake()
     {
+        //spawns enemies
         for (int i = 0; i < lightFishAmount; i++)
         {
             lightFishes[i] = Instantiate(lightFishPrefab, new Vector2(0, 0), Quaternion.identity);
         }
-
         for (int i = 0; i < mediumFishAmount; i++)
         {
             mediumFishes[i] = Instantiate(mediumFishPrefab, new Vector2(0, 0), Quaternion.identity);
         }
-
         for (int i = 0; i < octopusAmount; i++)
         {
             octopusEnemies[i] = Instantiate(octopusEnemyPrefab, new Vector2(startX + (3 * i), -90), Quaternion.identity);
         }
-
         for (int i = 0; i < heavyEnemyAmount; i++)
         {
             heavyEnemies[i] = Instantiate(heavyEnemyPrefab, new Vector2(0, 0), Quaternion.identity);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//MAIN ENEMY CLASS
 public class Enemy : Character
 {
+    //VARIABLES
+
+    //STATES
     public enum State
     {
         roam,
@@ -12,10 +16,8 @@ public class Enemy : Character
         attacking,
         retreating
     }
-    
     public float minY;
     public float maxY;
-
     public float randomY;
     protected bool right = true;
     protected GameObject target;
@@ -26,16 +28,7 @@ public class Enemy : Character
     protected int attackSpeed;
     private int attackTime = 1;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    //Methods for states
     protected void CheckToAttack()
     {
         if (targetScript != null)
@@ -46,18 +39,19 @@ public class Enemy : Character
             }
         }
     }
+
     protected void Attack()
     {
         if (target != null)
         {
             if (Time.time > attackTime)
             {
-                //Debug.Log("WORKS");
                 targetScript.TakeDamage(this.attackDamage);
                 attackTime = Mathf.RoundToInt(Time.time) + attackSpeed;
             }
         }
     }
+
     protected void CheckToRoam()
     {   
         if (this.transform.position.y <= randomY + 2f && this.transform.position.y >= randomY - 2f)
@@ -69,12 +63,10 @@ public class Enemy : Character
         {
             state = State.roam;
         }
-     
     }
 
     protected void Roam()
     {
-       
         if (right)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -97,8 +89,4 @@ public class Enemy : Character
             }
         }
     }
-   
-
-
-
 }
