@@ -231,7 +231,7 @@ public class UpgradeManager : MonoBehaviour
             }
             else
             {
-                pips[i].GetComponent<Image>().color = new Color32(65, 65, 65, 255);
+                pips[i].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
             }
         }
     }
