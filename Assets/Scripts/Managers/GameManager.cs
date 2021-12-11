@@ -10,6 +10,16 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     //VARIABLES
+    public enum GameState
+    {
+        Title,
+        GamePlay,
+        GameOver,
+        UpgradeScreen,
+        WinScreen,
+        CreditsScreen
+    }
+    public GameState gameState;
     public static GameManager gameManager;
     public GameObject subCam;
     public GameObject sub;
@@ -24,8 +34,6 @@ public class GameManager : MonoBehaviour
     private UpgradeManager upgradeManagerScript;
     private Vector3 originSubPos;
     private Vector3 subCamOriginPos;
-    private Scene currentScene;
-    private string sceneName;
     private SoundManager _soundManagerScript;
     public SoundManager soundManagerScript
     {
@@ -67,13 +75,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        currentScene = SceneManager.GetActiveScene();
-        sceneName = currentScene.name;
         earnedMoney = (int)(subStats.currentDepth * 1.5f) + (subStats.coinsCollected * subStats.coinWorth);
         if (subStats.isDead == false)
         {
             if (subStats.health <= 0)
-            { 
+            {
                 subStats.hullIsBroken = true;
                 subStats.addMoney(earnedMoney);
                 //auto saving.....
@@ -89,56 +95,57 @@ public class GameManager : MonoBehaviour
                 subStats.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             }
         }
-        else if (subStats.isDead == true)
-        {
-            //nothing....
-        }
 
-        if (sceneName == Global.gameSceneName)
+        if (SceneManager.GetActiveScene().name == GameState.Title.ToString()) { gameState = GameState.Title; }
+        if (SceneManager.GetActiveScene().name == GameState.GamePlay.ToString()) { gameState = GameState.GamePlay; }
+        if (SceneManager.GetActiveScene().name == GameState.UpgradeScreen.ToString()) { gameState = GameState.UpgradeScreen; }
+        if (SceneManager.GetActiveScene().name == GameState.GameOver.ToString()) { gameState = GameState.GameOver; }
+        if (SceneManager.GetActiveScene().name == GameState.WinScreen.ToString()) { gameState = GameState.WinScreen; }
+        if (SceneManager.GetActiveScene().name == GameState.CreditsScreen.ToString()) { gameState = GameState.CreditsScreen; }
+
+        switch (gameState) 
         {
-            sub.SetActive(true);
-            subStats.inShop = false;
-            subCam.SetActive(true);
-            subStatsCanvas.SetActive(true);
-            upgradeManagerScript.moneyCanvas.SetActive(true);
-            sub.GetComponent<SpriteRenderer>().enabled = true;
-            sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-        }
-        if (sceneName == Global.upgradeSceneName)
-        {
-            sub.SetActive(true);
-            subCam.SetActive(false);
-            subStatsCanvas.SetActive(false);
-            upgradeManagerScript.moneyCanvas.SetActive(true);
-            subStats.inShop = true;
-            subCam.transform.position = subCamOriginPos;
-            sub.GetComponent<SpriteRenderer>().enabled = false;
-        }
-        if (sceneName == Global.titleSceneName)
-        {
-            sub.SetActive(false);
-            subCam.SetActive(false);
-            subStatsCanvas.SetActive(false);
-            upgradeManagerScript.moneyCanvas.SetActive(false);
-            subStats.inShop = true;
-        }
-        if (sceneName == Global.creditScreenName)
-        {
-            sub.SetActive(false);
-            subCam.SetActive(false);
-            subStatsCanvas.SetActive(false);
-            upgradeManagerScript.moneyCanvas.SetActive(false);
-            subStats.inShop = true;
-        }
-        if (sceneName == Global.winSceneName)
-        {
-            //auto saving.....
-            Save();
-            sub.SetActive(false);
-            subCam.SetActive(false);
-            subStatsCanvas.SetActive(false);
-            upgradeManagerScript.moneyCanvas.SetActive(false);
-            subStats.inShop = true;
+            case GameState.GamePlay:
+                sub.SetActive(true);
+                subStats.inShop = false;
+                subCam.SetActive(true);
+                subStatsCanvas.SetActive(true);
+                upgradeManagerScript.moneyCanvas.SetActive(true);
+                sub.GetComponent<SpriteRenderer>().enabled = true;
+                sub.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                break;
+            case GameState.UpgradeScreen:
+                sub.SetActive(true);
+                subCam.SetActive(false);
+                subStatsCanvas.SetActive(false);
+                upgradeManagerScript.moneyCanvas.SetActive(true);
+                subStats.inShop = true;
+                subCam.transform.position = subCamOriginPos;
+                sub.GetComponent<SpriteRenderer>().enabled = false;
+                break;
+            case GameState.Title:
+                sub.SetActive(false);
+                subCam.SetActive(false);
+                subStatsCanvas.SetActive(false);
+                upgradeManagerScript.moneyCanvas.SetActive(false);
+                subStats.inShop = true;
+                break;
+            case GameState.CreditsScreen:
+                sub.SetActive(false);
+                subCam.SetActive(false);
+                subStatsCanvas.SetActive(false);
+                upgradeManagerScript.moneyCanvas.SetActive(false);
+                subStats.inShop = true;
+                break;
+            case GameState.WinScreen:
+                //auto saving.....
+                Save();
+                sub.SetActive(false);
+                subCam.SetActive(false);
+                subStatsCanvas.SetActive(false);
+                upgradeManagerScript.moneyCanvas.SetActive(false);
+                subStats.inShop = true;
+                break;
         }
     }
 

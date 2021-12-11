@@ -108,7 +108,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (upgradeManagerScript != null && upgradeManager != null)
         {
-            upgradeManagerScript.UpgradePressureResistance();
+            upgradeManagerScript.IncreaseUpgrade(upgradeManagerScript.pressureResistanceCost, ref upgradeManagerScript.subStats.currentPressureResistanceUpgrade);
         }
     }
 
@@ -116,7 +116,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (upgradeManagerScript != null && upgradeManager != null)
         {
-            upgradeManagerScript.UpgradeFuel();
+            upgradeManagerScript.IncreaseUpgrade(upgradeManagerScript.fuelCost, ref upgradeManagerScript.subStats.currentFuelUpgrade);
         }
     }
 
@@ -124,7 +124,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (upgradeManagerScript != null && upgradeManager != null)
         {
-            upgradeManagerScript.UpgradeEngine();
+            upgradeManagerScript.IncreaseUpgrade(upgradeManagerScript.engineCost, ref upgradeManagerScript.subStats.currentEngineUpgrade);
         }
     }
 
@@ -132,7 +132,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (upgradeManagerScript != null && upgradeManager != null)
         {
-            upgradeManagerScript.UpgradeHullArmour();
+            upgradeManagerScript.IncreaseUpgrade(upgradeManagerScript.hullCost, ref upgradeManagerScript.subStats.currentHullUpgrade);
         }
     }
 
@@ -140,7 +140,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (upgradeManagerScript != null && upgradeManager != null)
         {
-            upgradeManagerScript.UpgradePropeller();
+            upgradeManagerScript.IncreaseUpgrade(upgradeManagerScript.propellerCost, ref upgradeManagerScript.subStats.currentPropellerUpgrade);
         }
     }
 

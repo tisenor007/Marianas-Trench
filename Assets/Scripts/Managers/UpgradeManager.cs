@@ -12,30 +12,60 @@ public class UpgradeManager : MonoBehaviour
     public Color enabledColour;
     public Color disabledColour;
     protected static int _upgradeAmount = 8;
-    public static int upgradeAmount
+    public static int maxUpgradeAmount
     {
         get { return _upgradeAmount; }
         set { _upgradeAmount = value; }
     }
 
     [HideInInspector]
-    public int[] fuelUpgrades = new int[upgradeAmount];
+    public int[] fuelUpgrades = new int[maxUpgradeAmount];
     [HideInInspector]
-    public int[] engineUpgrades = new int[upgradeAmount];
+    public int[] engineUpgrades = new int[maxUpgradeAmount];
     [HideInInspector]
-    public int[] hullUpgrades = new int[upgradeAmount];
+    public int[] hullUpgrades = new int[maxUpgradeAmount];
     [HideInInspector]
-    public int[] propellerUpgrades = new int[upgradeAmount];
+    public int[] propellerUpgrades = new int[maxUpgradeAmount];
     [HideInInspector]
-    public int[] pressureResistanceUpgrades = new int[upgradeAmount];
+    public int[] pressureResistanceUpgrades = new int[maxUpgradeAmount];
     [HideInInspector]
-    public int[] pricePerUpgrade = new int[upgradeAmount];
+    public int[] pricePerUpgrade = new int[maxUpgradeAmount];
     public Transform[] pips = new Transform[8];
-    protected int fuelCost;
-    protected int engineCost;
-    protected int hullCost;
-    protected int propellerCost;
-    protected int pressureResistanceCost;
+    protected int _fuelCost;
+    public int fuelCost
+    {
+        get { return _fuelCost; }
+        set { _fuelCost = value; }
+    }
+
+    protected int _engineCost;
+    public int engineCost
+    {
+        get { return _engineCost; }
+        set { _engineCost = value; }
+    }
+
+    protected int _hullCost;
+    public int hullCost
+    {
+        get { return _hullCost; }
+        set { _hullCost = value; }
+    }
+
+    protected int _propellerCost;
+    public int propellerCost
+    {
+        get { return _propellerCost; }
+        set { _propellerCost = value; }
+    }
+
+    protected int _pressureResistanceCost;
+    public int pressureResistanceCost
+    {
+        get { return _pressureResistanceCost; }
+        set { _pressureResistanceCost = value; }
+    }
+
 
     private void Awake()
     {
@@ -51,88 +81,13 @@ public class UpgradeManager : MonoBehaviour
         pressureResistanceCost = pricePerUpgrade[subStats.currentPressureResistanceUpgrade];
     }
 
-    public void UpgradePressureResistance()
+    public void IncreaseUpgrade( int upgradeCost, ref int currentUpgradeNumber)
     {
-        if (subStats.currentMoney >= pressureResistanceCost)
+        if (subStats.currentMoney >= upgradeCost && currentUpgradeNumber < maxUpgradeAmount - 1)
         {
-            if (subStats.currentPressureResistanceUpgrade >= upgradeAmount - 1)
-            {
-                subStats.currentPressureResistanceUpgrade = upgradeAmount - 1;
-            }
-            else
-            {
-                subStats.removeMoney(pressureResistanceCost);
-                subStats.currentPressureResistanceUpgrade = subStats.currentPressureResistanceUpgrade + 1;
-                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
-            }
-        }
-    }
-
-    public void UpgradeFuel()
-    {
-        if (subStats.currentMoney >= fuelCost)
-        {
-            if (subStats.currentFuelUpgrade >= upgradeAmount - 1)
-            {
-                subStats.currentFuelUpgrade = upgradeAmount - 1;
-            }
-            else
-            {
-                subStats.removeMoney(fuelCost);
-                subStats.currentFuelUpgrade = subStats.currentFuelUpgrade + 1;
-                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
-            }
-        }
-    }
-
-    public void UpgradeEngine()
-    {
-        if (subStats.currentMoney >= engineCost)
-        {
-            if (subStats.currentEngineUpgrade >= upgradeAmount - 1)
-            {
-                subStats.currentEngineUpgrade = upgradeAmount - 1;
-            }
-            else
-            {
-                subStats.currentEngineUpgrade = subStats.currentEngineUpgrade + 1;
-                subStats.removeMoney(engineCost);
-                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
-            }
-        }
-    }
-
-    public void UpgradeHullArmour()
-    {
-        if (subStats.currentMoney >= hullCost)
-        {
-            if (subStats.currentHullUpgrade >= upgradeAmount - 1)
-            {
-                subStats.currentHullUpgrade = upgradeAmount - 1;
-            }
-            else
-            {
-                subStats.currentHullUpgrade = subStats.currentHullUpgrade + 1;
-                subStats.removeMoney(hullCost);
-                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
-            }
-        }
-    }
-
-    public void UpgradePropeller()
-    {
-        if (subStats.currentMoney >= propellerCost)
-        {
-            if (subStats.currentPropellerUpgrade >= upgradeAmount - 1)
-            {
-                subStats.currentPropellerUpgrade = upgradeAmount - 1;
-            }
-            else
-            {
-                subStats.currentPropellerUpgrade = subStats.currentPropellerUpgrade + 1;
-                subStats.removeMoney(propellerCost);
-                gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
-            }
+            subStats.removeMoney(upgradeCost);
+            currentUpgradeNumber++;
+            gameManager.soundManagerScript.PlayUpgradeSound(this.GetComponent<AudioSource>());
         }
     }
 
