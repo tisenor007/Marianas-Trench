@@ -10,24 +10,30 @@ public class UIManager : MonoBehaviour
 {
     //VARIABLES
     public GameManager gameManager;
+
     public GameObject outOfFuelObject;
     public GameObject hullBrokenObject;
+    public GameObject shadePanel;
+    public GameObject[] tutorialPages;
+
     public RectTransform diveAgainButton;
     public RectTransform results;
+
     public Vector2 resultsMoveToPosition;
     public Vector2 diveAgainButtonMoveToPosition;
-    public bool running = true;
-    public bool deathCheck = true;
+
     public Text depthText;
     public Text coinsText;
     public Text totalText;
     public TMP_Text[] currentDepth = new TMP_Text[3];
-    public GameObject shadePanel;
-    public GameObject[] tutorialPages;
+    
     public Text subHull;
     public Image pressureGaugeImage;
     public Sprite[] pressureGauge = new Sprite[5];
     public GameObject fuelTank;
+
+    private bool running = true;
+    private bool deathCheck = true;
 
     void Start()
     {
@@ -43,7 +49,7 @@ public class UIManager : MonoBehaviour
         //sets ui based of scene
         if (sceneName == Global.titleSceneName)
         {
-            if (running)
+            if (running) //runs once
             {
                 RectTransform title = GameObject.Find("Title").GetComponent<RectTransform>();
                 Vector2 titleMoveToPosition = new Vector2(title.localPosition.x, title.localPosition.y);
